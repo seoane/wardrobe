@@ -13,4 +13,23 @@ public class Feet extends Cloth {
     protected Feet(String name, Season season, Colors color, String photographyPath, String description) {
         super(name, season, color, photographyPath, description);
     }
+
+    public Feet(){
+        super();
+    }
+
+    public FootwearType getFootwearType() {
+        return footwearType;
+    }
+
+    public void setFootwearType(FootwearType footwearType) {
+        this.footwearType = footwearType;
+    }
+
+    @Override
+    public String toString() {
+        return "Feet{" + super.toString() +
+                ", footwearType=" + footwearType +
+                '}';
+    }
 }
