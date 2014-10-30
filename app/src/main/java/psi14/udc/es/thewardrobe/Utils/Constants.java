@@ -8,12 +8,18 @@ public final class Constants {
     //CONSTANTS FOR CHEST_SQL_DEALING
 
     public static final String CHEST_TABLE = "CHEST";
-    public static final String CHEST_ID = "_ID";
+    public static final String LEGS_TABLE = "LEGS";
+    public static final String FEETS_TABLE = "FEETS";
+
+    public static final String ID = "_ID";
     public static final String NAME = "NAME";
     public static final String COLOR = "COLOR";
     public static final String SEASON = "SEASON";
     public static final String URI = "URI";
     public static final String DESCRIPTION = "DESCRIPTION";
     public static final String CHEST_TYPE = "CLOTH_TYPE";
+    public static final String LEGS_TYPE = "LEGS_TYPE";
+    public static final String FEETS_TYPE = "FEETS_TYPE";
+
 
 }

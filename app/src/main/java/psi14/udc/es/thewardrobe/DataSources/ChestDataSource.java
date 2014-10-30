@@ -37,12 +37,14 @@ public class ChestDataSource extends ClothDataSource {
         super.open();
         Log.d("addChest", chest.toString());
         ContentValues values = new ContentValues();
-        /*    public static final String CHEST_ID = "_ID";
-    public static final String NAME = "NAME";
-    public static final String COLOR = "COLOR";
-    public static final String URI = "URI";
-    public static final String DESCRIPTION = "DESCRIPTION";
-    public static final String CLOTH_TYPE = "CLOTH_TYPE";*/
+
+/*      public static final String CHEST_ID = "_ID";
+        public static final String NAME = "NAME";
+        public static final String COLOR = "COLOR";
+        public static final String SEASON = "SEASON";
+        public static final String URI = "URI";
+        public static final String DESCRIPTION = "DESCRIPTION";
+        public static final String CLOTH_TYPE = "CLOTH_TYPE";*/
 
         values.put(NAME, chest.getName());
         values.put(COLOR, chest.getColor().toString());
