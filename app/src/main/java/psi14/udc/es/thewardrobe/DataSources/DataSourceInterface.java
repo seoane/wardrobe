@@ -1,4 +1,4 @@
-package lab06.seoane_vila.psi14.udc.es.thewardrobe.DataSources;
+package psi14.udc.es.thewardrobe.DataSources;
 
 /**
  * Created by Sokun on 29/10/14.

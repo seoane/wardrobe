@@ -1,4 +1,4 @@
-package lab06.seoane_vila.psi14.udc.es.thewardrobe.DataSources;
+package psi14.udc.es.thewardrobe.DataSources;
 
 import android.content.Context;
 import android.database.SQLException;
@@ -15,11 +15,10 @@ public abstract class ClothDataSource implements DataSourceInterface {
 
     public ClothDataSource(Context context) {
         helper = new TheWardrobeSQLiteHelper(context);
-        helper.createDatabase();
     }
 
     public void open() throws SQLException {
-        database = helper.openDataBase();
+        database = helper.getWritableDatabase();
     }
 
     public void close() {

@@ -1,21 +1,29 @@
-package lab06.seoane_vila.psi14.udc.es.thewardrobe;
+package psi14.udc.es.thewardrobe;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import lab06.seoane_vila.psi14.udc.es.thewardrobe.DataSources.ClothDataSource;
+import psi14.udc.es.thewardrobe.ControlLayer.Chest;
+import psi14.udc.es.thewardrobe.DataSources.ChestDataSource;
+import psi14.udc.es.thewardrobe.Utils.ChestType;
+import psi14.udc.es.thewardrobe.Utils.Colors;
+import psi14.udc.es.thewardrobe.Utils.Season;
 
 
 public class TheWardrobeMainActivity extends Activity {
-    ClothDataSource clothDataSource;
+    ChestDataSource chestDataSource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_the_wardrobe_main);
+        chestDataSource = ChestDataSource.getInstance(this);
+        Chest chest = new Chest("Falda de putilla", Season.AUTUMN, Colors.BLUE, "/NULL", "es de ser putas", ChestType.BLOUSES);
 
+        //chestDataSource.addChest(chest);
+        chestDataSource.getChest(1);
     }
 
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="lab06.seoane_vila.psi14.udc.es.thewardrobe">
+    package="psi14.udc.es.thewardrobe">
 
     <application
         android:allowBackup="true"

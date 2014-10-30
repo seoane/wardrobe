@@ -4,5 +4,6 @@
     <string name="app_name">TheWardrobe</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="color_orange">Naranja</string>
 
 </resources>
