@@ -34,6 +34,7 @@ public class TheWardrobeSQLiteHelper extends SQLiteOpenHelper {
                 "CREATE TABLE " + "CHEST(" +
                 "_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "NAME TEXT NOT NULL," +
+                "SEASON TEXT NOT NULL," +
                 "COLOR TEXT NOT NULL," +
                 "URI TEXT NOT NULL," +
                 "DESCRIPTION TEXT NOT NULL," +

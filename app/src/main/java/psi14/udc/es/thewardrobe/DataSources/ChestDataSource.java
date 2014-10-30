@@ -8,12 +8,14 @@ import android.util.Log;
 import psi14.udc.es.thewardrobe.ControlLayer.Chest;
 import psi14.udc.es.thewardrobe.Utils.ChestType;
 import psi14.udc.es.thewardrobe.Utils.Colors;
+import psi14.udc.es.thewardrobe.Utils.Season;
 
 import static psi14.udc.es.thewardrobe.Utils.Constants.CHEST_TABLE;
 import static psi14.udc.es.thewardrobe.Utils.Constants.CHEST_TYPE;
 import static psi14.udc.es.thewardrobe.Utils.Constants.COLOR;
 import static psi14.udc.es.thewardrobe.Utils.Constants.DESCRIPTION;
 import static psi14.udc.es.thewardrobe.Utils.Constants.NAME;
+import static psi14.udc.es.thewardrobe.Utils.Constants.SEASON;
 import static psi14.udc.es.thewardrobe.Utils.Constants.URI;
 
 /**
@@ -44,6 +46,7 @@ public class ChestDataSource extends ClothDataSource {
 
         values.put(NAME, chest.getName());
         values.put(COLOR, chest.getColor().toString());
+        values.put(SEASON, chest.getSeason().toString());
         values.put(URI, chest.getPhotographyPath());
         values.put(DESCRIPTION, chest.getDescription());
         values.put(CHEST_TYPE, chest.getChestType().toString());
@@ -57,7 +60,7 @@ public class ChestDataSource extends ClothDataSource {
     public Chest getChest(int id) {
         super.open();
         //SQLiteDatabase db = this.getReadableDatabase();
-        String[] columns = {NAME, COLOR, URI, DESCRIPTION, CHEST_TYPE};
+        String[] columns = {NAME, COLOR, URI, DESCRIPTION, CHEST_TYPE, SEASON};
         // 2. build query
         Cursor cursor =
                 database.query(CHEST_TABLE, // a. table
@@ -80,6 +83,7 @@ public class ChestDataSource extends ClothDataSource {
         chest.setPhotographyPath(cursor.getString(2));
         chest.setDescription(cursor.getString(3));
         chest.setChestType(ChestType.valueOf(cursor.getString(4)));
+        chest.setSeason(Season.valueOf(cursor.getString(5)));
 
         //log
         Log.d("getChest(" + id + ")", chest.toString());

@@ -22,7 +22,7 @@ public class TheWardrobeMainActivity extends Activity {
         chestDataSource = ChestDataSource.getInstance(this);
         Chest chest = new Chest("Falda de putilla", Season.AUTUMN, Colors.BLUE, "/NULL", "es de ser putas", ChestType.BLOUSES);
 
-        //chestDataSource.addChest(chest);
+        chestDataSource.addChest(chest);
         chestDataSource.getChest(1);
     }
 

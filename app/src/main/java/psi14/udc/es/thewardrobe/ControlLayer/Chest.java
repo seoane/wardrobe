@@ -30,7 +30,7 @@ public class Chest extends Cloth {
     @Override
     public String toString() {
         return "Chest{" + super.toString() +
-                "chestType=" + chestType +
+                ", chestType=" + chestType +
                 '}';
     }
 }

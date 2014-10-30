@@ -11,6 +11,7 @@ public final class Constants {
     public static final String CHEST_ID = "_ID";
     public static final String NAME = "NAME";
     public static final String COLOR = "COLOR";
+    public static final String SEASON = "SEASON";
     public static final String URI = "URI";
     public static final String DESCRIPTION = "DESCRIPTION";
     public static final String CHEST_TYPE = "CLOTH_TYPE";
