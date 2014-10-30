@@ -15,7 +15,6 @@ public class TheWardrobeMainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_the_wardrobe_main);
-        clothDataSource = ClothDataSource.getInstance(this);
 
     }
 

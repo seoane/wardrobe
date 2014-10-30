@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 /**
  * Created by Sokun on 29/10/14.
  */
-public class ClothDataSource implements DataSourceInterface {
+public abstract class ClothDataSource implements DataSourceInterface {
     protected static ClothDataSource instance = null;
     protected SQLiteDatabase database;
     TheWardrobeSQLiteHelper helper;
@@ -16,11 +16,6 @@ public class ClothDataSource implements DataSourceInterface {
     public ClothDataSource(Context context) {
         helper = new TheWardrobeSQLiteHelper(context);
         helper.createDatabase();
-    }
-
-    public static ClothDataSource getInstance(Context context) {
-        if (instance == null) instance = new ClothDataSource(context);
-        return (ClothDataSource) instance;
     }
 
     public void open() throws SQLException {
