@@ -3,9 +3,7 @@ package psi14.udc.es.thewardrobe.ControlLayer;
 import psi14.udc.es.thewardrobe.Utils.Colors;
 import psi14.udc.es.thewardrobe.Utils.Season;
 
-/**
- * Created by Sokun on 29/10/14.
- */
+
 public abstract class Cloth {
     String name;
     Season season;

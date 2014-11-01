@@ -4,9 +4,7 @@ import psi14.udc.es.thewardrobe.Utils.Colors;
 import psi14.udc.es.thewardrobe.Utils.FeetType;
 import psi14.udc.es.thewardrobe.Utils.Season;
 
-/**
- * Created by Sokun on 29/10/14.
- */
+
 public class Feet extends Cloth {
     FeetType feetType;
 

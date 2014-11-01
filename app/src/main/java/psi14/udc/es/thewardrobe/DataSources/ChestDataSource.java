@@ -18,9 +18,7 @@ import static psi14.udc.es.thewardrobe.Utils.Constants.NAME;
 import static psi14.udc.es.thewardrobe.Utils.Constants.SEASON;
 import static psi14.udc.es.thewardrobe.Utils.Constants.URI;
 
-/**
- * Created by Sokun on 30/10/14.
- */
+
 public class ChestDataSource extends ClothDataSource {
     protected static ChestDataSource instance = null;
 

@@ -4,9 +4,7 @@ import psi14.udc.es.thewardrobe.Utils.ChestType;
 import psi14.udc.es.thewardrobe.Utils.Colors;
 import psi14.udc.es.thewardrobe.Utils.Season;
 
-/**
- * Created by Sokun on 29/10/14.
- */
+
 public class Chest extends Cloth {
     ChestType chestType;
 
