@@ -76,7 +76,7 @@ public class ChestDataSource extends ClothDataSource {
         if (cursor != null)
             cursor.moveToFirst();
 
-        // 4. build book object
+        // 4. build chest object
         Chest chest = new Chest();
         chest.setName(cursor.getString(0));
         chest.setColor(Colors.valueOf(cursor.getString(1)));
@@ -88,7 +88,7 @@ public class ChestDataSource extends ClothDataSource {
         //log
         Log.d("getChest(" + id + ")", chest.toString());
 
-        // 5. return book
+        // 5. return chest
         return chest;
     }
 

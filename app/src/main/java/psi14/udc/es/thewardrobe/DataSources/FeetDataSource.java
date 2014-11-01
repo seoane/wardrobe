@@ -71,7 +71,7 @@ public class FeetDataSource extends ClothDataSource{
         if (cursor != null)
             cursor.moveToFirst();
 
-        // 4. build book object
+        // 4. build feet object
         Feet feet = new Feet();
         feet.setName(cursor.getString(0));
         feet.setColor(Colors.valueOf(cursor.getString(1)));
@@ -83,7 +83,7 @@ public class FeetDataSource extends ClothDataSource{
         //log
         Log.d("getFeet(" + id + ")", feet.toString());
 
-        // 5. return book
+        // 5. return feet
         return feet;
     }
 }
