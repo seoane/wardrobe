@@ -1,6 +1,5 @@
 package psi14.udc.es.thewardrobe.ControlLayer;
 
-import psi14.udc.es.thewardrobe.Utils.ChestType;
 import psi14.udc.es.thewardrobe.Utils.Colors;
 import psi14.udc.es.thewardrobe.Utils.LegsType;
 import psi14.udc.es.thewardrobe.Utils.Season;
@@ -23,7 +22,7 @@ public class Legs extends Cloth {
         return legsType;
     }
 
-    public void setLegsType(ChestType chestType) {
+    public void setLegsType(LegsType legsType) {
         this.legsType = legsType;
     }
 
