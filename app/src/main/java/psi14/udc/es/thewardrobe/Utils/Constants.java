@@ -9,7 +9,7 @@ public final class Constants {
 
     public static final String CHEST_TABLE = "CHEST";
     public static final String LEGS_TABLE = "LEGS";
-    public static final String FEETS_TABLE = "FEETS";
+    public static final String FEET_TABLE = "FEET";
 
     public static final String ID = "_ID";
     public static final String NAME = "NAME";
@@ -17,9 +17,9 @@ public final class Constants {
     public static final String SEASON = "SEASON";
     public static final String URI = "URI";
     public static final String DESCRIPTION = "DESCRIPTION";
-    public static final String CHEST_TYPE = "CLOTH_TYPE";
+    public static final String CHEST_TYPE = "CHEST_TYPE";
     public static final String LEGS_TYPE = "LEGS_TYPE";
-    public static final String FEETS_TYPE = "FEETS_TYPE";
+    public static final String FEET_TYPE = "FEET_TYPE";
 
 
 }

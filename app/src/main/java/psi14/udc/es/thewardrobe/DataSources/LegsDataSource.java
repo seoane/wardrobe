@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
+
 import psi14.udc.es.thewardrobe.ControlLayer.Legs;
 import psi14.udc.es.thewardrobe.Utils.Colors;
 import psi14.udc.es.thewardrobe.Utils.LegsType;

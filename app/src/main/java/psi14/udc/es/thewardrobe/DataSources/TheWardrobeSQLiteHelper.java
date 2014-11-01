@@ -7,18 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.io.File;
 
-import static psi14.udc.es.thewardrobe.Utils.Constants.CHEST_TABLE;
-import static psi14.udc.es.thewardrobe.Utils.Constants.CHEST_TYPE;
-import static psi14.udc.es.thewardrobe.Utils.Constants.COLOR;
-import static psi14.udc.es.thewardrobe.Utils.Constants.DESCRIPTION;
-import static psi14.udc.es.thewardrobe.Utils.Constants.FEETS_TABLE;
-import static psi14.udc.es.thewardrobe.Utils.Constants.FEETS_TYPE;
-import static psi14.udc.es.thewardrobe.Utils.Constants.ID;
-import static psi14.udc.es.thewardrobe.Utils.Constants.LEGS_TABLE;
-import static psi14.udc.es.thewardrobe.Utils.Constants.LEGS_TYPE;
-import static psi14.udc.es.thewardrobe.Utils.Constants.NAME;
-import static psi14.udc.es.thewardrobe.Utils.Constants.SEASON;
-import static psi14.udc.es.thewardrobe.Utils.Constants.URI;
+import static psi14.udc.es.thewardrobe.Utils.Constants.*;
 
 public class TheWardrobeSQLiteHelper extends SQLiteOpenHelper {
     private final static String LOG_TAG = "TheWardrobeSQLiteHelper";
@@ -62,14 +51,14 @@ public class TheWardrobeSQLiteHelper extends SQLiteOpenHelper {
                 LEGS_TYPE + " TEXT NOT NULL" +
                 ");");
         db.execSQL("" +
-                "CREATE TABLE " + FEETS_TABLE + "(" +
+                "CREATE TABLE " + FEET_TABLE + "(" +
                 ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 NAME + " TEXT NOT NULL," +
                 SEASON + " TEXT NOT NULL," +
                 COLOR + " TEXT NOT NULL," +
                 URI + " TEXT NOT NULL," +
                 DESCRIPTION + " TEXT NOT NULL," +
-                FEETS_TYPE + " TEXT NOT NULL" +
+                FEET_TYPE + " TEXT NOT NULL" +
                 ");");
 
     }
