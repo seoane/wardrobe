@@ -19,5 +19,4 @@ public final class Constants {
     public static final String LEGS_TYPE = "LEGS_TYPE";
     public static final String FEET_TYPE = "FEET_TYPE";
 
-
 }

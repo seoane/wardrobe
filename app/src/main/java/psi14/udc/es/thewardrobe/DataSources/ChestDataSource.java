@@ -18,7 +18,9 @@ import static psi14.udc.es.thewardrobe.Utils.Constants.NAME;
 import static psi14.udc.es.thewardrobe.Utils.Constants.SEASON;
 import static psi14.udc.es.thewardrobe.Utils.Constants.URI;
 
-
+/**
+ * Created by Sokun on 30/10/14.
+ */
 public class ChestDataSource extends ClothDataSource {
     protected static ChestDataSource instance = null;
 
@@ -51,32 +53,27 @@ public class ChestDataSource extends ClothDataSource {
         values.put(DESCRIPTION, chest.getDescription());
         values.put(CHEST_TYPE, chest.getChestType().toString());
 
-        // 3. insert
         database.insert(CHEST_TABLE, null, values);
-        // 4. close
         database.close();
     }
 
     public Chest getChest(int id) {
         super.open();
-        //SQLiteDatabase db = this.getReadableDatabase();
-        String[] columns = {NAME, COLOR, URI, DESCRIPTION, CHEST_TYPE, SEASON};
-        // 2. build query
-        Cursor cursor =
-                database.query(CHEST_TABLE, // a. table
-                        columns, // b. column names
-                        " _ID = ?", // c. selections
-                        new String[]{String.valueOf(id)}, // d. selections args
-                        null, // e. group by
-                        null, // f. having
-                        null, // g. order by
-                        null); // h. limit
 
-        // 3. if we got results get the first one
+        String[] columns = {NAME, COLOR, URI, DESCRIPTION, CHEST_TYPE, SEASON};
+
+        Cursor cursor =
+                database.query(CHEST_TABLE,
+                        columns,
+                        " _ID = ?",
+                        new String[]{String.valueOf(id)},
+                        null,
+                        null,
+                        null,
+                        null);
         if (cursor != null)
             cursor.moveToFirst();
 
-        // 4. build chest object
         Chest chest = new Chest();
         chest.setName(cursor.getString(0));
         chest.setColor(Colors.valueOf(cursor.getString(1)));
@@ -85,10 +82,8 @@ public class ChestDataSource extends ClothDataSource {
         chest.setChestType(ChestType.valueOf(cursor.getString(4)));
         chest.setSeason(Season.valueOf(cursor.getString(5)));
 
-        //log
         Log.d("getChest(" + id + ")", chest.toString());
 
-        // 5. return chest
         return chest;
     }
 
