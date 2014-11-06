@@ -38,6 +38,26 @@ public class TestLegsDataSource extends AndroidTestCase {
         assertTrue(legsDataSource.deleteLegs(id));
     }
 
+    public void testUpdateLegsToDatabase() {
+        int id = 0;
+        try {
+            Legs legs =
+                    new Legs("Leggins", Season.AUTUMN, Colors.BLUE,
+                            "/NULL", "No hay descripción disponible", LegsType.LEGGINGS);
+            id = legsDataSource.addLegs(legs);
+            Legs foundLegs = legsDataSource.getLegs(id);
+            legs.setDescription("Nueva Descripción");
+            legsDataSource.updateLegs(legs);
+            Legs foundUpdatedLegs = legsDataSource.getLegs(id);
+            assertEquals(foundLegs, foundUpdatedLegs);
+
+        } finally {
+            legsDataSource.deleteLegs(id);
+
+        }
+
+    }
+
     public void tearDown() throws Exception {
         legsDataSource.close();
         super.tearDown();

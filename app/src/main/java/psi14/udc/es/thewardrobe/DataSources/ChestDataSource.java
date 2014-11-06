@@ -83,8 +83,7 @@ public class ChestDataSource extends ClothDataSource {
         chest.setDescription(cursor.getString(3));
         chest.setChestType(ChestType.valueOf(cursor.getString(4)));
         chest.setSeason(Season.valueOf(cursor.getString(5)));
-
-        Log.d("getChest(" + id + ")", chest.toString());
+        chest.setId(id);
 
         return chest;
     }
@@ -95,6 +94,7 @@ public class ChestDataSource extends ClothDataSource {
     }
 
     public boolean updateChest(Chest chest) {
+        super.open();
         long idNot = chest.getId();
         ContentValues cv = new ContentValues();
         cv.put(NAME, chest.getName());

@@ -20,12 +20,17 @@ public class TestChestDataSource extends AndroidTestCase {
     }
 
     public void testAddAndFindToDataBase() {
-        Chest chest =
-                new Chest("Camiseta de manga corta", Season.AUTUMN, Colors.BLUE,
-                        "/NULL", "No hay descripción disponible", ChestType.BLOUSES);
-        int id = chestDataSource.addChest(chest);
-        Chest foundChest = chestDataSource.getChest(id);
-        assertEquals(chest, foundChest);
+        int id = 0;
+        try {
+            Chest chest =
+                    new Chest("Camiseta de manga corta", Season.AUTUMN, Colors.BLUE,
+                            "/NULL", "No hay descripción disponible", ChestType.BLOUSES);
+            id = chestDataSource.addChest(chest);
+            Chest foundChest = chestDataSource.getChest(id);
+            assertEquals(chest, foundChest);
+        } finally {
+            chestDataSource.deleteChest(id);
+        }
     }
 
     public void testDeleteFromDataBase() {
@@ -34,6 +39,25 @@ public class TestChestDataSource extends AndroidTestCase {
                         "/NULL", "No hay descripción disponible", ChestType.BLOUSES);
         int id = chestDataSource.addChest(chest);
         assertTrue(chestDataSource.deleteChest(id));
+    }
+
+    public void testUpdateChestToDatabase() {
+        int id = 0;
+        try {
+            Chest chest =
+                    new Chest("Camiseta de manga corta", Season.AUTUMN, Colors.BLUE,
+                            "/NULL", "No hay descripción disponible", ChestType.BLOUSES);
+            id = chestDataSource.addChest(chest);
+            Chest foundChest = chestDataSource.getChest(id);
+            chest.setDescription("Nueva Descripción");
+            chestDataSource.updateChest(chest);
+            Chest foundUpdatedChest = chestDataSource.getChest(id);
+            assertEquals(foundChest, foundUpdatedChest);
+        } finally {
+            chestDataSource.deleteChest(id);
+
+        }
+
     }
 
     public void tearDown() throws Exception {

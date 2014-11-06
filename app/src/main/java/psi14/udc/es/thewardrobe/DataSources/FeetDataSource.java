@@ -87,7 +87,7 @@ public class FeetDataSource extends ClothDataSource{
         feet.setDescription(cursor.getString(3));
         feet.setFeetType(FeetType.valueOf(cursor.getString(4)));
         feet.setSeason(Season.valueOf(cursor.getString(5)));
-
+        feet.setId(id);
         //log
         Log.d("getFeet(" + id + ")", feet.toString());
 
@@ -101,7 +101,7 @@ public class FeetDataSource extends ClothDataSource{
     }
 
     public boolean updateFeet(Feet feet) {
-
+        super.open();
         long idNot = feet.getId();
         ContentValues cv = new ContentValues();
         cv.put(NAME, feet.getName());

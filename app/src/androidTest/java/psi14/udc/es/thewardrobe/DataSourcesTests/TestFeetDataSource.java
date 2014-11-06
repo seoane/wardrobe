@@ -37,6 +37,27 @@ public class TestFeetDataSource extends AndroidTestCase {
         assertTrue(feetDataSource.deleteFeet(id));
     }
 
+    public void testUpdateFeetToDatabase() {
+        int id = 0;
+        try {
+            Feet feet =
+                    new Feet("Zapatitos", Season.AUTUMN, Colors.BLUE,
+                            "/NULL", "No hay descripción disponible", FeetType.SANDALS);
+            id = feetDataSource.addFeet(feet);
+            Feet foundFeet = feetDataSource.getFeet(id);
+
+            feet.setDescription("Nueva Descripción");
+            feetDataSource.updateFeet(feet);
+
+            Feet foundUpdateFeet = feetDataSource.getFeet(id);
+            assertEquals(foundFeet, foundUpdateFeet);
+        } finally {
+            feetDataSource.deleteFeet(id);
+
+        }
+
+    }
+
     public void tearDown() throws Exception {
         feetDataSource.close();
         super.tearDown();
