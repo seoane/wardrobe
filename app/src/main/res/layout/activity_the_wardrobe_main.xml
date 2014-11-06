@@ -10,4 +10,10 @@
         android:text="@string/title_activity_mac_cloth"
         android:id="@+id/but_mac"
         android:layout_gravity="center_horizontal" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/lv_main"
+        android:layout_gravity="center_horizontal" />
 </LinearLayout>

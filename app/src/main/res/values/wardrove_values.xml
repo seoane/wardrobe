@@ -2,9 +2,9 @@
 <resources>
 
     <string-array name="bodyParts">
-        <item> Chest </item>
-        <item> Legs </item>
-        <item> Feet </item>
+        <item> @string/chest </item>
+        <item> @string/legs </item>
+        <item> @string/feet </item>
     </string-array>
 
 

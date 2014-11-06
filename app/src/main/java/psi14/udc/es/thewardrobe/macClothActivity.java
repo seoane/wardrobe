@@ -4,15 +4,18 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-public class macClothActivity extends Activity {
+public class macClothActivity extends Activity implements AdapterView.OnItemSelectedListener{
 
     public final static String TAG = "macClothActivity";
     EditText etName,etDescription;
     Spinner spBodyPart,spClothType,spSeason,spColor;
+    String[] bodyParts,chestTypes,legTypes,feetTypes,seasons,colors;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,10 +30,12 @@ public class macClothActivity extends Activity {
         spColor = (Spinner) findViewById(R.id.sp_color);
 
         //Adapters
-        String[] bodyParts = getResources().getStringArray(R.array.bodyParts);
-        String[] chestTypes = getResources().getStringArray(R.array.chestTypes);
-        String[] seasons = getResources().getStringArray(R.array.seasons);
-        String[] colors = getResources().getStringArray(R.array.colors);
+        bodyParts = getResources().getStringArray(R.array.bodyParts);
+        chestTypes = getResources().getStringArray(R.array.chestTypes);
+        legTypes = getResources().getStringArray(R.array.legsTypes);
+        feetTypes = getResources().getStringArray(R.array.feetTypes);
+        seasons = getResources().getStringArray(R.array.seasons);
+        colors = getResources().getStringArray(R.array.colors);
 
         spBodyPart.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item, bodyParts));
         spBodyPart.setHorizontalScrollBarEnabled(true);
@@ -62,5 +67,32 @@ public class macClothActivity extends Activity {
             default:
                 return super.onContextItemSelected(item);
         }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
+
+        switch (adapterView.getId()){
+            case R.id.sp_bodyPart:
+                String part = adapterView.getItemAtPosition(pos).toString();
+                if (part.equalsIgnoreCase(getString(R.string.chest))){
+                    spClothType.setAdapter(new ArrayAdapter<String>(this,
+                            android.R.layout.simple_spinner_dropdown_item, chestTypes));
+                }else if (part.equalsIgnoreCase(getString(R.string.legs))){
+                    spClothType.setAdapter(new ArrayAdapter<String>(this,
+                            android.R.layout.simple_spinner_dropdown_item, legTypes));
+                }else if (part.equalsIgnoreCase(getString(R.string.feet))){
+                    spClothType.setAdapter(new ArrayAdapter<String>(this,
+                            android.R.layout.simple_spinner_dropdown_item, feetTypes));
+                }
+            default:
+                return;
+        }
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 }

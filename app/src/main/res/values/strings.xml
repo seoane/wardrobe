@@ -13,5 +13,8 @@
     <string name="description">Description:</string>
     <string name="action_add">Add</string>
     <string name="action_cancel">Cancel</string>
+    <string name="chest">Chest</string>
+    <string name="feet">Feet</string>
+    <string name="legs">Legs</string>
 
 </resources>
