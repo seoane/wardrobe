@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 
 import psi14.udc.es.thewardrobe.DataSources.ChestDataSource;
 
@@ -14,6 +15,7 @@ import psi14.udc.es.thewardrobe.DataSources.ChestDataSource;
 public class TheWardrobeMainActivity extends Activity implements View.OnClickListener{
     ChestDataSource chestDataSource;
     Button but_mac;
+    ListView lv_main;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +25,7 @@ public class TheWardrobeMainActivity extends Activity implements View.OnClickLis
         //Chest chest = new Chest("Falda de putilla", Season.AUTUMN, Colors.BLUE, "/NULL", "es de ser putas", ChestType.BLOUSES);
         //chestDataSource.addChest(chest);
         but_mac = (Button) findViewById(R.id.but_mac);
+        lv_main = (ListView) findViewById(R.id.lv_main);
         but_mac.setOnClickListener(this);
     }
 
