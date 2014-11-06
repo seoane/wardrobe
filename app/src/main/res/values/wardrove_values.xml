@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="bodyParts">
+        <item> Chest </item>
+        <item> Legs </item>
+        <item> Feet </item>
+    </string-array>
+
+
+    <string-array name="chestTypes">
+        <item> T_Shirt </item>
+        <item> Blouse </item>
+        <item> Shirt </item>
+        <item> Jersey </item>
+        <item> Jacket </item>
+        <item> SweatShirt </item>
+        <item> HoodieSweatShirt </item>
+    </string-array>
+
+    <string-array name="legsTypes">
+        <item> Skirt </item>
+        <item> Trousers </item>
+        <item> Shorts </item>
+        <item> Leggings </item>
+        <item> Capri_Pants </item>
+        <item> Long_Skirt </item>
+        <item> Miny_Skirt </item>
+    </string-array>
+
+
+    <string-array name="feetTypes">
+        <item> Show </item>
+        <item> Boots </item>
+        <item> Sandals </item>
+        <item> Hills </item>
+        <item> Sport_Shoes </item>
+        <item> Slippers </item>
+        <item> Flat_Shoes </item>
+    </string-array>
+
+    <string-array name="seasons">
+        <item> Autumn </item>
+        <item> Winter </item>
+        <item> Spring </item>
+        <item> Summer </item>
+    </string-array>
+
+    <string-array name="colors">
+        <item> White </item>
+        <item> Blue </item>
+        <item> Red </item>
+        <item> Green </item>
+        <item> Yellow </item>
+        <item> Black </item>
+        <item> Orange </item>
+        <item> Brown </item>
+        <item> Pink </item>
+        <item> Grey </item>
+    </string-array>
+
+
+</resources>
