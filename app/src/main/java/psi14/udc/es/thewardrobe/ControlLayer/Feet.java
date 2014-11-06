@@ -8,8 +8,9 @@ import psi14.udc.es.thewardrobe.Utils.Season;
 public class Feet extends Cloth {
     FeetType feetType;
 
-    protected Feet(String name, Season season, Colors color, String photographyPath, String description) {
+    public Feet(String name, Season season, Colors color, String photographyPath, String description, FeetType feetType) {
         super(name, season, color, photographyPath, description);
+        this.feetType = feetType;
     }
 
     public Feet(){
@@ -29,5 +30,25 @@ public class Feet extends Cloth {
         return "Feet{" + super.toString() +
                 ", feetType=" + feetType +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        Feet feet = (Feet) o;
+
+        if (feetType != feet.feetType) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (feetType != null ? feetType.hashCode() : 0);
+        return result;
     }
 }

@@ -22,6 +22,34 @@ public abstract class Cloth {
     protected Cloth() {
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Cloth cloth = (Cloth) o;
+
+        if (color != cloth.color) return false;
+        if (description != null ? !description.equals(cloth.description) : cloth.description != null)
+            return false;
+        if (name != null ? !name.equals(cloth.name) : cloth.name != null) return false;
+        if (photographyPath != null ? !photographyPath.equals(cloth.photographyPath) : cloth.photographyPath != null)
+            return false;
+        if (season != cloth.season) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (season != null ? season.hashCode() : 0);
+        result = 31 * result + (color != null ? color.hashCode() : 0);
+        result = 31 * result + (photographyPath != null ? photographyPath.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        return result;
+    }
+
     public String getName() {
         return name;
     }

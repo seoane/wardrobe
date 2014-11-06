@@ -33,7 +33,7 @@ public class LegsDataSource extends ClothDataSource {
         return (LegsDataSource) instance;
     }
 
-    public void addLegs(Legs legs) {
+    public int addLegs(Legs legs) {
         super.open();
         Log.d("addLegs", legs.toString());
         ContentValues values = new ContentValues();
@@ -54,9 +54,10 @@ public class LegsDataSource extends ClothDataSource {
         values.put(LEGS_TYPE, legs.getLegsType().toString());
 
         // 3. insert
-        database.insert(LEGS_TABLE, null, values);
+        Long id = database.insert(LEGS_TABLE, null, values);
         // 4. close
         database.close();
+        return id.intValue();
     }
 
     public Legs getLegs(int id) {
@@ -94,8 +95,8 @@ public class LegsDataSource extends ClothDataSource {
         return legs;
     }
 
-    public boolean deleteFeet(int id) {
+    public boolean deleteLegs(int id) {
         super.open();
-        return (database.delete(LEGS_TABLE, ID + " =? ", new String[]{String.valueOf(id)}) == 0);
+        return (database.delete(LEGS_TABLE, ID + " =? ", new String[]{String.valueOf(id)}) == 1);
     }
 }

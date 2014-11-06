@@ -34,7 +34,7 @@ public class ChestDataSource extends ClothDataSource {
         return (ChestDataSource) instance;
     }
 
-    public void addChest(Chest chest) {
+    public int addChest(Chest chest) {
         super.open();
         Log.d("addChest", chest.toString());
         ContentValues values = new ContentValues();
@@ -54,8 +54,9 @@ public class ChestDataSource extends ClothDataSource {
         values.put(DESCRIPTION, chest.getDescription());
         values.put(CHEST_TYPE, chest.getChestType().toString());
 
-        database.insert(CHEST_TABLE, null, values);
+        Long id = database.insert(CHEST_TABLE, null, values);
         database.close();
+        return id.intValue();
     }
 
     public Chest getChest(int id) {
@@ -88,8 +89,8 @@ public class ChestDataSource extends ClothDataSource {
         return chest;
     }
 
-    public boolean deleteFeet(int id) {
+    public boolean deleteChest(int id) {
         super.open();
-        return (database.delete(CHEST_TABLE, ID + " =? ", new String[]{String.valueOf(id)}) == 0);
+        return (database.delete(CHEST_TABLE, ID + " =? ", new String[]{String.valueOf(id)}) == 1);
     }
 }

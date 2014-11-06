@@ -5,13 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.util.ArrayList;
-
-import psi14.udc.es.thewardrobe.ControlLayer.Chest;
 import psi14.udc.es.thewardrobe.DataSources.ChestDataSource;
-import psi14.udc.es.thewardrobe.Utils.ChestType;
-import psi14.udc.es.thewardrobe.Utils.Colors;
-import psi14.udc.es.thewardrobe.Utils.Season;
 
 
 public class TheWardrobeMainActivity extends Activity {
@@ -22,9 +16,8 @@ public class TheWardrobeMainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_the_wardrobe_main);
         chestDataSource = ChestDataSource.getInstance(this);
-        Chest chest = new Chest("Falda de putilla", Season.AUTUMN, Colors.BLUE, "/NULL", "es de ser putas", ChestType.BLOUSES);
-        chestDataSource.addChest(chest);
-        chestDataSource.getChest(1);
+        //Chest chest = new Chest("Falda de putilla", Season.AUTUMN, Colors.BLUE, "/NULL", "es de ser putas", ChestType.BLOUSES);
+        //chestDataSource.addChest(chest);
     }
 
 

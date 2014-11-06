@@ -9,7 +9,7 @@ public final class Constants {
     public static final String LEGS_TABLE = "LEGS";
     public static final String FEET_TABLE = "FEET";
 
-    public static final String ID = "_ID";
+    public static final String ID = "_id";
     public static final String NAME = "NAME";
     public static final String COLOR = "COLOR";
     public static final String SEASON = "SEASON";

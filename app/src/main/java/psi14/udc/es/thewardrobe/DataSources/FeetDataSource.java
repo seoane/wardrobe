@@ -33,7 +33,7 @@ public class FeetDataSource extends ClothDataSource{
         return (FeetDataSource) instance;
     }
 
-    public void addFeet(Feet feet) {
+    public int addFeet(Feet feet) {
         super.open();
         Log.d("addFeet", feet.toString());
         ContentValues values = new ContentValues();
@@ -54,9 +54,10 @@ public class FeetDataSource extends ClothDataSource{
         values.put(FEET_TYPE, feet.getFeetType().toString());
 
         // 3. insert
-        database.insert(FEET_TABLE, null, values);
+        Long id = database.insert(FEET_TABLE, null, values);
         // 4. close
         database.close();
+        return id.intValue();
     }
 
     public Feet getFeet(int id) {
@@ -96,6 +97,6 @@ public class FeetDataSource extends ClothDataSource{
 
     public boolean deleteFeet(int id) {
         super.open();
-        return (database.delete(FEET_TABLE, ID + " =? ", new String[]{String.valueOf(id)}) == 0);
+        return (database.delete(FEET_TABLE, ID + " =? ", new String[]{String.valueOf(id)}) == 1);
     }
 }
