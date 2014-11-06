@@ -16,5 +16,7 @@
     <string name="chest">Chest</string>
     <string name="feet">Feet</string>
     <string name="legs">Legs</string>
+    <string name="insert_name">Name your cloth</string>
+    <string name="insert_description">Insert a description</string>
 
 </resources>

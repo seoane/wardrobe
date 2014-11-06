@@ -2,6 +2,7 @@ package psi14.udc.es.thewardrobe;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -39,6 +40,7 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
 
         spBodyPart.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item, bodyParts));
         spBodyPart.setHorizontalScrollBarEnabled(true);
+        spBodyPart.setOnItemSelectedListener(this);
         spClothType.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item, chestTypes));
         spClothType.setHorizontalScrollBarEnabled(true);
         spSeason.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item, seasons));
@@ -75,6 +77,7 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
         switch (adapterView.getId()){
             case R.id.sp_bodyPart:
                 String part = adapterView.getItemAtPosition(pos).toString();
+                Log.d(TAG,"Seleccionada parte " + part );
                 if (part.equalsIgnoreCase(getString(R.string.chest))){
                     spClothType.setAdapter(new ArrayAdapter<String>(this,
                             android.R.layout.simple_spinner_dropdown_item, chestTypes));
