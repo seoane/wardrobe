@@ -9,13 +9,15 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
-public class macClothActivity extends Activity implements AdapterView.OnItemSelectedListener{
+public class macClothActivity extends Activity implements AdapterView.OnItemSelectedListener,View.OnClickListener{
 
     public final static String TAG = "macClothActivity";
     EditText etName,etDescription;
     Spinner spBodyPart,spClothType,spSeason,spColor;
+    ImageView imageView;
     String[] bodyParts,chestTypes,legTypes,feetTypes,seasons,colors;
 
     @Override
@@ -29,6 +31,7 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
         spClothType = (Spinner) findViewById(R.id.sp_clothType);
         spSeason = (Spinner) findViewById(R.id.sp_season);
         spColor = (Spinner) findViewById(R.id.sp_color);
+        imageView  =(ImageView) findViewById(R.id.img);
 
         //Adapters
         bodyParts = getResources().getStringArray(R.array.bodyParts);
@@ -48,6 +51,8 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
         spColor.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item, colors));
         spColor.setHorizontalScrollBarEnabled(true);
 
+        imageView.setOnClickListener(this);
+
     }
 
 
@@ -65,7 +70,7 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
 
                 return true;
             case R.id.action_cancel:
-
+                finish();
             default:
                 return super.onContextItemSelected(item);
         }
@@ -97,5 +102,13 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view == imageView)
+        {
+            Log.d(TAG,"Imagen click");
+        }
     }
 }

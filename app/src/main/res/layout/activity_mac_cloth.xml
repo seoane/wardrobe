@@ -5,154 +5,178 @@
     android:layout_height="fill_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <LinearLayout
-        android:orientation="horizontal"
+    <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="fill_parent"
+        android:id="@+id/scrollView"
+        android:overScrollMode="never">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/name"
-            android:id="@+id/tv_name"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:padding="3dp"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:gravity="center" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
 
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:id="@+id/et_name"
-            android:singleLine="true"
-            android:inputType="text"
-            android:hint="@string/insert_name" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/img"
+                android:padding="10dp"
+                android:src="@android:drawable/ic_menu_camera"
+                android:layout_gravity="center" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/name"
+                    android:id="@+id/tv_name"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:padding="3dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:gravity="center" />
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:id="@+id/et_name"
+                    android:singleLine="true"
+                    android:inputType="text"
+                    android:hint="@string/insert_name" />
 
 
-    </LinearLayout>
+            </LinearLayout>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/part"
-            android:id="@+id/tv_part"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:layout_weight="1"
-            android:padding="3dp"
-            android:layout_gravity="center"
-            android:gravity="center" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/part"
+                    android:id="@+id/tv_part"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:layout_weight="1"
+                    android:padding="3dp"
+                    android:layout_gravity="center"
+                    android:gravity="center" />
 
-        <Spinner
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/sp_bodyPart"
-            android:layout_weight="2" />
+                <Spinner
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/sp_bodyPart"
+                    android:layout_weight="2" />
 
-    </LinearLayout>
+            </LinearLayout>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/clothType"
-            android:id="@+id/tv_clothType"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:layout_weight="1"
-            android:padding="3dp"
-            android:layout_gravity="center"
-            android:gravity="center" />
-        <Spinner
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/sp_clothType"
-            android:layout_weight="2" />
-    </LinearLayout>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/clothType"
+                    android:id="@+id/tv_clothType"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:layout_weight="1"
+                    android:padding="3dp"
+                    android:layout_gravity="center"
+                    android:gravity="center" />
+                <Spinner
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/sp_clothType"
+                    android:layout_weight="2" />
+            </LinearLayout>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/season"
-            android:id="@+id/tv_season"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:layout_weight="1"
-            android:padding="3dp"
-            android:layout_gravity="center"
-            android:gravity="center" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/season"
+                    android:id="@+id/tv_season"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:layout_weight="1"
+                    android:padding="3dp"
+                    android:layout_gravity="center"
+                    android:gravity="center" />
 
-        <Spinner
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/sp_season"
-            android:layout_weight="2" />
+                <Spinner
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/sp_season"
+                    android:layout_weight="2" />
 
-    </LinearLayout>
+            </LinearLayout>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/color"
-            android:id="@+id/tv_color"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:padding="3dp"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:gravity="center" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/color"
+                    android:id="@+id/tv_color"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:padding="3dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:gravity="center" />
 
-        <Spinner
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/sp_color"
-            android:layout_weight="2" />
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+                <Spinner
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/sp_color"
+                    android:layout_weight="2" />
+            </LinearLayout>
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/description"
-            android:id="@+id/tv_description"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:padding="3dp"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:gravity="center" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
 
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:id="@+id/et_description"
-            android:hint="@string/insert_description"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/description"
+                    android:id="@+id/tv_description"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:padding="3dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:gravity="center" />
 
-    </LinearLayout>
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:id="@+id/et_description"
+                    android:hint="@string/insert_description"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>
