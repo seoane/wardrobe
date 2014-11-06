@@ -13,6 +13,11 @@ public class Chest extends Cloth {
         this.chestType = chestType;
     }
 
+    public Chest(int id, String name, Season season, Colors color, String photographyPath, String description, ChestType chestType) {
+        super(id, name, season, color, photographyPath, description);
+        this.chestType = chestType;
+    }
+
     public Chest() {
         super();
     }

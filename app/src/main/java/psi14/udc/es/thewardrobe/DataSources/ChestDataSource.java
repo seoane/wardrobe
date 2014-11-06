@@ -93,4 +93,16 @@ public class ChestDataSource extends ClothDataSource {
         super.open();
         return (database.delete(CHEST_TABLE, ID + " =? ", new String[]{String.valueOf(id)}) == 1);
     }
+
+    public boolean updateChest(Chest chest) {
+        long idNot = chest.getId();
+        ContentValues cv = new ContentValues();
+        cv.put(NAME, chest.getName());
+        cv.put(COLOR, chest.getColor().toString());
+        cv.put(URI, chest.getPhotographyPath());
+        cv.put(DESCRIPTION, chest.getDescription());
+        cv.put(CHEST_TYPE, chest.getChestType().toString());
+        cv.put(SEASON, chest.getSeason().toString());
+        return (database.update(CHEST_TABLE, cv, ID + " = " + idNot, null) >= 1);
+    }
 }

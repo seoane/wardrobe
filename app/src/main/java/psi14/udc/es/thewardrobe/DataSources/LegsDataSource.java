@@ -99,4 +99,17 @@ public class LegsDataSource extends ClothDataSource {
         super.open();
         return (database.delete(LEGS_TABLE, ID + " =? ", new String[]{String.valueOf(id)}) == 1);
     }
+
+    public boolean updateLegs(Legs legs) {
+
+        long idNot = legs.getId();
+        ContentValues cv = new ContentValues();
+        cv.put(NAME, legs.getName());
+        cv.put(COLOR, legs.getColor().toString());
+        cv.put(URI, legs.getPhotographyPath());
+        cv.put(DESCRIPTION, legs.getDescription());
+        cv.put(LEGS_TYPE, legs.getLegsType().toString());
+        cv.put(SEASON, legs.getSeason().toString());
+        return (database.update(LEGS_TABLE, cv, ID + " = " + idNot, null) >= 1);
+    }
 }

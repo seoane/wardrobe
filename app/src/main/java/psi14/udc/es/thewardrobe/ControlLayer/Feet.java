@@ -13,6 +13,11 @@ public class Feet extends Cloth {
         this.feetType = feetType;
     }
 
+    public Feet(int id, String name, Season season, Colors color, String photographyPath, String description, FeetType feetType) {
+        super(id, name, season, color, photographyPath, description);
+        this.feetType = feetType;
+    }
+
     public Feet(){
         super();
     }

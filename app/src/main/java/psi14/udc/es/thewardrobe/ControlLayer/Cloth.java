@@ -5,11 +5,22 @@ import psi14.udc.es.thewardrobe.Utils.Season;
 
 
 public abstract class Cloth {
+    int id;
     String name;
-    Season season;
     Colors color;
     String photographyPath;
+    Season season;
     String description;
+
+    protected Cloth(int id, String name, Season season, Colors color, String photographyPath, String description) {
+
+        this.id = id;
+        this.name = name;
+        this.season = season;
+        this.color = color;
+        this.photographyPath = photographyPath;
+        this.description = description;
+    }
 
     protected Cloth(String name, Season season, Colors color, String photographyPath, String description) {
         this.name = name;
@@ -56,6 +67,15 @@ public abstract class Cloth {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getId() {
+
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Season getSeason() {

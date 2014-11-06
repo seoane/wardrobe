@@ -13,6 +13,11 @@ public class Legs extends Cloth {
         this.legsType = legsType;
     }
 
+    public Legs(int id, String name, Season season, Colors color, String photographyPath, String description, LegsType legsType) {
+        super(id, name, season, color, photographyPath, description);
+        this.legsType = legsType;
+    }
+
     public Legs() {
         super();
     }
