@@ -1,15 +1,19 @@
 package psi14.udc.es.thewardrobe;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import psi14.udc.es.thewardrobe.DataSources.ChestDataSource;
 
 
-public class TheWardrobeMainActivity extends Activity {
+public class TheWardrobeMainActivity extends Activity implements View.OnClickListener{
     ChestDataSource chestDataSource;
+    Button but_mac;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +22,8 @@ public class TheWardrobeMainActivity extends Activity {
         chestDataSource = ChestDataSource.getInstance(this);
         //Chest chest = new Chest("Falda de putilla", Season.AUTUMN, Colors.BLUE, "/NULL", "es de ser putas", ChestType.BLOUSES);
         //chestDataSource.addChest(chest);
+        but_mac = (Button) findViewById(R.id.but_mac);
+        but_mac.setOnClickListener(this);
     }
 
 
@@ -38,5 +44,12 @@ public class TheWardrobeMainActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view == but_mac){
+            startActivity(new Intent(this,macClothActivity.class));
+        }
     }
 }
