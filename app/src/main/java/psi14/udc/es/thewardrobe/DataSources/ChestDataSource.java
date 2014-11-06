@@ -14,6 +14,7 @@ import static psi14.udc.es.thewardrobe.Utils.Constants.CHEST_TABLE;
 import static psi14.udc.es.thewardrobe.Utils.Constants.CHEST_TYPE;
 import static psi14.udc.es.thewardrobe.Utils.Constants.COLOR;
 import static psi14.udc.es.thewardrobe.Utils.Constants.DESCRIPTION;
+import static psi14.udc.es.thewardrobe.Utils.Constants.ID;
 import static psi14.udc.es.thewardrobe.Utils.Constants.NAME;
 import static psi14.udc.es.thewardrobe.Utils.Constants.SEASON;
 import static psi14.udc.es.thewardrobe.Utils.Constants.URI;
@@ -87,4 +88,8 @@ public class ChestDataSource extends ClothDataSource {
         return chest;
     }
 
+    public boolean deleteFeet(int id) {
+        super.open();
+        return (database.delete(CHEST_TABLE, ID + " =? ", new String[]{String.valueOf(id)}) == 0);
+    }
 }

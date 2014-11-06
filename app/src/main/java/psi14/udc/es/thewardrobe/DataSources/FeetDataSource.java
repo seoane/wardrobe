@@ -10,7 +10,14 @@ import psi14.udc.es.thewardrobe.Utils.Colors;
 import psi14.udc.es.thewardrobe.Utils.FeetType;
 import psi14.udc.es.thewardrobe.Utils.Season;
 
-import static psi14.udc.es.thewardrobe.Utils.Constants.*;
+import static psi14.udc.es.thewardrobe.Utils.Constants.COLOR;
+import static psi14.udc.es.thewardrobe.Utils.Constants.DESCRIPTION;
+import static psi14.udc.es.thewardrobe.Utils.Constants.FEET_TABLE;
+import static psi14.udc.es.thewardrobe.Utils.Constants.FEET_TYPE;
+import static psi14.udc.es.thewardrobe.Utils.Constants.ID;
+import static psi14.udc.es.thewardrobe.Utils.Constants.NAME;
+import static psi14.udc.es.thewardrobe.Utils.Constants.SEASON;
+import static psi14.udc.es.thewardrobe.Utils.Constants.URI;
 
 
 public class FeetDataSource extends ClothDataSource{
@@ -85,5 +92,10 @@ public class FeetDataSource extends ClothDataSource{
 
         // 5. return feet
         return feet;
+    }
+
+    public boolean deleteFeet(int id) {
+        super.open();
+        return (database.delete(FEET_TABLE, ID + " =? ", new String[]{String.valueOf(id)}) == 0);
     }
 }
