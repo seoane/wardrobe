@@ -154,11 +154,13 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
     }
 
 
+
     private File createImageFile() throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "CLOTH_" + timeStamp + "_";
         File storageDir = getExternalFilesDir(null);
+
 
         File image = File.createTempFile(
                 imageFileName,  /* prefix */
@@ -174,10 +176,16 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Bitmap ThumbImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(mCapturedPhotoPath),
+        if (requestCode == REQUEST_IMAGE_CAPTURE){
+            if (resultCode == RESULT_OK) {
+                Bitmap ThumbImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(mCapturedPhotoPath),
                     THUMBSIZE, THUMBSIZE);
-            imageView.setImageBitmap(ThumbImage);
+                imageView.setImageBitmap(ThumbImage);
+            }else {
+                File file = new File(mCapturedPhotoPath);
+                if (file.delete())
+                    Log.d(TAG,"Deleted file: " + mCapturedPhotoPath);
+            }
         }
     }
 
