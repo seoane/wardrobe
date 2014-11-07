@@ -3,6 +3,8 @@ package psi14.udc.es.thewardrobe;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -23,11 +25,14 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import psi14.udc.es.thewardrobe.Utils.Constants;
+
 public class macClothActivity extends Activity implements AdapterView.OnItemSelectedListener,View.OnClickListener{
 
 
     public final static String TAG = "macClothActivity";
     static final int REQUEST_IMAGE_CAPTURE = 1;
+    final int THUMBSIZE = 128;
 
     EditText etName,etDescription;
     Spinner spBodyPart,spClothType,spSeason,spColor;
@@ -149,12 +154,12 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
     }
 
 
-
     private File createImageFile() throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "CLOTH_" + timeStamp + "_";
         File storageDir = getExternalFilesDir(null);
+
         File image = File.createTempFile(
                 imageFileName,  /* prefix */
                 ".jpg",         /* suffix */
@@ -170,8 +175,9 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            //File file = new File(mCapturedPhotoPath);
-            //imageView.setImageURI(Uri.fromFile(file));
+            Bitmap ThumbImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(mCapturedPhotoPath),
+                    THUMBSIZE, THUMBSIZE);
+            imageView.setImageBitmap(ThumbImage);
         }
     }
 
