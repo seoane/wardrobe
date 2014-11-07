@@ -18,5 +18,6 @@
     <string name="legs">Legs</string>
     <string name="insert_name">Name your cloth</string>
     <string name="insert_description">Insert a description</string>
+    <string name="error_photo_saving">Error saving photograph</string>
 
 </resources>
