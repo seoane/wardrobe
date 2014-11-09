@@ -4,7 +4,7 @@
     <string name="app_name">TheWardrobe</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_mac_cloth">macClothActivity</string>
+    <string name="title_activity_mac_cloth">Cloth Editor</string>
     <string name="name">Name:</string>
     <string name="part">Body Part:</string>
     <string name="clothType">Cloth Type:</string>
@@ -19,5 +19,7 @@
     <string name="insert_name">Name your cloth</string>
     <string name="insert_description">Insert a description</string>
     <string name="error_photo_saving">Error saving photograph</string>
+    <string name="str_butt_save">Save</string>
+    <string name="name_not_set">Please, name your cloth</string>
 
 </resources>

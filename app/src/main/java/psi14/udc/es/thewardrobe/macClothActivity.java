@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -25,20 +26,32 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import psi14.udc.es.thewardrobe.Utils.Constants;
+import psi14.udc.es.thewardrobe.ControlLayer.Chest;
+import psi14.udc.es.thewardrobe.ControlLayer.Feet;
+import psi14.udc.es.thewardrobe.ControlLayer.Legs;
+import psi14.udc.es.thewardrobe.DataSources.ChestDataSource;
+import psi14.udc.es.thewardrobe.DataSources.FeetDataSource;
+import psi14.udc.es.thewardrobe.DataSources.LegsDataSource;
+import psi14.udc.es.thewardrobe.Utils.ChestType;
+import psi14.udc.es.thewardrobe.Utils.Colors;
+import psi14.udc.es.thewardrobe.Utils.FeetType;
+import psi14.udc.es.thewardrobe.Utils.LegsType;
+import psi14.udc.es.thewardrobe.Utils.Season;
+
 
 public class macClothActivity extends Activity implements AdapterView.OnItemSelectedListener,View.OnClickListener{
 
 
     public final static String TAG = "macClothActivity";
     static final int REQUEST_IMAGE_CAPTURE = 1;
-    final int THUMBSIZE = 128;
+    final int THUMBSIZE = 230;
 
     EditText etName,etDescription;
     Spinner spBodyPart,spClothType,spSeason,spColor;
+    Button butt_save;
     ImageView imageView;
     String[] bodyParts,chestTypes,legTypes,feetTypes,seasons,colors;
-    String mCapturedPhotoPath;
+    String mCapturedPhotoPath,name,bodyPart,clothType,season,color,description;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +65,7 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
         spSeason = (Spinner) findViewById(R.id.sp_season);
         spColor = (Spinner) findViewById(R.id.sp_color);
         imageView  =(ImageView) findViewById(R.id.img);
+        butt_save = (Button) findViewById(R.id.butt_save);
 
         //Adapters
         bodyParts = getResources().getStringArray(R.array.bodyParts);
@@ -72,6 +86,8 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
         spColor.setHorizontalScrollBarEnabled(true);
 
         imageView.setOnClickListener(this);
+        butt_save.setOnClickListener(this);
+
 
     }
 
@@ -86,10 +102,10 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
-            case R.id.action_add:
-
-                return true;
             case R.id.action_cancel:
+                // Remove older image if exists
+                if (mCapturedPhotoPath!=null)
+                    removeFile(mCapturedPhotoPath);
                 finish();
             default:
                 return super.onContextItemSelected(item);
@@ -101,15 +117,15 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
 
         switch (adapterView.getId()){
             case R.id.sp_bodyPart:
-                String part = adapterView.getItemAtPosition(pos).toString();
-                Log.d(TAG,"Seleccionada parte " + part );
-                if (part.equalsIgnoreCase(getString(R.string.chest))){
+                String bodyPart = adapterView.getItemAtPosition(pos).toString();
+                Log.d(TAG,"Seleccionada parte " + bodyPart );
+                if (bodyPart.equalsIgnoreCase(getString(R.string.chest))){
                     spClothType.setAdapter(new ArrayAdapter<String>(this,
                             android.R.layout.simple_spinner_dropdown_item, chestTypes));
-                }else if (part.equalsIgnoreCase(getString(R.string.legs))){
+                }else if (bodyPart.equalsIgnoreCase(getString(R.string.legs))){
                     spClothType.setAdapter(new ArrayAdapter<String>(this,
                             android.R.layout.simple_spinner_dropdown_item, legTypes));
-                }else if (part.equalsIgnoreCase(getString(R.string.feet))){
+                }else if (bodyPart.equalsIgnoreCase(getString(R.string.feet))){
                     spClothType.setAdapter(new ArrayAdapter<String>(this,
                             android.R.layout.simple_spinner_dropdown_item, feetTypes));
                 }
@@ -126,11 +142,86 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
 
     @Override
     public void onClick(View view) {
-        if (view == imageView)
-        {
+        if (view == imageView){
+            // Remove older image if exists
+            if (mCapturedPhotoPath!=null)
+                removeFile(mCapturedPhotoPath);
             Log.d(TAG,"Imagen click");
             dispatchTakePictureIntent();
+
         }
+        else if (view == butt_save){
+
+            if (createDatabaseEntry()) {
+                finish();
+            }
+        }
+    }
+
+    private boolean createDatabaseEntry() {
+
+        name = etName.getText().toString();
+        bodyPart = spBodyPart.getSelectedItem().toString();
+        clothType = spClothType.getSelectedItem().toString();
+        season = spSeason.getSelectedItem().toString();
+        color = spColor.getSelectedItem().toString();
+        description = etDescription.getText().toString();
+
+        if (!name.equalsIgnoreCase("")) {
+
+            if (bodyPart.equalsIgnoreCase(getString(R.string.chest))) {
+
+                Chest chest = new Chest(name,
+                        Season.valueOf(season.toUpperCase().trim()),
+                        Colors.valueOf(color.toUpperCase().trim()),
+                        mCapturedPhotoPath, description.trim(),
+                        ChestType.valueOf(clothType.toUpperCase().trim()));
+
+                // Obtain DAO and add chest
+                ChestDataSource chestDataSource = ChestDataSource.getInstance(this);
+                chestDataSource.addChest(chest);
+
+                Log.d(TAG, "Added: " + chest + " to the db");
+
+
+            } else if (bodyPart.equalsIgnoreCase(getString(R.string.legs))) {
+
+                Legs legs = new Legs(name,
+                        Season.valueOf(season.toUpperCase().trim()),
+                        Colors.valueOf(color.toUpperCase().trim()),
+                        mCapturedPhotoPath, description.trim(),
+                        LegsType.valueOf(clothType.toUpperCase().trim()));
+
+                // Obtain DAO and add legs
+                LegsDataSource legsDataSource = LegsDataSource.getInstance(this);
+                legsDataSource.addLegs(legs);
+
+                Log.d(TAG, "Added: " + legs + " to the db");
+
+
+            } else if (bodyPart.equalsIgnoreCase(getString(R.string.feet))) {
+
+                Feet feet = new Feet(name,
+                        Season.valueOf(season.toUpperCase().trim()),
+                        Colors.valueOf(color.toUpperCase().trim()),
+                        mCapturedPhotoPath, description.trim(),
+                        FeetType.valueOf(clothType.toUpperCase().trim()));
+
+                // Obtain DAO and add legs
+                FeetDataSource feetDataSource = FeetDataSource.getInstance(this);
+                feetDataSource.addFeet(feet);
+
+                Log.d(TAG, "Added: " + feet + " to the db");
+
+            }
+        }else {
+            // If name is not set
+            Toast.makeText(this,getString(R.string.name_not_set), Toast.LENGTH_SHORT).show();
+            return false;
+
+        }
+        return true;
+
     }
 
     private void dispatchTakePictureIntent() {
@@ -154,45 +245,69 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
     }
 
 
-
     private File createImageFile() throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "CLOTH_" + timeStamp + "_";
         File storageDir = getExternalFilesDir(null);
+        File image = null;
 
+        if (isExternalStorageWritable()) {
+            image = File.createTempFile(
+                    imageFileName,  /* prefix */
+                    ".jpg",         /* suffix */
+                    storageDir      /* directory */
+            );
 
-        File image = File.createTempFile(
-                imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
-                storageDir      /* directory */
-        );
-
-        mCapturedPhotoPath = image.getAbsolutePath();
-        Log.d(TAG,"createImageFile: " + mCapturedPhotoPath);
-        return image;
+            mCapturedPhotoPath = image.getAbsolutePath();
+            Log.d(TAG, "createImageFile: " + mCapturedPhotoPath);
+        } else{
+            throw new IOException("External Storage not Writable");
+        }
+            return image;
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE){
             if (resultCode == RESULT_OK) {
-                Bitmap ThumbImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(mCapturedPhotoPath),
-                    THUMBSIZE, THUMBSIZE);
-                imageView.setImageBitmap(ThumbImage);
+                if (isExternalStorageReadable()) {
+                    // TO-DO Problema raro... a veces mCapturedPhotoPath es null...
+                    Log.d(TAG,"Creating thumbnail of " + mCapturedPhotoPath);
+                    Bitmap ThumbImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(mCapturedPhotoPath),
+                            THUMBSIZE, THUMBSIZE);
+                    imageView.setImageBitmap(ThumbImage);
+                }else{
+                    Log.d(TAG,"Could not read External Storage");
+                }
             }else {
-                File file = new File(mCapturedPhotoPath);
-                if (file.delete())
-                    Log.d(TAG,"Deleted file: " + mCapturedPhotoPath);
+               /*If result is not ok we delete the TempFile we created*/
+                removeFile(mCapturedPhotoPath);
             }
+
         }
+    }
+
+    private void removeFile(String path){
+            File file = new File(path);
+            if (file.delete())
+                Log.d(TAG,"Deleted file: " + path);
     }
 
     /* Checks if external storage is available for read and write */
     public boolean isExternalStorageWritable() {
         String state = Environment.getExternalStorageState();
         if (Environment.MEDIA_MOUNTED.equals(state)) {
+            return true;
+        }
+        return false;
+    }
+
+    /* Checks if external storage is available to at least read */
+    public boolean isExternalStorageReadable() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state) ||
+                Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
             return true;
         }
         return false;

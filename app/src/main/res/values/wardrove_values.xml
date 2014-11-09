@@ -30,7 +30,7 @@
 
 
     <string-array name="feetTypes">
-        <item> Shoe </item>
+        <item> Shoes </item>
         <item> Boots </item>
         <item> Sandals </item>
         <item> Hills </item>
