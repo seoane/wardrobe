@@ -44,7 +44,6 @@ public class listClothActivity extends Activity {
 
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.list_cloth, menu);
@@ -59,6 +58,8 @@ public class listClothActivity extends Activity {
             return true;
         }else if (id == R.id.menu_update){
             listCloth = chestDataSource.getAllChests();
+            listCloth.addAll(legsDataSource.getAllLegs());
+            listCloth.addAll(feetDataSource.getAllFeet());
             updateList(listCloth);
             return true;
         }

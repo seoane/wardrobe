@@ -110,7 +110,7 @@ public class ChestDataSource extends ClothDataSource {
             } while (cursor.moveToNext());
         }
 
-        Log.d("getAllBooks()", chests.toString());
+        Log.d("getAllChests()", chests.toString());
 
         return chests;
     }

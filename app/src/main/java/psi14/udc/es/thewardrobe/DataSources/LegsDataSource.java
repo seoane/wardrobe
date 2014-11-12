@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
 
+import java.util.ArrayList;
+
 import psi14.udc.es.thewardrobe.ControlLayer.Legs;
 import psi14.udc.es.thewardrobe.Utils.Colors;
 import psi14.udc.es.thewardrobe.Utils.LegsType;
@@ -93,6 +95,30 @@ public class LegsDataSource extends ClothDataSource {
         Log.d("getLegs(" + id + ")", legs.toString());
 
         // 5. return legs
+        return legs;
+    }
+
+    public ArrayList<Legs> getAllLegs() {
+        super.open();
+        ArrayList<Legs> legs = new ArrayList<Legs>();
+
+        String query = "SELECT  * FROM " + LEGS_TABLE;
+
+
+        Cursor cursor = database.rawQuery(query, null);
+
+        Legs leg = null;
+        if (cursor.moveToFirst()) {
+            do {
+                leg = new Legs(cursor.getInt(0),cursor.getString(1),Season.valueOf(cursor.getString(2)),
+                        Colors.valueOf(cursor.getString(3)),cursor.getString(4),
+                        cursor.getString(5),LegsType.valueOf(cursor.getString(6)));
+                legs.add(leg);
+            } while (cursor.moveToNext());
+        }
+
+        Log.d("getAllLegs()", legs.toString());
+
         return legs;
     }
 

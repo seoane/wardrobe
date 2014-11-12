@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
 
+import java.util.ArrayList;
+
 import psi14.udc.es.thewardrobe.ControlLayer.Feet;
 import psi14.udc.es.thewardrobe.Utils.Colors;
 import psi14.udc.es.thewardrobe.Utils.FeetType;
@@ -94,6 +96,30 @@ public class FeetDataSource extends ClothDataSource{
 
         // 5. return feet
         return feet;
+    }
+
+    public ArrayList<Feet> getAllFeet() {
+        super.open();
+        ArrayList<Feet> feets = new ArrayList<Feet>();
+
+        String query = "SELECT  * FROM " + FEET_TABLE;
+
+
+        Cursor cursor = database.rawQuery(query, null);
+
+        Feet feet = null;
+        if (cursor.moveToFirst()) {
+            do {
+                feet = new Feet(cursor.getInt(0),cursor.getString(1),Season.valueOf(cursor.getString(2)),
+                        Colors.valueOf(cursor.getString(3)),cursor.getString(4),
+                        cursor.getString(5),FeetType.valueOf(cursor.getString(6)));
+                feets.add(feet);
+            } while (cursor.moveToNext());
+        }
+
+        Log.d("getAllFeet()", feets.toString());
+
+        return feets;
     }
 
     public boolean deleteFeet(int id) {
