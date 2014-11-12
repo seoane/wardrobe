@@ -91,7 +91,6 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
 
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.mac_cloth, menu);

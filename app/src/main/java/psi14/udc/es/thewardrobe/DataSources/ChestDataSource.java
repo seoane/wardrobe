@@ -5,6 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import psi14.udc.es.thewardrobe.ControlLayer.Chest;
 import psi14.udc.es.thewardrobe.Utils.ChestType;
 import psi14.udc.es.thewardrobe.Utils.Colors;
@@ -41,15 +44,15 @@ public class ChestDataSource extends ClothDataSource {
 
 /*      public static final String CHEST_ID = "_ID";
         public static final String NAME = "NAME";
-        public static final String COLOR = "COLOR";
         public static final String SEASON = "SEASON";
+        public static final String COLOR = "COLOR";
         public static final String URI = "URI";
         public static final String DESCRIPTION = "DESCRIPTION";
         public static final String CLOTH_TYPE = "CLOTH_TYPE";*/
 
         values.put(NAME, chest.getName());
-        values.put(COLOR, chest.getColor().toString());
         values.put(SEASON, chest.getSeason().toString());
+        values.put(COLOR, chest.getColor().toString());
         values.put(URI, chest.getPhotographyPath());
         values.put(DESCRIPTION, chest.getDescription());
         values.put(CHEST_TYPE, chest.getChestType().toString());
@@ -62,7 +65,7 @@ public class ChestDataSource extends ClothDataSource {
     public Chest getChest(int id) {
         super.open();
 
-        String[] columns = {NAME, COLOR, URI, DESCRIPTION, CHEST_TYPE, SEASON};
+        String[] columns = {NAME,SEASON,COLOR, URI, DESCRIPTION, CHEST_TYPE};
 
         Cursor cursor =
                 database.query(CHEST_TABLE,
@@ -78,14 +81,38 @@ public class ChestDataSource extends ClothDataSource {
 
         Chest chest = new Chest();
         chest.setName(cursor.getString(0));
-        chest.setColor(Colors.valueOf(cursor.getString(1)));
-        chest.setPhotographyPath(cursor.getString(2));
-        chest.setDescription(cursor.getString(3));
-        chest.setChestType(ChestType.valueOf(cursor.getString(4)));
-        chest.setSeason(Season.valueOf(cursor.getString(5)));
+        chest.setSeason(Season.valueOf(cursor.getString(1)));
+        chest.setColor(Colors.valueOf(cursor.getString(2)));
+        chest.setPhotographyPath(cursor.getString(3));
+        chest.setDescription(cursor.getString(4));
+        chest.setChestType(ChestType.valueOf(cursor.getString(5)));
         chest.setId(id);
 
         return chest;
+    }
+
+    public ArrayList<Chest> getAllChests() {
+        super.open();
+        ArrayList<Chest> chests = new ArrayList<Chest>();
+
+        String query = "SELECT  * FROM " + CHEST_TABLE;
+
+
+        Cursor cursor = database.rawQuery(query, null);
+
+        Chest chest = null;
+        if (cursor.moveToFirst()) {
+            do {
+                chest = new Chest(cursor.getInt(0),cursor.getString(1),Season.valueOf(cursor.getString(2)),
+                        Colors.valueOf(cursor.getString(3)),cursor.getString(4),
+                        cursor.getString(5),ChestType.valueOf(cursor.getString(6)));
+                chests.add(chest);
+            } while (cursor.moveToNext());
+        }
+
+        Log.d("getAllBooks()", chests.toString());
+
+        return chests;
     }
 
     public boolean deleteChest(int id) {

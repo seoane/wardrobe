@@ -40,15 +40,15 @@ public class FeetDataSource extends ClothDataSource{
 
 /*      public static final String FEET_ID = "_ID";
         public static final String NAME = "NAME";
-        public static final String COLOR = "COLOR";
         public static final String SEASON = "SEASON";
+        public static final String COLOR = "COLOR";
         public static final String URI = "URI";
         public static final String DESCRIPTION = "DESCRIPTION";
         public static final String CLOTH_TYPE = "CLOTH_TYPE";*/
 
         values.put(NAME, feet.getName());
-        values.put(COLOR, feet.getColor().toString());
         values.put(SEASON, feet.getSeason().toString());
+        values.put(COLOR, feet.getColor().toString());
         values.put(URI, feet.getPhotographyPath());
         values.put(DESCRIPTION, feet.getDescription());
         values.put(FEET_TYPE, feet.getFeetType().toString());
@@ -63,7 +63,7 @@ public class FeetDataSource extends ClothDataSource{
     public Feet getFeet(int id) {
         super.open();
         //SQLiteDatabase db = this.getReadableDatabase();
-        String[] columns = {NAME, COLOR, URI, DESCRIPTION, FEET_TYPE, SEASON};
+        String[] columns = {NAME, SEASON,COLOR, URI, DESCRIPTION, FEET_TYPE};
         // 2. build query
         Cursor cursor =
                 database.query(FEET_TABLE, // a. table
@@ -82,11 +82,12 @@ public class FeetDataSource extends ClothDataSource{
         // 4. build feet object
         Feet feet = new Feet();
         feet.setName(cursor.getString(0));
-        feet.setColor(Colors.valueOf(cursor.getString(1)));
-        feet.setPhotographyPath(cursor.getString(2));
-        feet.setDescription(cursor.getString(3));
-        feet.setFeetType(FeetType.valueOf(cursor.getString(4)));
-        feet.setSeason(Season.valueOf(cursor.getString(5)));
+        feet.setSeason(Season.valueOf(cursor.getString(1)));
+        feet.setColor(Colors.valueOf(cursor.getString(2)));
+        feet.setPhotographyPath(cursor.getString(3));
+        feet.setDescription(cursor.getString(4));
+        feet.setFeetType(FeetType.valueOf(cursor.getString(5)));
+
         feet.setId(id);
         //log
         Log.d("getFeet(" + id + ")", feet.toString());
@@ -105,11 +106,11 @@ public class FeetDataSource extends ClothDataSource{
         long idNot = feet.getId();
         ContentValues cv = new ContentValues();
         cv.put(NAME, feet.getName());
+        cv.put(SEASON, feet.getSeason().toString());
         cv.put(COLOR, feet.getColor().toString());
         cv.put(URI, feet.getPhotographyPath());
         cv.put(DESCRIPTION, feet.getDescription());
         cv.put(FEET_TYPE, feet.getFeetType().toString());
-        cv.put(SEASON, feet.getSeason().toString());
         return (database.update(FEET_TABLE, cv, ID + " = " + idNot, null) >= 1);
     }
 }

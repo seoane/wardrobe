@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="psi14.udc.es.thewardrobe.listClothActivity" >
+
+    <item android:id="@+id/menu_add"
+        android:title="@string/menu_add"
+        android:icon="@android:drawable/ic_menu_add"
+        android:showAsAction="always" />
+
+    <item android:id="@+id/menu_update"
+        android:title="@string/menu_update"
+        android:icon="@android:drawable/ic_menu_rotate"
+        android:showAsAction="always" />
+
+</menu>

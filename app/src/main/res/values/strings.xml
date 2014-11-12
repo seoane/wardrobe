@@ -21,5 +21,9 @@
     <string name="error_photo_saving">Error saving photograph</string>
     <string name="str_butt_save">Save</string>
     <string name="name_not_set">Please, name your cloth</string>
+    <string name="menu_add">Add</string>
+    <string name="menu_list">Wardrobe</string>
+    <string name="title_activity_list_cloth">listClothActivity</string>
+    <string name="menu_update">Update</string>
 
 </resources>
