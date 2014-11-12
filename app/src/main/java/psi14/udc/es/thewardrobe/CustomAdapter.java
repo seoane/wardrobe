@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import psi14.udc.es.thewardrobe.ControlLayer.Cloth;
 
 /********* Adapter class extends with BaseAdapter and implements with OnClickListener ************/
-public class CustomAdapter extends BaseAdapter implements View.OnClickListener {
+public class CustomAdapter extends BaseAdapter {
 
     /*********** Declare Used Variables *********/
     private Activity activity;
@@ -60,8 +60,8 @@ public class CustomAdapter extends BaseAdapter implements View.OnClickListener {
     public static class ViewHolder{
 
         public TextView name;
-        public TextView color;
         public TextView season;
+        public TextView color;
         public TextView uri;
         public TextView description;
         public TextView type;
@@ -117,35 +117,7 @@ public class CustomAdapter extends BaseAdapter implements View.OnClickListener {
             holder.description.setText(tempValues.getDescription());
 
 
-            /******** Set Item Click Listner for LayoutInflater for each row *******/
-
-            vi.setOnClickListener(new OnItemClickListener( position ));
         }
         return vi;
-    }
-
-    @Override
-    public void onClick(View v) {
-        Log.v("CustomAdapter", "=====Row button clicked=====");
-    }
-
-    /********* Called when Item click in ListView ************/
-    private class OnItemClickListener  implements View.OnClickListener {
-        private int mPosition;
-
-        OnItemClickListener(int position){
-            mPosition = position;
-        }
-
-        @Override
-        public void onClick(View arg0) {
-
-
-            listClothActivity listAct = (listClothActivity)activity;
-
-            /****  Call  onItemClick Method inside CustomListViewAndroidExample Class ( See Below )****/
-
-            listAct.onItemClick(mPosition);
-        }
     }
 }

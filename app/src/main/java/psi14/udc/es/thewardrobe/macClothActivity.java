@@ -27,6 +27,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import psi14.udc.es.thewardrobe.ControlLayer.Chest;
+import psi14.udc.es.thewardrobe.ControlLayer.Cloth;
 import psi14.udc.es.thewardrobe.ControlLayer.Feet;
 import psi14.udc.es.thewardrobe.ControlLayer.Legs;
 import psi14.udc.es.thewardrobe.DataSources.ChestDataSource;
@@ -34,6 +35,7 @@ import psi14.udc.es.thewardrobe.DataSources.FeetDataSource;
 import psi14.udc.es.thewardrobe.DataSources.LegsDataSource;
 import psi14.udc.es.thewardrobe.Utils.ChestType;
 import psi14.udc.es.thewardrobe.Utils.Colors;
+import psi14.udc.es.thewardrobe.Utils.Constants;
 import psi14.udc.es.thewardrobe.Utils.FeetType;
 import psi14.udc.es.thewardrobe.Utils.LegsType;
 import psi14.udc.es.thewardrobe.Utils.Season;
@@ -52,6 +54,7 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
     ImageView imageView;
     String[] bodyParts,chestTypes,legTypes,feetTypes,seasons,colors;
     String mCapturedPhotoPath,name,bodyPart,clothType,season,color,description;
+    int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +90,30 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
 
         imageView.setOnClickListener(this);
         butt_save.setOnClickListener(this);
+
+/*        // Retrieve intent extras
+        Bundle extra = getIntent().getExtras();
+        if (extra != null) {
+            id = extra.getInt(Constants.ID, 0);
+            Cloth cloth = database.getNotas(id);
+            if (cloth != null) {
+                Bitmap ThumbImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(cloth.getPhotographyPath()),
+                        THUMBSIZE, THUMBSIZE);
+                imageView.setImageBitmap(ThumbImage);
+                etName.setText(cloth.getName());
+                ArrayAdapter<String> bodyPartAdapter = (ArrayAdapter<String>) spBodyPart.getAdapter();
+                spBodyPart.setSelection(bodyPartAdapter.getPosition(cloth.getBodyPart()));
+                ArrayAdapter<String> clothTypeAdapter = (ArrayAdapter<String>) spClothType.getAdapter();
+                spClothType.setSelection(clothTypeAdapter.getPosition(cloth.getClothType().toString()));
+                ArrayAdapter<String> spSeasonAdapter = (ArrayAdapter<String>) spSeason.getAdapter();
+                spSeason.setSelection(spSeasonAdapter.getPosition(cloth.getSeason().toString()));
+                ArrayAdapter<String> spColorAdapter = (ArrayAdapter<String>) spColor.getAdapter();
+                spColor.setSelection(spColorAdapter.getPosition(cloth.getColor().toString()));
+                etDescription.setText(cloth.getDescription());
+            } else {
+                Log.d(TAG, "Cloth with ID: " + id + " not found");
+            }
+        }*/
 
 
     }

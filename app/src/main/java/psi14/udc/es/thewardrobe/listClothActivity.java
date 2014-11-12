@@ -5,8 +5,13 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.ContextMenu;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
@@ -19,10 +24,13 @@ import psi14.udc.es.thewardrobe.ControlLayer.Cloth;
 import psi14.udc.es.thewardrobe.DataSources.ChestDataSource;
 import psi14.udc.es.thewardrobe.DataSources.FeetDataSource;
 import psi14.udc.es.thewardrobe.DataSources.LegsDataSource;
+import psi14.udc.es.thewardrobe.Utils.Constants;
 
 import static psi14.udc.es.thewardrobe.Utils.Constants.*;
 
 public class listClothActivity extends Activity {
+
+    public static final String TAG = "listClothActivity";
 
     ListView lv;
     ChestDataSource chestDataSource;
@@ -30,6 +38,7 @@ public class listClothActivity extends Activity {
     FeetDataSource feetDataSource;
     ArrayList listCloth;
     CustomAdapter adapter;
+    AdapterView.AdapterContextMenuInfo info;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +50,8 @@ public class listClothActivity extends Activity {
         chestDataSource = ChestDataSource.getInstance(this);
         legsDataSource = LegsDataSource.getInstance(this);
         feetDataSource = FeetDataSource.getInstance(this);
+
+        registerForContextMenu(lv);
 
     }
 
@@ -57,28 +68,52 @@ public class listClothActivity extends Activity {
             startActivity(new Intent(this,macClothActivity.class));
             return true;
         }else if (id == R.id.menu_update){
-            listCloth = chestDataSource.getAllChests();
-            listCloth.addAll(legsDataSource.getAllLegs());
-            listCloth.addAll(feetDataSource.getAllFeet());
-            updateList(listCloth);
+            updateList();
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void updateList(ArrayList<Cloth> list){
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.context_menu, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.context_edit:
+                Log.d(TAG, "Context Edit");
+                info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+                Log.d(TAG,"info: " + info.id);
+                /*Intent intent = new Intent(this, listClothActivity.class);
+                intent.putExtra(Constants.ID, (int) info.id);
+                startActivity(intent);*/
+                return true;
+            case R.id.context_delete:
+                Log.d(TAG, "Context Delete");
+                info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+                //Delete de la BD correspondiente...
+                updateList();
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
+    }
+
+    private void updateList(){
+
+        listCloth = chestDataSource.getAllChests();
+        listCloth.addAll(legsDataSource.getAllLegs());
+        listCloth.addAll(feetDataSource.getAllFeet());
+
         Resources res =getResources();
-        adapter=new CustomAdapter( this, list,res );
+        adapter=new CustomAdapter( this, listCloth,res );
         lv.setAdapter( adapter );
     }
 
-
-    public void onItemClick(int mPosition)
-    {
-        Cloth cloth = ( Cloth ) listCloth.get(mPosition);
-
-        Toast.makeText(this,cloth.getName(),Toast.LENGTH_LONG).show();
-
-    }
 }
 
