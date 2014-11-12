@@ -54,7 +54,7 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
     ImageView imageView;
     String[] bodyParts,chestTypes,legTypes,feetTypes,seasons,colors;
     String mCapturedPhotoPath,name,bodyPart,clothType,season,color,description;
-    int id;
+    Integer id=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

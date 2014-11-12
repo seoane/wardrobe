@@ -89,9 +89,9 @@ public class listClothActivity extends Activity {
                 Log.d(TAG, "Context Edit");
                 info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
                 Log.d(TAG,"info: " + info.id);
-                /*Intent intent = new Intent(this, listClothActivity.class);
+                Intent intent = new Intent(this, listClothActivity.class);
                 intent.putExtra(Constants.ID, (int) info.id);
-                startActivity(intent);*/
+                startActivity(intent);
                 return true;
             case R.id.context_delete:
                 Log.d(TAG, "Context Delete");
