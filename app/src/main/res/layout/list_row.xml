@@ -4,46 +4,76 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Name"
-        android:id="@+id/tv_row_name"
-        android:layout_gravity="center_horizontal" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:layout_weight="1"
+            android:padding="5dp"
+            android:id="@+id/tv_row_name"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Type"
+            android:layout_weight="1"
+            android:padding="5dp"
+            android:id="@+id/tv_row_type"
+            android:layout_gravity="center_horizontal" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/image"
+            android:src="@android:drawable/gallery_thumb"
+ />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Color"
+            android:layout_weight="1"
+            android:padding="5dp"
+            android:id="@+id/tv_row_color"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="SEASON"
+            android:layout_weight="1"
+            android:padding="5dp"
+            android:id="@+id/tv_row_season"
+            android:layout_gravity="center_horizontal" />
+    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Type"
-        android:id="@+id/tv_row_type"
-        android:layout_gravity="center_horizontal" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Color"
-        android:id="@+id/tv_row_color"
-        android:layout_gravity="center_horizontal" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SEASON"
-        android:id="@+id/tv_row_season"
-        android:layout_gravity="center_horizontal" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="URI"
-        android:id="@+id/tv_row_uri"
-        android:layout_gravity="center_horizontal" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="URI"
+        android:text="DESC"
+        android:padding="5dp"
         android:id="@+id/tv_row_description"
+ />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="URI"
+        android:padding="5dp"
+        android:id="@+id/tv_row_uri"
         android:layout_gravity="center_horizontal" />
 
 </LinearLayout>

@@ -3,6 +3,10 @@ package psi14.udc.es.thewardrobe;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.Image;
+import android.media.ThumbnailUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +28,6 @@ public class CustomAdapter extends BaseAdapter {
     private static LayoutInflater inflater=null;
     public Resources res;
     Cloth tempValues=null;
-    int i=0;
 
     /*************  CustomAdapter Constructor *****************/
     public CustomAdapter(Activity a, ArrayList d,Resources resLocal) {
@@ -65,6 +68,7 @@ public class CustomAdapter extends BaseAdapter {
         public TextView uri;
         public TextView description;
         public TextView type;
+        public ImageView image;
 
     }
 
@@ -88,6 +92,7 @@ public class CustomAdapter extends BaseAdapter {
             holder.uri=(TextView)vi.findViewById(R.id.tv_row_uri);
             holder.description=(TextView)vi.findViewById(R.id.tv_row_description);
             holder.type=(TextView)vi.findViewById(R.id.tv_row_type);
+            holder.image=(ImageView)vi.findViewById(R.id.image);
 
 
 
@@ -104,7 +109,7 @@ public class CustomAdapter extends BaseAdapter {
         }
         else
         {
-            /***** Get each Model object from Arraylist ********/
+            /***** Get each Cloth from Arraylist ********/
             tempValues=null;
             tempValues = ( Cloth ) data.get( position );
 
@@ -115,6 +120,9 @@ public class CustomAdapter extends BaseAdapter {
             holder.season.setText(tempValues.getSeason().toString());
             holder.uri.setText(tempValues.getPhotographyPath());
             holder.description.setText(tempValues.getDescription());
+           /* Bitmap thumbImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(tempValues.getPhotographyPath()),
+                    64, 64);
+            holder.image.setImageBitmap(thumbImage);*/
 
 
         }
