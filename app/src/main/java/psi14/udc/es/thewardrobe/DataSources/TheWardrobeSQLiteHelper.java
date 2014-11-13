@@ -31,34 +31,15 @@ public class TheWardrobeSQLiteHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("" +
-                "CREATE TABLE " + CHEST_TABLE + "(" +
+                "CREATE TABLE " + CLOTH_TABLE + "(" +
                 ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 NAME + " TEXT NOT NULL," +
+                BODYPART + "TEXT NOT NULL" +
                 SEASON + " TEXT NOT NULL," +
                 COLOR + " TEXT NOT NULL," +
                 URI + " TEXT NOT NULL," +
                 DESCRIPTION + " TEXT NOT NULL," +
-                CHEST_TYPE + " TEXT NOT NULL" +
-                ");");
-        db.execSQL("" +
-                "CREATE TABLE " + LEGS_TABLE + "(" +
-                ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                NAME + " TEXT NOT NULL," +
-                SEASON + " TEXT NOT NULL," +
-                COLOR + " TEXT NOT NULL," +
-                URI + " TEXT NOT NULL," +
-                DESCRIPTION + " TEXT NOT NULL," +
-                LEGS_TYPE + " TEXT NOT NULL" +
-                ");");
-        db.execSQL("" +
-                "CREATE TABLE " + FEET_TABLE + "(" +
-                ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                NAME + " TEXT NOT NULL," +
-                SEASON + " TEXT NOT NULL," +
-                COLOR + " TEXT NOT NULL," +
-                URI + " TEXT NOT NULL," +
-                DESCRIPTION + " TEXT NOT NULL," +
-                FEET_TYPE + " TEXT NOT NULL" +
+                TYPE + " TEXT NOT NULL" +
                 ");");
 
     }
@@ -71,10 +52,10 @@ public class TheWardrobeSQLiteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int arg1, int arg2) {
-        // Drop older books table if existed
-        db.execSQL("DROP TABLE IF EXISTS CHEST");
+        // Drop older cloths table if existed
+        db.execSQL("DROP TABLE IF EXISTS "+  CLOTH_TABLE);
 
-        // create fresh books table
+        // create fresh cloths table
         this.onCreate(db);
     }
 

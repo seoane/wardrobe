@@ -3,7 +3,6 @@ package psi14.udc.es.thewardrobe;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -13,17 +12,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
-import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import psi14.udc.es.thewardrobe.ControlLayer.Chest;
 import psi14.udc.es.thewardrobe.ControlLayer.Cloth;
-import psi14.udc.es.thewardrobe.DataSources.ChestDataSource;
-import psi14.udc.es.thewardrobe.DataSources.FeetDataSource;
-import psi14.udc.es.thewardrobe.DataSources.LegsDataSource;
+import psi14.udc.es.thewardrobe.DataSources.ClothDataSource;
 import psi14.udc.es.thewardrobe.Utils.Constants;
 
 import static psi14.udc.es.thewardrobe.Utils.Constants.*;
@@ -33,10 +26,9 @@ public class listClothActivity extends Activity {
     public static final String TAG = "listClothActivity";
 
     ListView lv;
-    ChestDataSource chestDataSource;
-    LegsDataSource legsDataSource;
-    FeetDataSource feetDataSource;
-    ArrayList listCloth;
+    ClothDataSource clothDataSource;
+
+    List<Cloth> listCloth;
     CustomAdapter adapter;
     AdapterView.AdapterContextMenuInfo info;
 
@@ -47,9 +39,7 @@ public class listClothActivity extends Activity {
         lv = (ListView) findViewById(R.id.lv_main);
 
         // Obtain dataSources
-        chestDataSource = ChestDataSource.getInstance(this);
-        legsDataSource = LegsDataSource.getInstance(this);
-        feetDataSource = FeetDataSource.getInstance(this);
+        clothDataSource = ClothDataSource.getInstance(this);
 
         registerForContextMenu(lv);
 
@@ -106,9 +96,7 @@ public class listClothActivity extends Activity {
 
     private void updateList(){
 
-        listCloth = chestDataSource.getAllChests();
-        listCloth.addAll(legsDataSource.getAllLegs());
-        listCloth.addAll(feetDataSource.getAllFeet());
+        listCloth = clothDataSource.getAllCloths();
 
         Resources res =getResources();
         adapter=new CustomAdapter( this, listCloth,res );

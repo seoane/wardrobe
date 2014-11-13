@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import psi14.udc.es.thewardrobe.ControlLayer.Cloth;
 
@@ -24,13 +25,13 @@ public class CustomAdapter extends BaseAdapter {
 
     /*********** Declare Used Variables *********/
     private Activity activity;
-    private ArrayList data;
+    private List<Cloth> data;
     private static LayoutInflater inflater=null;
     public Resources res;
     Cloth tempValues=null;
 
     /*************  CustomAdapter Constructor *****************/
-    public CustomAdapter(Activity a, ArrayList d,Resources resLocal) {
+    public CustomAdapter(Activity a, List<Cloth> d,Resources resLocal) {
 
         /********** Take passed values **********/
         activity = a;
@@ -118,7 +119,7 @@ public class CustomAdapter extends BaseAdapter {
             holder.name.setText(tempValues.getName());
             holder.color.setText(tempValues.getColor().toString());
             holder.season.setText(tempValues.getSeason().toString());
-            holder.uri.setText(tempValues.getPhotographyPath());
+            holder.uri.setText(tempValues.getUri());
             holder.description.setText(tempValues.getDescription());
            /* Bitmap thumbImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(tempValues.getPhotographyPath()),
                     64, 64);
