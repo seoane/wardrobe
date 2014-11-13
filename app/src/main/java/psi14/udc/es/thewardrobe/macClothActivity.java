@@ -225,7 +225,7 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
                                         String color,String description) {
 
 
-        if (!name.equalsIgnoreCase("") && !mCapturedPhotoPath.equalsIgnoreCase("")) {
+        if (!name.equalsIgnoreCase("") && mCapturedPhotoPath!=null) {
             cloth.setName(name);
             cloth.setBodyPart(BodyParts.valueOf(bodyPart));
             cloth.setType(clothType);
@@ -251,7 +251,7 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
                                         String color,String description) {
 
 
-        if (!name.equalsIgnoreCase("") && !mCapturedPhotoPath.equalsIgnoreCase("")) {
+        if (!name.equalsIgnoreCase("") && mCapturedPhotoPath!=null) {
 
             Cloth cloth = new Cloth(name,
                     BodyParts.valueOf(bodyPart.trim()),
