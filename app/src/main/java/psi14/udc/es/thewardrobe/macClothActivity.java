@@ -150,6 +150,7 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
                 if (mCapturedPhotoPath!=null && oldCloth==null)
                     removeFile(mCapturedPhotoPath);
                 finish();
+                return true;
             case R.id.action_ok:
                 name = etName.getText().toString();
                 bodyPart = spBodyPart.getSelectedItem().toString();
@@ -169,6 +170,7 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
                         finish();
                     }
                 }
+                return true;
             default:
                 return super.onContextItemSelected(item);
         }
