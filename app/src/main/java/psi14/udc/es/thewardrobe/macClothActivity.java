@@ -46,7 +46,7 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
     Button butt_save;
     ImageView imageView;
     String[] bodyParts,chestTypes,legTypes,feetTypes,seasons,colors;
-    String prevCapturePhotoPath,mCapturedPhotoPath,name,bodyPart,clothType,season,color,description;
+    String prevCapturedPhotoPath,mCapturedPhotoPath,name,bodyPart,clothType,season,color,description;
     Integer id=null;
     ClothDataSource clothDataSource;
     Boolean ignore = true;
@@ -149,7 +149,7 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
 
         switch (item.getItemId()) {
             case R.id.action_cancel:
-                // Remove older image if exists and we arent modifying an existing one
+                // Remove older image if exists and we arent updating an existing one
                 if (mCapturedPhotoPath!=null && oldCloth==null)
                     removeFile(mCapturedPhotoPath);
                 finish();
@@ -195,7 +195,7 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
     public void onClick(View view) {
         if (view == imageView){
             // Remember older image if we fail to get a new one
-            prevCapturePhotoPath = mCapturedPhotoPath;
+            prevCapturedPhotoPath = mCapturedPhotoPath;
             Log.d(TAG,"Image click");
             dispatchTakePictureIntent();
 
@@ -297,7 +297,6 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
         }
     }
 
-
     private File createImageFile() throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
@@ -327,13 +326,14 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
                 if (isExternalStorageReadable()) {
                     // TO-DO Problema raro... a veces mCapturedPhotoPath es null...
                     Log.d(TAG,"Creating thumbnail of " + mCapturedPhotoPath);
+                    // Realizar en background
                     Bitmap ThumbImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(mCapturedPhotoPath),
                             THUMBSIZE, THUMBSIZE);
                     imageView.setImageBitmap(ThumbImage);
                     //Delete de old image
-                    if (prevCapturePhotoPath!=null){
-                        removeFile(prevCapturePhotoPath);
-                        prevCapturePhotoPath=null;
+                    if (prevCapturedPhotoPath!=null){
+                        removeFile(prevCapturedPhotoPath);
+                        prevCapturedPhotoPath=null;
                     }
                 }else{
                     Log.d(TAG,"Could not read External Storage");
@@ -341,11 +341,8 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
             }else {
                /*If result is not ok we delete the TempFile we created*/
                 removeFile(mCapturedPhotoPath);
-                mCapturedPhotoPath = prevCapturePhotoPath;
-                if (mCapturedPhotoPath==null) {
-                    imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), android.R.drawable.ic_menu_camera));
-                    mCapturedPhotoPath = null;
-                }
+                /*We left the old one in place*/
+                mCapturedPhotoPath=prevCapturedPhotoPath;
             }
 
         }
