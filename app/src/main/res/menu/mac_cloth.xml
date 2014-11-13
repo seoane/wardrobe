@@ -2,6 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="psi14.udc.es.thewardrobe.macClothActivity" >
 
+    <item android:id="@+id/action_ok"
+        android:title="@string/action_ok"
+        android:icon="@android:drawable/ic_menu_save"
+        android:showAsAction="always" />
+
     <item android:id="@+id/action_cancel"
         android:title="@string/action_cancel"
         android:icon="@android:drawable/ic_menu_close_clear_cancel"

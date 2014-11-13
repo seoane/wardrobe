@@ -176,13 +176,6 @@
 
             </LinearLayout>
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/str_butt_save"
-                android:id="@+id/butt_save"
-                android:layout_gravity="center_horizontal" />
-
         </LinearLayout>
     </ScrollView>
 

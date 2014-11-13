@@ -43,7 +43,6 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
 
     EditText etName,etDescription;
     Spinner spBodyPart,spClothType,spSeason,spColor;
-    Button butt_save;
     ImageView imageView;
     String[] bodyParts,chestTypes,legTypes,feetTypes,seasons,colors;
     String prevCapturedPhotoPath,mCapturedPhotoPath,name,bodyPart,clothType,season,color,description;
@@ -65,7 +64,6 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
         spSeason = (Spinner) findViewById(R.id.sp_season);
         spColor = (Spinner) findViewById(R.id.sp_color);
         imageView  =(ImageView) findViewById(R.id.img);
-        butt_save = (Button) findViewById(R.id.butt_save);
 
         //Adapters
         bodyParts = getResources().getStringArray(R.array.bodyParts);
@@ -134,7 +132,6 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
         //Listeners
         spBodyPart.setOnItemSelectedListener(this);
         imageView.setOnClickListener(this);
-        butt_save.setOnClickListener(this);
 
     }
 
@@ -153,6 +150,25 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
                 if (mCapturedPhotoPath!=null && oldCloth==null)
                     removeFile(mCapturedPhotoPath);
                 finish();
+            case R.id.action_ok:
+                name = etName.getText().toString();
+                bodyPart = spBodyPart.getSelectedItem().toString();
+                clothType = spClothType.getSelectedItem().toString();
+                season = spSeason.getSelectedItem().toString();
+                color = spColor.getSelectedItem().toString();
+                description = etDescription.getText().toString();
+
+                if (oldCloth != null){
+                    // We are modifying a cloth
+                    if(updateDatabaseEntry(oldCloth,name,bodyPart,clothType,season,color,description)){
+                        finish();
+                    }
+                }else{
+                    // Creating a new cloth
+                    if (createDatabaseEntry(name,bodyPart,clothType,season,color,description)) {
+                        finish();
+                    }
+                }
             default:
                 return super.onContextItemSelected(item);
         }
@@ -199,27 +215,6 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
             Log.d(TAG,"Image click");
             dispatchTakePictureIntent();
 
-        }
-        else if (view == butt_save) {
-
-            name = etName.getText().toString();
-            bodyPart = spBodyPart.getSelectedItem().toString();
-            clothType = spClothType.getSelectedItem().toString();
-            season = spSeason.getSelectedItem().toString();
-            color = spColor.getSelectedItem().toString();
-            description = etDescription.getText().toString();
-
-            if (oldCloth != null){
-                  // We are modifying a cloth
-                  if(updateDatabaseEntry(oldCloth,name,bodyPart,clothType,season,color,description)){
-                      finish();
-                  }
-            }else{
-                // Creating a new cloth
-                if (createDatabaseEntry(name,bodyPart,clothType,season,color,description)) {
-                    finish();
-                }
-            }
         }
     }
 
