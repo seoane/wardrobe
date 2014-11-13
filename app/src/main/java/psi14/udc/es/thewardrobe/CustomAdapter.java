@@ -108,7 +108,8 @@ public class CustomAdapter extends BaseAdapter {
 
         if(list.size()<=0)
         {
-            holder.name.setText("No Data");
+            //holder.name.setText("No Data");
+            view = inflater.inflate(R.layout.no_data,null);
 
         }
         else

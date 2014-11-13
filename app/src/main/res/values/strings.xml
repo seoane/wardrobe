@@ -27,5 +27,6 @@
     <string name="menu_update">Update</string>
     <string name="str_delete">Delete</string>
     <string name="str_edit">Edit</string>
+    <string name="no_data">No data</string>
 
 </resources>
