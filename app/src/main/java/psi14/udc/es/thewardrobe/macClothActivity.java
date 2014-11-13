@@ -26,18 +26,11 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import psi14.udc.es.thewardrobe.ControlLayer.Chest;
 import psi14.udc.es.thewardrobe.ControlLayer.Cloth;
-import psi14.udc.es.thewardrobe.ControlLayer.Feet;
-import psi14.udc.es.thewardrobe.ControlLayer.Legs;
-import psi14.udc.es.thewardrobe.DataSources.ChestDataSource;
-import psi14.udc.es.thewardrobe.DataSources.FeetDataSource;
-import psi14.udc.es.thewardrobe.DataSources.LegsDataSource;
-import psi14.udc.es.thewardrobe.Utils.ChestType;
+import psi14.udc.es.thewardrobe.DataSources.ClothDataSource;
+import psi14.udc.es.thewardrobe.Utils.BodyParts;
 import psi14.udc.es.thewardrobe.Utils.Colors;
 import psi14.udc.es.thewardrobe.Utils.Constants;
-import psi14.udc.es.thewardrobe.Utils.FeetType;
-import psi14.udc.es.thewardrobe.Utils.LegsType;
 import psi14.udc.es.thewardrobe.Utils.Season;
 
 
@@ -55,12 +48,14 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
     String[] bodyParts,chestTypes,legTypes,feetTypes,seasons,colors;
     String mCapturedPhotoPath,name,bodyPart,clothType,season,color,description;
     Integer id=null;
+    ClothDataSource clothDataSource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mac_cloth);
 
+        //Views
         etName = (EditText) findViewById(R.id.et_name);
         etDescription = (EditText) findViewById(R.id.et_description);
         spBodyPart = (Spinner) findViewById(R.id.sp_bodyPart);
@@ -91,20 +86,23 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
         imageView.setOnClickListener(this);
         butt_save.setOnClickListener(this);
 
-/*        // Retrieve intent extras
+        // Obtain DAO and add chest
+        clothDataSource = ClothDataSource.getInstance(this);
+
+        // Retrieve intent extras
         Bundle extra = getIntent().getExtras();
         if (extra != null) {
             id = extra.getInt(Constants.ID, 0);
-            Cloth cloth = database.getNotas(id);
+            Cloth cloth = clothDataSource.getCloth(id);
             if (cloth != null) {
-                Bitmap ThumbImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(cloth.getPhotographyPath()),
+                Bitmap ThumbImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(cloth.getUri()),
                         THUMBSIZE, THUMBSIZE);
                 imageView.setImageBitmap(ThumbImage);
                 etName.setText(cloth.getName());
                 ArrayAdapter<String> bodyPartAdapter = (ArrayAdapter<String>) spBodyPart.getAdapter();
-                spBodyPart.setSelection(bodyPartAdapter.getPosition(cloth.getBodyPart()));
+                spBodyPart.setSelection(bodyPartAdapter.getPosition(cloth.getBodyPart().toString()));
                 ArrayAdapter<String> clothTypeAdapter = (ArrayAdapter<String>) spClothType.getAdapter();
-                spClothType.setSelection(clothTypeAdapter.getPosition(cloth.getClothType().toString()));
+                spClothType.setSelection(clothTypeAdapter.getPosition(cloth.getType().toString()));
                 ArrayAdapter<String> spSeasonAdapter = (ArrayAdapter<String>) spSeason.getAdapter();
                 spSeason.setSelection(spSeasonAdapter.getPosition(cloth.getSeason().toString()));
                 ArrayAdapter<String> spColorAdapter = (ArrayAdapter<String>) spColor.getAdapter();
@@ -113,7 +111,7 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
             } else {
                 Log.d(TAG, "Cloth with ID: " + id + " not found");
             }
-        }*/
+        }
 
 
     }
@@ -195,51 +193,18 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
 
         if (!name.equalsIgnoreCase("")) {
 
-            if (bodyPart.equalsIgnoreCase(getString(R.string.chest))) {
+            Cloth cloth = new Cloth(name,
+                    BodyParts.valueOf(bodyPart.toUpperCase().trim()),
+                    clothType,
+                    Season.valueOf(season.toUpperCase().trim()),
+                    Colors.valueOf(color.toUpperCase().trim()),
+                    description.trim(),
+                    mCapturedPhotoPath);
 
-                Chest chest = new Chest(name,
-                        Season.valueOf(season.toUpperCase().trim()),
-                        Colors.valueOf(color.toUpperCase().trim()),
-                        mCapturedPhotoPath, description.trim(),
-                        ChestType.valueOf(clothType.toUpperCase().trim()));
+            clothDataSource.addCloth(cloth);
 
-                // Obtain DAO and add chest
-                ChestDataSource chestDataSource = ChestDataSource.getInstance(this);
-                chestDataSource.addChest(chest);
+            Log.d(TAG, "Added: " + cloth + " to the db");
 
-                Log.d(TAG, "Added: " + chest + " to the db");
-
-
-            } else if (bodyPart.equalsIgnoreCase(getString(R.string.legs))) {
-
-                Legs legs = new Legs(name,
-                        Season.valueOf(season.toUpperCase().trim()),
-                        Colors.valueOf(color.toUpperCase().trim()),
-                        mCapturedPhotoPath, description.trim(),
-                        LegsType.valueOf(clothType.toUpperCase().trim()));
-
-                // Obtain DAO and add legs
-                LegsDataSource legsDataSource = LegsDataSource.getInstance(this);
-                legsDataSource.addLegs(legs);
-
-                Log.d(TAG, "Added: " + legs + " to the db");
-
-
-            } else if (bodyPart.equalsIgnoreCase(getString(R.string.feet))) {
-
-                Feet feet = new Feet(name,
-                        Season.valueOf(season.toUpperCase().trim()),
-                        Colors.valueOf(color.toUpperCase().trim()),
-                        mCapturedPhotoPath, description.trim(),
-                        FeetType.valueOf(clothType.toUpperCase().trim()));
-
-                // Obtain DAO and add legs
-                FeetDataSource feetDataSource = FeetDataSource.getInstance(this);
-                feetDataSource.addFeet(feet);
-
-                Log.d(TAG, "Added: " + feet + " to the db");
-
-            }
         }else {
             // If name is not set
             Toast.makeText(this,getString(R.string.name_not_set), Toast.LENGTH_SHORT).show();

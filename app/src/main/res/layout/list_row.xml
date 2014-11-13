@@ -21,11 +21,21 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:text="BodyPart"
+            android:layout_weight="1"
+            android:padding="5dp"
+            android:id="@+id/tv_row_bodyPart"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:text="Type"
             android:layout_weight="1"
             android:padding="5dp"
             android:id="@+id/tv_row_type"
             android:layout_gravity="center_horizontal" />
+
 
         <ImageView
             android:layout_width="wrap_content"

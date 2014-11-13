@@ -41,6 +41,7 @@ public class listClothActivity extends Activity {
         // Obtain dataSources
         clothDataSource = ClothDataSource.getInstance(this);
 
+        // Context Menu
         registerForContextMenu(lv);
 
     }
@@ -84,8 +85,8 @@ public class listClothActivity extends Activity {
                 startActivity(intent);
                 return true;
             case R.id.context_delete:
-                Log.d(TAG, "Context Delete");
                 info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+                Log.d(TAG, "Context Delete" + info.id);
                 //Delete de la BD correspondiente...
                 updateList();
                 return true;
