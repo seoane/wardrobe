@@ -46,7 +46,7 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
     Button butt_save;
     ImageView imageView;
     String[] bodyParts,chestTypes,legTypes,feetTypes,seasons,colors;
-    String mCapturedPhotoPath,name,bodyPart,clothType,season,color,description;
+    String prevCapturePhotoPath,mCapturedPhotoPath,name,bodyPart,clothType,season,color,description;
     Integer id=null;
     ClothDataSource clothDataSource;
     Boolean ignore = true;
@@ -194,9 +194,8 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
     @Override
     public void onClick(View view) {
         if (view == imageView){
-            // Remove older image if exists
-            if (mCapturedPhotoPath!=null)
-                removeFile(mCapturedPhotoPath);
+            // Remember older image if we fail to get a new one
+            prevCapturePhotoPath = mCapturedPhotoPath;
             Log.d(TAG,"Image click");
             dispatchTakePictureIntent();
 
@@ -211,11 +210,12 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
             description = etDescription.getText().toString();
 
             if (oldCloth != null){
-                // We are modifying a cloth
+                  // We are modifying a cloth
                   if(updateDatabaseEntry(oldCloth,name,bodyPart,clothType,season,color,description)){
                       finish();
                   }
             }else{
+                // Creating a new cloth
                 if (createDatabaseEntry(name,bodyPart,clothType,season,color,description)) {
                     finish();
                 }
@@ -330,14 +330,22 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
                     Bitmap ThumbImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(mCapturedPhotoPath),
                             THUMBSIZE, THUMBSIZE);
                     imageView.setImageBitmap(ThumbImage);
+                    //Delete de old image
+                    if (prevCapturePhotoPath!=null){
+                        removeFile(prevCapturePhotoPath);
+                        prevCapturePhotoPath=null;
+                    }
                 }else{
                     Log.d(TAG,"Could not read External Storage");
                 }
             }else {
                /*If result is not ok we delete the TempFile we created*/
                 removeFile(mCapturedPhotoPath);
-                imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(),android.R.drawable.ic_menu_camera));
-                mCapturedPhotoPath = null;
+                mCapturedPhotoPath = prevCapturePhotoPath;
+                if (mCapturedPhotoPath==null) {
+                    imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), android.R.drawable.ic_menu_camera));
+                    mCapturedPhotoPath = null;
+                }
             }
 
         }
