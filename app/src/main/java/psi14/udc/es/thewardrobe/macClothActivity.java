@@ -49,6 +49,8 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
     String mCapturedPhotoPath,name,bodyPart,clothType,season,color,description;
     Integer id=null;
     ClothDataSource clothDataSource;
+    Boolean ignore = true;
+    Cloth oldCloth=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,16 +77,12 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
 
         spBodyPart.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item, bodyParts));
         spBodyPart.setHorizontalScrollBarEnabled(true);
-        spBodyPart.setOnItemSelectedListener(this);
         spClothType.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item, chestTypes));
         spClothType.setHorizontalScrollBarEnabled(true);
         spSeason.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item, seasons));
         spSeason.setHorizontalScrollBarEnabled(true);
         spColor.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item, colors));
         spColor.setHorizontalScrollBarEnabled(true);
-
-        imageView.setOnClickListener(this);
-        butt_save.setOnClickListener(this);
 
         // Obtain DAO and add chest
         clothDataSource = ClothDataSource.getInstance(this);
@@ -93,26 +91,50 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
         Bundle extra = getIntent().getExtras();
         if (extra != null) {
             id = extra.getInt(Constants.ID, 0);
-            Cloth cloth = clothDataSource.getCloth(id);
-            if (cloth != null) {
-                Bitmap ThumbImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(cloth.getUri()),
+            oldCloth = clothDataSource.getCloth(id);
+            if (oldCloth != null) {
+                Bitmap ThumbImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(oldCloth.getUri()),
                         THUMBSIZE, THUMBSIZE);
                 imageView.setImageBitmap(ThumbImage);
-                etName.setText(cloth.getName());
+                etName.setText(oldCloth.getName());
                 ArrayAdapter<String> bodyPartAdapter = (ArrayAdapter<String>) spBodyPart.getAdapter();
-                spBodyPart.setSelection(bodyPartAdapter.getPosition(cloth.getBodyPart().toString()));
+                bodyPart = oldCloth.getBodyPart().toString();
+                spBodyPart.setSelection(bodyPartAdapter.getPosition(bodyPart));
+
+                //Check which bodypart is selected to set type adapter properly
+                if (bodyPart.equalsIgnoreCase(getString(R.string.chest))){
+                    spClothType.setAdapter(new ArrayAdapter<String>(this,
+                            android.R.layout.simple_spinner_dropdown_item, chestTypes));
+                }else if (bodyPart.equalsIgnoreCase(getString(R.string.legs))){
+                    spClothType.setAdapter(new ArrayAdapter<String>(this,
+                            android.R.layout.simple_spinner_dropdown_item, legTypes));
+                }else if (bodyPart.equalsIgnoreCase(getString(R.string.feet))){
+                    spClothType.setAdapter(new ArrayAdapter<String>(this,
+                            android.R.layout.simple_spinner_dropdown_item, feetTypes));
+                }
+
                 ArrayAdapter<String> clothTypeAdapter = (ArrayAdapter<String>) spClothType.getAdapter();
-                spClothType.setSelection(clothTypeAdapter.getPosition(cloth.getType().toString()));
+                spClothType.setSelection(clothTypeAdapter.getPosition(oldCloth.getType()));
+
                 ArrayAdapter<String> spSeasonAdapter = (ArrayAdapter<String>) spSeason.getAdapter();
-                spSeason.setSelection(spSeasonAdapter.getPosition(cloth.getSeason().toString()));
+                spSeason.setSelection(spSeasonAdapter.getPosition(oldCloth.getSeason().toString()));
+
                 ArrayAdapter<String> spColorAdapter = (ArrayAdapter<String>) spColor.getAdapter();
-                spColor.setSelection(spColorAdapter.getPosition(cloth.getColor().toString()));
-                etDescription.setText(cloth.getDescription());
+                spColor.setSelection(spColorAdapter.getPosition(oldCloth.getColor().toString()));
+
+                etDescription.setText(oldCloth.getDescription());
+
+                mCapturedPhotoPath=oldCloth.getUri();
+
             } else {
                 Log.d(TAG, "Cloth with ID: " + id + " not found");
             }
         }
 
+        //Listeners
+        spBodyPart.setOnItemSelectedListener(this);
+        imageView.setOnClickListener(this);
+        butt_save.setOnClickListener(this);
 
     }
 
@@ -127,8 +149,8 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
 
         switch (item.getItemId()) {
             case R.id.action_cancel:
-                // Remove older image if exists
-                if (mCapturedPhotoPath!=null)
+                // Remove older image if exists and we arent modifying an existing one
+                if (mCapturedPhotoPath!=null && oldCloth==null)
                     removeFile(mCapturedPhotoPath);
                 finish();
             default:
@@ -138,11 +160,16 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
+        // Flag to avoid event firing onCreate
+        if (ignore){
+            ignore=false;
+            return;
+        }
 
         switch (adapterView.getId()){
             case R.id.sp_bodyPart:
                 String bodyPart = adapterView.getItemAtPosition(pos).toString();
-                Log.d(TAG,"Seleccionada parte " + bodyPart );
+                Log.d(TAG,"Selected bodyPart: " + bodyPart );
                 if (bodyPart.equalsIgnoreCase(getString(R.string.chest))){
                     spClothType.setAdapter(new ArrayAdapter<String>(this,
                             android.R.layout.simple_spinner_dropdown_item, chestTypes));
@@ -170,40 +197,76 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
             // Remove older image if exists
             if (mCapturedPhotoPath!=null)
                 removeFile(mCapturedPhotoPath);
-            Log.d(TAG,"Imagen click");
+            Log.d(TAG,"Image click");
             dispatchTakePictureIntent();
 
         }
-        else if (view == butt_save){
+        else if (view == butt_save) {
 
-            if (createDatabaseEntry()) {
-                finish();
+            name = etName.getText().toString();
+            bodyPart = spBodyPart.getSelectedItem().toString();
+            clothType = spClothType.getSelectedItem().toString();
+            season = spSeason.getSelectedItem().toString();
+            color = spColor.getSelectedItem().toString();
+            description = etDescription.getText().toString();
+
+            if (oldCloth != null){
+                // We are modifying a cloth
+                  if(updateDatabaseEntry(oldCloth,name,bodyPart,clothType,season,color,description)){
+                      finish();
+                  }
+            }else{
+                if (createDatabaseEntry(name,bodyPart,clothType,season,color,description)) {
+                    finish();
+                }
             }
         }
     }
 
-    private boolean createDatabaseEntry() {
 
-        name = etName.getText().toString();
-        bodyPart = spBodyPart.getSelectedItem().toString();
-        clothType = spClothType.getSelectedItem().toString();
-        season = spSeason.getSelectedItem().toString();
-        color = spColor.getSelectedItem().toString();
-        description = etDescription.getText().toString();
+    private boolean updateDatabaseEntry(Cloth cloth,String name,String bodyPart,String clothType,String season,
+                                        String color,String description) {
 
-        if (!name.equalsIgnoreCase("")) {
+
+        if (!name.equalsIgnoreCase("") && !mCapturedPhotoPath.equalsIgnoreCase("")) {
+            cloth.setName(name);
+            cloth.setBodyPart(BodyParts.valueOf(bodyPart));
+            cloth.setType(clothType);
+            cloth.setSeason(Season.valueOf(season));
+            cloth.setColor(Colors.valueOf(color));
+            cloth.setDescription(description);
+            cloth.setUri(mCapturedPhotoPath);
+
+            clothDataSource.updateCloth(cloth);
+
+            Log.d(TAG, "Update: " + cloth + " into the db");
+
+        }else {
+            // If name and image are not set
+            Toast.makeText(this,getString(R.string.name_not_set), Toast.LENGTH_SHORT).show();
+            return false;
+
+        }
+        return true;
+    }
+
+    private boolean createDatabaseEntry(String name,String bodyPart,String clothType,String season,
+                                        String color,String description) {
+
+
+        if (!name.equalsIgnoreCase("") && !mCapturedPhotoPath.equalsIgnoreCase("")) {
 
             Cloth cloth = new Cloth(name,
-                    BodyParts.valueOf(bodyPart.toUpperCase().trim()),
+                    BodyParts.valueOf(bodyPart.trim()),
                     clothType,
-                    Season.valueOf(season.toUpperCase().trim()),
-                    Colors.valueOf(color.toUpperCase().trim()),
+                    Season.valueOf(season.trim()),
+                    Colors.valueOf(color.trim()),
                     description.trim(),
                     mCapturedPhotoPath);
 
             clothDataSource.addCloth(cloth);
 
-            Log.d(TAG, "Added: " + cloth + " to the db");
+            Log.d(TAG, "Add: " + cloth + " to the db");
 
         }else {
             // If name is not set
@@ -212,7 +275,6 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
 
         }
         return true;
-
     }
 
     private void dispatchTakePictureIntent() {
@@ -274,6 +336,8 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
             }else {
                /*If result is not ok we delete the TempFile we created*/
                 removeFile(mCapturedPhotoPath);
+                imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(),android.R.drawable.ic_menu_camera));
+                mCapturedPhotoPath = null;
             }
 
         }

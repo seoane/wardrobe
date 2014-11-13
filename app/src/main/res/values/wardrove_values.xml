@@ -2,61 +2,61 @@
 <resources>
 
     <string-array name="bodyParts">
-        <item> @string/chest </item>
-        <item> @string/legs </item>
-        <item> @string/feet </item>
+        <item>@string/chest</item>
+        <item>@string/legs</item>
+        <item>@string/feet</item>
     </string-array>
 
 
     <string-array name="chestTypes">
-        <item> T_Shirt </item>
-        <item> Blouse </item>
-        <item> Shirt </item>
-        <item> Jersey </item>
-        <item> Jacket </item>
-        <item> SweatShirt </item>
-        <item> HoodieSweatShirt </item>
+        <item>T_Shirt</item>
+        <item>Blouse</item>
+        <item>Shirt</item>
+        <item>Jersey</item>
+        <item>Jacket</item>
+        <item>SweatShirt</item>
+        <item>HoodieSweatShirt</item>
     </string-array>
 
     <string-array name="legsTypes">
-        <item> Skirt </item>
-        <item> Trousers </item>
-        <item> Shorts </item>
-        <item> Leggings </item>
-        <item> Capri_Pants </item>
-        <item> Long_Skirt </item>
-        <item> Miny_Skirt </item>
+        <item>Skirt</item>
+        <item>Trousers</item>
+        <item>Shorts</item>
+        <item>Leggings</item>
+        <item>Capri_Pants</item>
+        <item>Long_Skirt</item>
+        <item>Miny_Skirt</item>
     </string-array>
 
 
     <string-array name="feetTypes">
-        <item> Shoes </item>
-        <item> Boots </item>
-        <item> Sandals </item>
-        <item> Hills </item>
-        <item> Sport_Shoes </item>
-        <item> Slippers </item>
-        <item> Flat_Shoes </item>
+        <item>Shoes</item>
+        <item>Boots</item>
+        <item>Sandals</item>
+        <item>Hills</item>
+        <item>Sport_Shoes</item>
+        <item>Slippers</item>
+        <item>Flat_Shoes</item>
     </string-array>
 
     <string-array name="seasons">
-        <item> Autumn </item>
-        <item> Winter </item>
-        <item> Spring </item>
-        <item> Summer </item>
+        <item>Autumn</item>
+        <item>Winter</item>
+        <item>Spring</item>
+        <item>Summer</item>
     </string-array>
 
     <string-array name="colors">
-        <item> White </item>
-        <item> Blue </item>
-        <item> Red </item>
-        <item> Green </item>
-        <item> Yellow </item>
-        <item> Black </item>
-        <item> Orange </item>
-        <item> Brown </item>
-        <item> Pink </item>
-        <item> Grey </item>
+        <item>White</item>
+        <item>Blue</item>
+        <item>Red</item>
+        <item>Green</item>
+        <item>Yellow</item>
+        <item>Black</item>
+        <item>Orange</item>
+        <item>Brown</item>
+        <item>Pink</item>
+        <item>Grey</item>
     </string-array>
 
 

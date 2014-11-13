@@ -52,8 +52,9 @@ public class CustomAdapter extends BaseAdapter {
         return list.size();
     }
 
+    @Override
     public Object getItem(int position) {
-        return position;
+        return list.get(position);
     }
 
     public long getItemId(int position) {

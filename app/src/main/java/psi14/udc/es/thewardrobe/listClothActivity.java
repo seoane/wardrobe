@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import java.io.File;
 import java.util.List;
 
 import psi14.udc.es.thewardrobe.ControlLayer.Cloth;
@@ -75,19 +76,22 @@ public class listClothActivity extends Activity {
     @Override
     public boolean onContextItemSelected(MenuItem item) {
 
+        info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        Log.d(TAG,"ContextMenu: Position on listView: " + info.id);
+        Cloth cloth = (Cloth) lv.getAdapter().getItem((int)info.id);
+        int id = cloth.getId();
+
         switch (item.getItemId()) {
             case R.id.context_edit:
-                Log.d(TAG, "Context Edit");
-                info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-                Log.d(TAG,"info: " + info.id);
-                Intent intent = new Intent(this, listClothActivity.class);
-                intent.putExtra(Constants.ID, (int) info.id);
+                Log.d(TAG,"Edit:Selected cloth with ID: " + id);
+                Intent intent = new Intent(this, macClothActivity.class);
+                intent.putExtra(Constants.ID,id);
                 startActivity(intent);
                 return true;
             case R.id.context_delete:
-                info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-                Log.d(TAG, "Context Delete" + info.id);
-                //Delete de la BD correspondiente...
+                Log.d(TAG,"Delete:Selected cloth with ID: " + id);
+                clothDataSource.deleteCloth(id);
+                removeFile(cloth.getUri());
                 updateList();
                 return true;
             default:
@@ -99,9 +103,16 @@ public class listClothActivity extends Activity {
 
         listCloth = clothDataSource.getAllCloths();
 
-        Resources res =getResources();
-        adapter=new CustomAdapter( this, listCloth,res );
+        Resources res = getResources();
+        adapter = new CustomAdapter( this, listCloth,res );
         lv.setAdapter( adapter );
+    }
+
+
+    private void removeFile(String path){
+        File file = new File(path);
+        if (file.delete())
+            Log.d(TAG,"Deleted file: " + path);
     }
 
 }

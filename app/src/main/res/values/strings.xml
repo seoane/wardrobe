@@ -20,10 +20,10 @@
     <string name="insert_description">Insert a description</string>
     <string name="error_photo_saving">Error saving photograph</string>
     <string name="str_butt_save">Save</string>
-    <string name="name_not_set">Please, name your cloth</string>
+    <string name="name_not_set">Please, name and take a picture of your cloth</string>
     <string name="menu_add">Add</string>
     <string name="menu_list">Wardrobe</string>
-    <string name="title_activity_list_cloth">Wardrobe</string>
+    <string name="title_activity_list_cloth">Wardrobe List</string>
     <string name="menu_update">Update</string>
     <string name="str_delete">Delete</string>
     <string name="str_edit">Edit</string>

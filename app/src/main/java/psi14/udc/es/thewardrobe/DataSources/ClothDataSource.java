@@ -123,7 +123,7 @@ public class ClothDataSource implements DataSourceInterface {
         return (database.delete(CLOTH_TABLE, ID + " =? ", new String[]{String.valueOf(id)}) == 1);
     }
 
-    public boolean updateChest(Cloth cloth) {
+    public boolean updateCloth(Cloth cloth) {
         open();
         Integer idNot = cloth.getId();
         ContentValues values = new ContentValues();
