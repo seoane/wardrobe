@@ -20,7 +20,6 @@ import psi14.udc.es.thewardrobe.ControlLayer.Cloth;
 import psi14.udc.es.thewardrobe.DataSources.ClothDataSource;
 import psi14.udc.es.thewardrobe.Utils.Constants;
 
-import static psi14.udc.es.thewardrobe.Utils.Constants.*;
 
 public class listClothActivity extends Activity {
 

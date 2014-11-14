@@ -1,7 +1,6 @@
 package psi14.udc.es.thewardrobe.Utils;
 
 
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
@@ -64,7 +63,7 @@ public abstract class Utilities {
         if (bitmapWorkerTask != null) {
             final String bitmapData = bitmapWorkerTask.getPath();
             // If bitmapData is not yet set or it differs from the new data
-            if (bitmapData == null || bitmapData != path) {
+            if (bitmapData == null || !bitmapData.equalsIgnoreCase(path)) {
                 // Cancel previous task
                 bitmapWorkerTask.cancel(true);
             } else {

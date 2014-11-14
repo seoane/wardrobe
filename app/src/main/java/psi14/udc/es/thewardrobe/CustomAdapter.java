@@ -5,9 +5,6 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
-import android.media.ThumbnailUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +12,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import psi14.udc.es.thewardrobe.ControlLayer.Cloth;
@@ -125,13 +121,13 @@ public class CustomAdapter extends BaseAdapter {
         {
             /***** Get each Cloth from Arraylist ********/
             tempValues=null;
-            tempValues = ( Cloth ) list.get( position );
+            tempValues = list.get( position );
 
             /************  Set Model values in Holder elements ***********/
 
             holder.name.setText(tempValues.getName());
             holder.bodyPart.setText(bodyParts[tempValues.getBodyPart().ordinal()]);
-            holder.type.setText(tempValues.getType().toString());
+            holder.type.setText(tempValues.getType());
             holder.season.setText(seasons[tempValues.getSeason().ordinal()]);
             holder.color.setText(colors[tempValues.getColor().ordinal()]);
             loadBitmap(tempValues.getUri(),holder.image);

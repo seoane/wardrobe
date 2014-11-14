@@ -3,8 +3,7 @@ package psi14.udc.es.thewardrobe;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.ThumbnailUtils;
+
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -309,7 +308,7 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "CLOTH_" + timeStamp + "_";
         File storageDir = getExternalFilesDir(null);
-        File image = null;
+        File image;
 
         if (isExternalStorageWritable()) {
             image = File.createTempFile(
