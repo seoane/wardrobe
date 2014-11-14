@@ -79,8 +79,8 @@ public class listClothActivity extends Activity {
     public boolean onContextItemSelected(MenuItem item) {
 
         info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        Log.d(TAG,"ContextMenu: Position on listView: " + info.id);
-        Cloth cloth = (Cloth) lv.getAdapter().getItem((int)info.id);
+        Log.d(TAG,"ContextMenu: Position on listView: " + info.position);
+        Cloth cloth = (Cloth) lv.getAdapter().getItem(info.position);
         int id = cloth.getId();
 
         switch (item.getItemId()) {

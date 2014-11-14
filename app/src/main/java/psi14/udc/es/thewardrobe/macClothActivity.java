@@ -169,11 +169,13 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
                 if (oldCloth != null){
                     // We are modifying a cloth
                     if(updateDatabaseEntry(oldCloth,name,indexBodyPart,clothType,indexSeason,indexColor,description)){
+                        Toast.makeText(this,getString(R.string.cloth_updated), Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 }else{
                     // Creating a new cloth
                     if (createDatabaseEntry(name,indexBodyPart,clothType,indexSeason,indexColor,description)) {
+                        Toast.makeText(this,getString(R.string.cloth_added), Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 }

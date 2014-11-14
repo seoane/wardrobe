@@ -29,5 +29,7 @@
     <string name="str_edit">Edit</string>
     <string name="no_data">No data</string>
     <string name="action_ok">Ok</string>
+    <string name="cloth_updated">Updated</string>
+    <string name="cloth_added">Added</string>
 
 </resources>
