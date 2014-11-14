@@ -29,6 +29,10 @@ public class BitmapWorkerTask extends AsyncTask<String, Void, Bitmap> {
     @Override
     protected Bitmap doInBackground(String... params) {
         path = params[0];
+        if (params.length>1) {
+            int size = Integer.valueOf(params[1]);
+            return decodeSampledBitmapFromPath(path, size, size);
+        }
         return decodeSampledBitmapFromPath(path, THUMBSIZE, THUMBSIZE);
     }
 

@@ -44,6 +44,9 @@ public class listClothActivity extends Activity {
         // Context Menu
         registerForContextMenu(lv);
 
+        //Load data
+        updateList();
+
     }
 
     @Override
