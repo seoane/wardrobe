@@ -20,6 +20,8 @@ import java.util.List;
 
 import psi14.udc.es.thewardrobe.ControlLayer.Cloth;
 
+import static psi14.udc.es.thewardrobe.Utils.Utilities.cancelPotentialWork;
+
 /********* Adapter class extends with BaseAdapter and implements with OnClickListener ************/
 public class CustomAdapter extends BaseAdapter {
 
@@ -27,20 +29,31 @@ public class CustomAdapter extends BaseAdapter {
     private Activity activity;
     private List<Cloth> list;
     private static LayoutInflater inflater=null;
-    public Resources resLocal;
+    public Resources res;
     Cloth tempValues=null;
+    Bitmap mPlaceHolderBitmap;
+    String[] bodyParts,seasons,colors;
 
     /*************  CustomAdapter Constructor *****************/
-    public CustomAdapter(Activity activity, List<Cloth> list,Resources resLocal) {
+    public CustomAdapter(Activity activity, List<Cloth> list,Resources res) {
 
         /********** Take passed values **********/
         this.activity = activity;
         this.list=list;
-        this.resLocal = resLocal;
+        this.res = res;
+
+        /************Placeholder bitmap******************/
+        mPlaceHolderBitmap = BitmapFactory.decodeResource(res, android.R.drawable.gallery_thumb);
+
 
         /***********  Layout inflator to call external xml layout () ***********/
         inflater = ( LayoutInflater )activity.
                 getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        
+        /******** Arrays locale Strings *************/
+        bodyParts = res.getStringArray(R.array.bodyParts);
+        seasons = res.getStringArray(R.array.seasons);
+        colors = res.getStringArray(R.array.colors);
 
     }
 
@@ -69,8 +82,6 @@ public class CustomAdapter extends BaseAdapter {
         public TextView type;
         public TextView season;
         public TextView color;
-        public TextView description;
-        public TextView uri;
         public ImageView image;
 
     }
@@ -94,8 +105,6 @@ public class CustomAdapter extends BaseAdapter {
             holder.type = (TextView) view.findViewById(R.id.tv_row_type);
             holder.color=(TextView)view.findViewById(R.id.tv_row_color);
             holder.season=(TextView)view.findViewById(R.id.tv_row_season);
-            holder.uri=(TextView)view.findViewById(R.id.tv_row_uri);
-            holder.description=(TextView)view.findViewById(R.id.tv_row_description);
             holder.type=(TextView)view.findViewById(R.id.tv_row_type);
             holder.image=(ImageView)view.findViewById(R.id.image);
 
@@ -121,18 +130,25 @@ public class CustomAdapter extends BaseAdapter {
             /************  Set Model values in Holder elements ***********/
 
             holder.name.setText(tempValues.getName());
-            holder.bodyPart.setText(tempValues.getBodyPart().toString());
+            holder.bodyPart.setText(bodyParts[tempValues.getBodyPart().ordinal()]);
             holder.type.setText(tempValues.getType().toString());
-            holder.season.setText(tempValues.getSeason().toString());
-            holder.color.setText(tempValues.getColor().toString());
-            holder.description.setText(tempValues.getDescription());
-            holder.uri.setText(tempValues.getUri());
-           /* Bitmap thumbImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(tempValues.getPhotographyPath()),
-                    64, 64);
-            holder.image.setImageBitmap(thumbImage);*/
+            holder.season.setText(seasons[tempValues.getSeason().ordinal()]);
+            holder.color.setText(colors[tempValues.getColor().ordinal()]);
+            loadBitmap(tempValues.getUri(),holder.image);
 
 
         }
         return view;
+    }
+
+    // Method to load images in background
+    public void loadBitmap(String path, ImageView imageView) {
+        if (cancelPotentialWork(path, imageView)) {
+            final BitmapWorkerTask task = new BitmapWorkerTask(imageView);
+            final AsyncDrawable asyncDrawable =
+                    new AsyncDrawable(res, mPlaceHolderBitmap, task);
+            imageView.setImageDrawable(asyncDrawable);
+            task.execute(path);
+        }
     }
 }

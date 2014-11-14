@@ -383,13 +383,14 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
         task.execute(path);
     }
 
+
     /*----------------------------------------------------------------------------------
         Asynctask for thumbnail creation
-    */
+    -------------------------------------------------------------------------------------*/
 
     class BitmapWorkerTask extends AsyncTask<String, Void, Bitmap> {
         private final WeakReference<ImageView> imageViewReference;
-        private String data = "";
+        private String path = "";
 
         public BitmapWorkerTask(ImageView imageView) {
             // Use a WeakReference to ensure the ImageView can be garbage collected
@@ -399,8 +400,8 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
         // Decode image in background.
         @Override
         protected Bitmap doInBackground(String... params) {
-            data = params[0];
-            return decodeSampledBitmapFromPath(data, THUMBSIZE, THUMBSIZE);
+            path = params[0];
+            return decodeSampledBitmapFromPath(path, THUMBSIZE, THUMBSIZE);
         }
 
         // Once complete, see if ImageView is still around and set bitmap.

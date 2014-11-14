@@ -9,7 +9,7 @@
 
 
     <string-array name="chestTypes">
-        <item>T_Shirt</item>
+        <item>T-Shirt</item>
         <item>Blouse</item>
         <item>Shirt</item>
         <item>Jersey</item>

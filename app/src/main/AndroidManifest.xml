@@ -18,11 +18,13 @@
         </activity>
         <activity
             android:name=".macClothActivity"
-            android:label="@string/title_activity_mac_cloth" >
+            android:label="@string/title_activity_mac_cloth"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".listClothActivity"
-            android:label="@string/title_activity_list_cloth" >
+            android:label="@string/title_activity_list_cloth"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 
