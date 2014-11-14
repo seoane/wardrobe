@@ -46,15 +46,23 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
     ImageView imageView;
     String[] bodyParts,chestTypes,legTypes,feetTypes,seasons,colors;
     String prevCapturedPhotoPath,mCapturedPhotoPath,name,bodyPart,clothType,season,color,description;
-    Integer id=null;
+    Integer id=null,indexBodyPart,indexSeason,indexColor;
     ClothDataSource clothDataSource;
     Boolean ignore = true;
     Cloth oldCloth=null;
+
+    // Enum values
+    BodyParts[] bodyPartValues = BodyParts.values();
+    Colors[] colorValues = Colors.values();
+    Season[] seasonValues = Season.values();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mac_cloth);
+
 
         //Views
         etName = (EditText) findViewById(R.id.et_name);
@@ -65,7 +73,7 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
         spColor = (Spinner) findViewById(R.id.sp_color);
         imageView  =(ImageView) findViewById(R.id.img);
 
-        //Adapters
+        //Adapters (could be done on xml)
         bodyParts = getResources().getStringArray(R.array.bodyParts);
         chestTypes = getResources().getStringArray(R.array.chestTypes);
         legTypes = getResources().getStringArray(R.array.legsTypes);
@@ -95,18 +103,18 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
                         THUMBSIZE, THUMBSIZE);
                 imageView.setImageBitmap(ThumbImage);
                 etName.setText(oldCloth.getName());
-                ArrayAdapter<String> bodyPartAdapter = (ArrayAdapter<String>) spBodyPart.getAdapter();
-                bodyPart = oldCloth.getBodyPart().toString();
-                spBodyPart.setSelection(bodyPartAdapter.getPosition(bodyPart));
+
+                // We use the ordinal o the enum to avoid conflicts with languages*
+                spBodyPart.setSelection(oldCloth.getBodyPart().ordinal());
 
                 //Check which bodypart is selected to set type adapter properly
-                if (bodyPart.equalsIgnoreCase(getString(R.string.chest))){
+                if (oldCloth.getBodyPart()==BodyParts.CHEST){
                     spClothType.setAdapter(new ArrayAdapter<String>(this,
                             android.R.layout.simple_spinner_dropdown_item, chestTypes));
-                }else if (bodyPart.equalsIgnoreCase(getString(R.string.legs))){
+                }else if (oldCloth.getBodyPart()==BodyParts.LEGS){
                     spClothType.setAdapter(new ArrayAdapter<String>(this,
                             android.R.layout.simple_spinner_dropdown_item, legTypes));
-                }else if (bodyPart.equalsIgnoreCase(getString(R.string.feet))){
+                }else if (oldCloth.getBodyPart()==BodyParts.FEET){
                     spClothType.setAdapter(new ArrayAdapter<String>(this,
                             android.R.layout.simple_spinner_dropdown_item, feetTypes));
                 }
@@ -114,11 +122,9 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
                 ArrayAdapter<String> clothTypeAdapter = (ArrayAdapter<String>) spClothType.getAdapter();
                 spClothType.setSelection(clothTypeAdapter.getPosition(oldCloth.getType()));
 
-                ArrayAdapter<String> spSeasonAdapter = (ArrayAdapter<String>) spSeason.getAdapter();
-                spSeason.setSelection(spSeasonAdapter.getPosition(oldCloth.getSeason().toString()));
+                spSeason.setSelection(oldCloth.getSeason().ordinal());
 
-                ArrayAdapter<String> spColorAdapter = (ArrayAdapter<String>) spColor.getAdapter();
-                spColor.setSelection(spColorAdapter.getPosition(oldCloth.getColor().toString()));
+                spColor.setSelection(oldCloth.getColor().ordinal());
 
                 etDescription.setText(oldCloth.getDescription());
 
@@ -153,20 +159,20 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
                 return true;
             case R.id.action_ok:
                 name = etName.getText().toString();
-                bodyPart = spBodyPart.getSelectedItem().toString();
+                indexBodyPart = spBodyPart.getSelectedItemPosition();
                 clothType = spClothType.getSelectedItem().toString();
-                season = spSeason.getSelectedItem().toString();
-                color = spColor.getSelectedItem().toString();
+                indexSeason = spSeason.getSelectedItemPosition();
+                indexColor = spColor.getSelectedItemPosition();
                 description = etDescription.getText().toString();
 
                 if (oldCloth != null){
                     // We are modifying a cloth
-                    if(updateDatabaseEntry(oldCloth,name,bodyPart,clothType,season,color,description)){
+                    if(updateDatabaseEntry(oldCloth,name,indexBodyPart,clothType,indexSeason,indexColor,description)){
                         finish();
                     }
                 }else{
                     // Creating a new cloth
-                    if (createDatabaseEntry(name,bodyPart,clothType,season,color,description)) {
+                    if (createDatabaseEntry(name,indexBodyPart,clothType,indexSeason,indexColor,description)) {
                         finish();
                     }
                 }
@@ -186,15 +192,17 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
 
         switch (adapterView.getId()){
             case R.id.sp_bodyPart:
-                String bodyPart = adapterView.getItemAtPosition(pos).toString();
-                Log.d(TAG,"Selected bodyPart: " + bodyPart );
-                if (bodyPart.equalsIgnoreCase(getString(R.string.chest))){
+
+                // Again we use position in array to avoid language conflicts
+                indexBodyPart = adapterView.getSelectedItemPosition();
+
+                if (bodyPartValues[indexBodyPart]==BodyParts.CHEST){
                     spClothType.setAdapter(new ArrayAdapter<String>(this,
                             android.R.layout.simple_spinner_dropdown_item, chestTypes));
-                }else if (bodyPart.equalsIgnoreCase(getString(R.string.legs))){
+                }else if (bodyPartValues[indexBodyPart]==BodyParts.LEGS){
                     spClothType.setAdapter(new ArrayAdapter<String>(this,
                             android.R.layout.simple_spinner_dropdown_item, legTypes));
-                }else if (bodyPart.equalsIgnoreCase(getString(R.string.feet))){
+                }else if (bodyPartValues[indexBodyPart]==BodyParts.FEET){
                     spClothType.setAdapter(new ArrayAdapter<String>(this,
                             android.R.layout.simple_spinner_dropdown_item, feetTypes));
                 }
@@ -221,16 +229,16 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
     }
 
 
-    private boolean updateDatabaseEntry(Cloth cloth,String name,String bodyPart,String clothType,String season,
-                                        String color,String description) {
+    private boolean updateDatabaseEntry(Cloth cloth,String name,Integer indexBodyPart,String clothType,Integer indexSeason,
+                                        Integer indexColor,String description) {
 
 
         if (!name.equalsIgnoreCase("") && mCapturedPhotoPath!=null) {
             cloth.setName(name);
-            cloth.setBodyPart(BodyParts.valueOf(bodyPart));
+            cloth.setBodyPart(bodyPartValues[indexBodyPart]);
             cloth.setType(clothType);
-            cloth.setSeason(Season.valueOf(season));
-            cloth.setColor(Colors.valueOf(color));
+            cloth.setSeason(seasonValues[indexSeason]);
+            cloth.setColor(colorValues[indexColor]);
             cloth.setDescription(description);
             cloth.setUri(mCapturedPhotoPath);
 
@@ -247,17 +255,17 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
         return true;
     }
 
-    private boolean createDatabaseEntry(String name,String bodyPart,String clothType,String season,
-                                        String color,String description) {
+    private boolean createDatabaseEntry(String name,Integer indexBodyPart,String clothType,Integer indexSeason,
+                                        Integer indexColor,String description) {
 
 
         if (!name.equalsIgnoreCase("") && mCapturedPhotoPath!=null) {
 
             Cloth cloth = new Cloth(name,
-                    BodyParts.valueOf(bodyPart.trim()),
+                    bodyPartValues[indexBodyPart],
                     clothType,
-                    Season.valueOf(season.trim()),
-                    Colors.valueOf(color.trim()),
+                    seasonValues[indexSeason],
+                    colorValues[indexColor],
                     description.trim(),
                     mCapturedPhotoPath);
 
