@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -15,7 +16,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -30,8 +31,10 @@ import psi14.udc.es.thewardrobe.ControlLayer.Cloth;
 import psi14.udc.es.thewardrobe.DataSources.ClothDataSource;
 import psi14.udc.es.thewardrobe.Utils.BodyParts;
 import psi14.udc.es.thewardrobe.Utils.Colors;
-import psi14.udc.es.thewardrobe.Utils.Constants;
 import psi14.udc.es.thewardrobe.Utils.Season;
+
+import static psi14.udc.es.thewardrobe.Utils.Constants.*;
+import static psi14.udc.es.thewardrobe.Utils.Utilities.decodeSampledBitmapFromPath;
 
 
 public class macClothActivity extends Activity implements AdapterView.OnItemSelectedListener,View.OnClickListener{
@@ -39,16 +42,15 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
 
     public final static String TAG = "macClothActivity";
     static final int REQUEST_IMAGE_CAPTURE = 1;
-    final int THUMBSIZE = 230;
 
     EditText etName,etDescription;
     Spinner spBodyPart,spClothType,spSeason,spColor;
     ImageView imageView;
     String[] bodyParts,chestTypes,legTypes,feetTypes,seasons,colors;
-    String prevCapturedPhotoPath,mCapturedPhotoPath,name,bodyPart,clothType,season,color,description;
+    String prevCapturedPhotoPath,mCapturedPhotoPath,name,clothType,description;
     Integer id=null,indexBodyPart,indexSeason,indexColor;
     ClothDataSource clothDataSource;
-    Boolean ignore = true;
+    Boolean ignoreEvent = true;
     Cloth oldCloth=null;
 
     // Enum values
@@ -96,12 +98,12 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
         // Retrieve intent extras
         Bundle extra = getIntent().getExtras();
         if (extra != null) {
-            id = extra.getInt(Constants.ID, 0);
+            id = extra.getInt(ID, 0);
             oldCloth = clothDataSource.getCloth(id);
             if (oldCloth != null) {
-                Bitmap ThumbImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(oldCloth.getUri()),
-                        THUMBSIZE, THUMBSIZE);
-                imageView.setImageBitmap(ThumbImage);
+                // Loading bitmap in background
+                loadBitmap(oldCloth.getUri(),imageView);
+
                 etName.setText(oldCloth.getName());
 
                 // We use the ordinal o the enum to avoid conflicts with languages*
@@ -185,8 +187,8 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
         // Flag to avoid event firing onCreate
-        if (ignore){
-            ignore=false;
+        if (ignoreEvent){
+            ignoreEvent=false;
             return;
         }
 
@@ -331,10 +333,8 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
                 if (isExternalStorageReadable()) {
                     // TO-DO Problema raro... a veces mCapturedPhotoPath es null...
                     Log.d(TAG,"Creating thumbnail of " + mCapturedPhotoPath);
-                    // Realizar en background
-                    Bitmap ThumbImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(mCapturedPhotoPath),
-                            THUMBSIZE, THUMBSIZE);
-                    imageView.setImageBitmap(ThumbImage);
+                    // Loading bitmap in background
+                    loadBitmap(mCapturedPhotoPath,imageView);
                     //Delete de old image
                     if (prevCapturedPhotoPath!=null){
                         removeFile(prevCapturedPhotoPath);
@@ -376,6 +376,43 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
             return true;
         }
         return false;
+    }
+
+    public void loadBitmap(String path, ImageView imageView) {
+        BitmapWorkerTask task = new BitmapWorkerTask(imageView);
+        task.execute(path);
+    }
+
+    /*----------------------------------------------------------------------------------
+        Asynctask for thumbnail creation
+    */
+
+    class BitmapWorkerTask extends AsyncTask<String, Void, Bitmap> {
+        private final WeakReference<ImageView> imageViewReference;
+        private String data = "";
+
+        public BitmapWorkerTask(ImageView imageView) {
+            // Use a WeakReference to ensure the ImageView can be garbage collected
+            imageViewReference = new WeakReference<ImageView>(imageView);
+        }
+
+        // Decode image in background.
+        @Override
+        protected Bitmap doInBackground(String... params) {
+            data = params[0];
+            return decodeSampledBitmapFromPath(data, THUMBSIZE, THUMBSIZE);
+        }
+
+        // Once complete, see if ImageView is still around and set bitmap.
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            if (imageViewReference != null && bitmap != null) {
+                final ImageView imageView = imageViewReference.get();
+                if (imageView != null) {
+                    imageView.setImageBitmap(bitmap);
+                }
+            }
+        }
     }
 
 }

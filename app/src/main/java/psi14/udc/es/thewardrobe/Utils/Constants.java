@@ -18,5 +18,6 @@ public final class Constants {
 
     // CONSTANT FOR PICTURES_DEALING
     public static final String DIRECTORY_PICTURES = "cloths_pictures";
+    public static final int THUMBSIZE = 100;
 
 }
