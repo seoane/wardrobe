@@ -18,7 +18,7 @@ import psi14.udc.es.thewardrobe.ControlLayer.Cloth;
 
 import static psi14.udc.es.thewardrobe.Utils.Utilities.cancelPotentialWork;
 
-/********* Adapter class extends with BaseAdapter and implements with OnClickListener ************/
+/********* Adapter class extends with BaseAdapter  ************/
 public class CustomAdapter extends BaseAdapter {
 
     /*********** Declare Used Variables *********/
@@ -53,7 +53,7 @@ public class CustomAdapter extends BaseAdapter {
 
     }
 
-    /******** What is the size of Passed Arraylist Size ************/
+    /******** What is the size of Passed List Size ************/
     public int getCount() {
 
         if(list.size()<=0)
@@ -67,7 +67,7 @@ public class CustomAdapter extends BaseAdapter {
     }
 
     public long getItemId(int position) {
-        return position;
+        return list.get(position).getId();
     }
 
     /********* Create a holder Class to contain inflated xml file elements *********/
@@ -90,10 +90,10 @@ public class CustomAdapter extends BaseAdapter {
 
         if(convertView==null){
 
-            /****** Inflate tabitem.xml file for each row ( Defined below ) *******/
+            /****** Inflate list_row.xml file for each row ( Defined below ) *******/
             view = inflater.inflate(R.layout.list_row, null);
 
-            /****** View Holder Object to contain tabitem.xml file elements ******/
+            /****** View Holder Object to contain list_row.xml file elements ******/
 
             holder = new ViewHolder();
             holder.name = (TextView) view.findViewById(R.id.tv_row_name);
