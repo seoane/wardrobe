@@ -325,7 +325,7 @@ public class MacClothActivity extends Activity implements AdapterView.OnItemSele
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "CLOTH_" + timeStamp + "_";
-        File storageDir = getExternalFilesDir(null);
+        File storageDir = getExternalFilesDir(DIRECTORY_PICTURES);
         File image;
 
         if (isExternalStorageWritable()) {

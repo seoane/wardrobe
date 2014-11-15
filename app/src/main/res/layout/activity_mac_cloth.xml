@@ -20,8 +20,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/img"
-                android:padding="10dp"
+                android:padding="1dp"
+                android:layout_margin="10dp"
                 android:src="@android:drawable/ic_menu_camera"
+                android:background="@android:color/darker_gray"
                 android:layout_gravity="center" />
 
             <LinearLayout
@@ -48,7 +50,8 @@
                     android:id="@+id/et_name"
                     android:singleLine="true"
                     android:inputType="text"
-                    android:hint="@string/insert_name" />
+                    android:hint="@string/insert_name"
+                    android:layout_margin="5dp"/>
 
 
             </LinearLayout>
@@ -74,7 +77,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/sp_bodyPart"
-                    android:layout_weight="2" />
+                    android:layout_weight="2"
+                    android:layout_margin="5dp"/>
 
             </LinearLayout>
 
@@ -98,6 +102,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/sp_clothType"
+                    android:layout_margin="5dp"
                     android:layout_weight="2" />
             </LinearLayout>
 
@@ -122,7 +127,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/sp_season"
-                    android:layout_weight="2" />
+                    android:layout_weight="2"
+                    android:layout_margin="5dp"/>
 
             </LinearLayout>
 
@@ -147,7 +153,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/sp_color"
-                    android:layout_weight="2" />
+                    android:layout_weight="2"
+                    android:layout_margin="5dp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -172,7 +179,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:id="@+id/et_description"
-                    android:hint="@string/insert_description"/>
+                    android:hint="@string/insert_description"
+                    android:layout_margin="5dp"/>
 
             </LinearLayout>
 
