@@ -68,7 +68,7 @@ public class ListClothActivity extends Activity implements AdapterView.OnItemCli
             startActivity(new Intent(this,MacClothActivity.class));
             return true;
         }else if (id == R.id.menu_update){
-            updateList();
+            updateList(clothDataSource.getAllCloths());
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -100,20 +100,17 @@ public class ListClothActivity extends Activity implements AdapterView.OnItemCli
                 Log.d(LOG_TAG,"Delete:Selected cloth with ID: " + id);
                 clothDataSource.deleteCloth(id);
                 removeFile(cloth.getUri());
-                updateList();
+                updateList(clothDataSource.getAllCloths());
                 return true;
             default:
                 return super.onContextItemSelected(item);
         }
     }
 
-    private void updateList(){
-        // Shoulda been done with notifyDataSetChanged but i couldnt get it to work
-        listCloth = clothDataSource.getAllCloths();
-        adapter = new CustomAdapter( this, listCloth,getResources() );
-        lv.setAdapter( adapter );
-
-
+    private void updateList(List<Cloth> newList){
+        listCloth.clear();
+        listCloth.addAll(newList);
+        adapter.notifyDataSetChanged();
     }
 
 
