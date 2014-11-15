@@ -9,7 +9,7 @@ import android.view.MenuItem;
 
 public class TheWardrobeMainActivity extends Activity{
 
-
+    public final static String LOG_TAG = "TheWardrobeMainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +29,10 @@ public class TheWardrobeMainActivity extends Activity{
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.menu_add) {
-            startActivity(new Intent(this,macClothActivity.class));
+            startActivity(new Intent(this,MacClothActivity.class));
             return true;
         }else if (id == R.id.menu_list){
-            startActivity(new Intent(this,listClothActivity.class));
+            startActivity(new Intent(this,ListClothActivity.class));
             return true;
         }
         return super.onOptionsItemSelected(item);

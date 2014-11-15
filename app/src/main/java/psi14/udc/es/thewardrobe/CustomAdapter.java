@@ -26,7 +26,7 @@ public class CustomAdapter extends BaseAdapter {
     private List<Cloth> list;
     private static LayoutInflater inflater=null;
     public Resources res;
-    Cloth tempValues=null;
+    Cloth tempCloth=null;
     Bitmap mPlaceHolderBitmap;
     String[] bodyParts,seasons,colors;
 
@@ -39,13 +39,13 @@ public class CustomAdapter extends BaseAdapter {
         this.res = res;
 
         /************Placeholder bitmap******************/
-        mPlaceHolderBitmap = BitmapFactory.decodeResource(res, android.R.drawable.gallery_thumb);
+        mPlaceHolderBitmap = BitmapFactory.decodeResource(res, android.R.drawable.ic_menu_gallery);
 
 
         /***********  Layout inflator to call external xml layout () ***********/
         inflater = ( LayoutInflater )activity.
                 getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        
+
         /******** Arrays locale Strings *************/
         bodyParts = res.getStringArray(R.array.bodyParts);
         seasons = res.getStringArray(R.array.seasons);
@@ -61,7 +61,6 @@ public class CustomAdapter extends BaseAdapter {
         return list.size();
     }
 
-    @Override
     public Object getItem(int position) {
         return list.get(position);
     }
@@ -96,13 +95,13 @@ public class CustomAdapter extends BaseAdapter {
             /****** View Holder Object to contain list_row.xml file elements ******/
 
             holder = new ViewHolder();
-            holder.name = (TextView) view.findViewById(R.id.tv_row_name);
-            holder.bodyPart = (TextView) view.findViewById(R.id.tv_row_bodyPart);
-            holder.type = (TextView) view.findViewById(R.id.tv_row_type);
-            holder.color=(TextView)view.findViewById(R.id.tv_row_color);
-            holder.season=(TextView)view.findViewById(R.id.tv_row_season);
-            holder.type=(TextView)view.findViewById(R.id.tv_row_type);
-            holder.image=(ImageView)view.findViewById(R.id.image);
+            holder.name = (TextView)view.findViewById(R.id.tv_row_name);
+            holder.bodyPart = (TextView)view.findViewById(R.id.tv_row_bodyPart);
+            holder.type = (TextView)view.findViewById(R.id.tv_row_type);
+            holder.color = (TextView)view.findViewById(R.id.tv_row_color);
+            holder.season = (TextView)view.findViewById(R.id.tv_row_season);
+            holder.type = (TextView)view.findViewById(R.id.tv_row_type);
+            holder.image = (ImageView)view.findViewById(R.id.image);
 
 
             /************  Set holder with LayoutInflater ************/
@@ -111,29 +110,19 @@ public class CustomAdapter extends BaseAdapter {
         else
             holder=(ViewHolder)view.getTag();
 
-        if(list.size()<=0)
-        {
-            //holder.name.setText("No Data");
-            view = inflater.inflate(R.layout.no_data,null);
+        /***** Get each Cloth from Arraylist ********/
+        tempCloth = null;
+        tempCloth = list.get( position );
 
-        }
-        else
-        {
-            /***** Get each Cloth from Arraylist ********/
-            tempValues=null;
-            tempValues = list.get( position );
+        /************  Set Model values in Holder elements ***********/
 
-            /************  Set Model values in Holder elements ***********/
+        holder.name.setText(tempCloth.getName());
+        holder.bodyPart.setText(bodyParts[tempCloth.getBodyPart().ordinal()]);
+        holder.type.setText(tempCloth.getType());
+        holder.season.setText(seasons[tempCloth.getSeason().ordinal()]);
+        holder.color.setText(colors[tempCloth.getColor().ordinal()]);
+        loadBitmap(tempCloth.getUri(),holder.image);
 
-            holder.name.setText(tempValues.getName());
-            holder.bodyPart.setText(bodyParts[tempValues.getBodyPart().ordinal()]);
-            holder.type.setText(tempValues.getType());
-            holder.season.setText(seasons[tempValues.getSeason().ordinal()]);
-            holder.color.setText(colors[tempValues.getColor().ordinal()]);
-            loadBitmap(tempValues.getUri(),holder.image);
-
-
-        }
         return view;
     }
 

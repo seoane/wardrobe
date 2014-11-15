@@ -36,10 +36,10 @@ import static psi14.udc.es.thewardrobe.Utils.Constants.*;
 import static psi14.udc.es.thewardrobe.Utils.Utilities.decodeSampledBitmapFromPath;
 
 
-public class macClothActivity extends Activity implements AdapterView.OnItemSelectedListener,View.OnClickListener{
+public class MacClothActivity extends Activity implements AdapterView.OnItemSelectedListener,View.OnClickListener{
 
 
-    public final static String TAG = "macClothActivity";
+    public final static String LOG_TAG = "MacClothActivity";
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
     EditText etName,etDescription;
@@ -132,7 +132,7 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
                 mCapturedPhotoPath=oldCloth.getUri();
 
             } else {
-                Log.d(TAG, "Cloth with ID: " + id + " not found");
+                Log.d(LOG_TAG, "Cloth with ID: " + id + " not found");
             }
         }
 
@@ -225,7 +225,7 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
         if (view == imageView){
             // Remember older image if we fail to get a new one
             prevCapturedPhotoPath = mCapturedPhotoPath;
-            Log.d(TAG,"Image click");
+            Log.d(LOG_TAG,"Image click");
             dispatchTakePictureIntent();
 
         }
@@ -247,7 +247,7 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
 
             clothDataSource.updateCloth(cloth);
 
-            Log.d(TAG, "Update: " + cloth + " into the db");
+            Log.d(LOG_TAG, "Update: " + cloth + " into the db");
 
         }else {
             // If name and image are not set
@@ -274,7 +274,7 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
 
             clothDataSource.addCloth(cloth);
 
-            Log.d(TAG, "Add: " + cloth + " to the db");
+            Log.d(LOG_TAG, "Add: " + cloth + " to the db");
 
         }else {
             // If name is not set
@@ -320,7 +320,7 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
             );
 
             mCapturedPhotoPath = image.getAbsolutePath();
-            Log.d(TAG, "createImageFile: " + mCapturedPhotoPath);
+            Log.d(LOG_TAG, "createImageFile: " + mCapturedPhotoPath);
         } else{
             throw new IOException("External Storage not Writable");
         }
@@ -333,7 +333,7 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
             if (resultCode == RESULT_OK) {
                 if (isExternalStorageReadable()) {
                     // TO-DO Problema raro... a veces mCapturedPhotoPath es null...
-                    Log.d(TAG,"Creating thumbnail of " + mCapturedPhotoPath);
+                    Log.d(LOG_TAG,"Creating thumbnail of " + mCapturedPhotoPath);
                     // Loading bitmap in background
                     loadBitmap(mCapturedPhotoPath,imageView);
                     //Delete de old image
@@ -342,11 +342,12 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
                         prevCapturedPhotoPath=null;
                     }
                 }else{
-                    Log.d(TAG,"Could not read External Storage");
+                    Log.d(LOG_TAG,"Could not read External Storage");
                 }
             }else {
                /*If result is not ok we delete the TempFile we created*/
-                removeFile(mCapturedPhotoPath);
+                if (mCapturedPhotoPath!=null)
+                    removeFile(mCapturedPhotoPath);
                 /*We left the old one in place*/
                 mCapturedPhotoPath=prevCapturedPhotoPath;
             }
@@ -357,7 +358,7 @@ public class macClothActivity extends Activity implements AdapterView.OnItemSele
     private void removeFile(String path){
             File file = new File(path);
             if (file.delete())
-                Log.d(TAG,"Deleted file: " + path);
+                Log.d(LOG_TAG,"Deleted file: " + path);
     }
 
     /* Checks if external storage is available for read and write */
