@@ -22,7 +22,7 @@ import psi14.udc.es.thewardrobe.DataSources.ClothDataSource;
 import psi14.udc.es.thewardrobe.Utils.Constants;
 
 
-public class ListClothActivity extends Activity {
+public class ListClothActivity extends Activity implements AdapterView.OnItemClickListener{
 
     public static final String LOG_TAG = "ListClothActivity";
 
@@ -46,7 +46,12 @@ public class ListClothActivity extends Activity {
         registerForContextMenu(lv);
 
         //Load data: (Should be done on backGround)
-        updateList();
+        listCloth = clothDataSource.getAllCloths();
+        adapter = new CustomAdapter( this, listCloth,getResources() );
+        lv.setAdapter( adapter );
+
+        // Set Listener
+        lv.setOnItemClickListener(this);
 
     }
 
@@ -103,16 +108,12 @@ public class ListClothActivity extends Activity {
     }
 
     private void updateList(){
-
+        // Shoulda been done with notifyDataSetChanged but i couldnt get it to work
         listCloth = clothDataSource.getAllCloths();
+        adapter = new CustomAdapter( this, listCloth,getResources() );
+        lv.setAdapter( adapter );
 
-        if (listCloth.size()>0){
-            Resources res = getResources();
-            adapter = new CustomAdapter( this, listCloth,res );
-            lv.setAdapter( adapter );
-        }else{
-            Toast.makeText(this, getString(R.string.no_data), Toast.LENGTH_SHORT).show();
-        }
+
     }
 
 
@@ -122,5 +123,14 @@ public class ListClothActivity extends Activity {
             Log.d(LOG_TAG,"Deleted file: " + path);
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int pos, long i) {
+        int id = (int)lv.getAdapter().getItemId(pos);
+        Log.d(LOG_TAG,"Clicked cloth with ID: " + id);
+        Intent intent = new Intent(this, DetailsClothActivity.class);
+        intent.putExtra(Constants.ID,id);
+        startActivity(intent);
+
+    }
 }
 

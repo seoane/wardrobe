@@ -19,12 +19,16 @@
         <activity
             android:name=".MacClothActivity"
             android:label="@string/title_activity_mac_cloth"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".ListClothActivity"
             android:label="@string/title_activity_list_cloth"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".DetailsClothActivity"
+            android:label="@string/title_activity_details_cloth" >
         </activity>
     </application>
 

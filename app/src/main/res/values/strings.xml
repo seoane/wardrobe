@@ -31,5 +31,9 @@
     <string name="action_ok">Ok</string>
     <string name="cloth_updated">Updated</string>
     <string name="cloth_added">Added</string>
+    <string name="title_activity_details_cloth">Details</string>
+    <string name="bodyPart">Body Part:</string>
+    <string name="action_edit">Edit</string>
+    <string name="action_delete">Delete</string>
 
 </resources>

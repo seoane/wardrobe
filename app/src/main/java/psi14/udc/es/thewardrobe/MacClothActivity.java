@@ -46,7 +46,7 @@ public class MacClothActivity extends Activity implements AdapterView.OnItemSele
     Spinner spBodyPart,spClothType,spSeason,spColor;
     ImageView imageView;
     String[] bodyParts,chestTypes,legTypes,feetTypes,seasons,colors;
-    String prevCapturedPhotoPath,mCapturedPhotoPath,name,clothType,description;
+    static String prevCapturedPhotoPath,mCapturedPhotoPath="",name,clothType,description;
     Integer id=null,indexBodyPart,indexSeason,indexColor;
     ClothDataSource clothDataSource;
     Boolean ignoreEvent = true;

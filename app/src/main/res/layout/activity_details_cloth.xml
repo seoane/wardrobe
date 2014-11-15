@@ -1,0 +1,192 @@
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/scrollView" >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_details_name"
+                    android:text="Name of the Cloth"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:padding="2dp"
+                    android:layout_margin="10dp"
+                    android:textSize="25sp"/>
+
+                <ImageView
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
+                    android:id="@+id/imageView_details"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:src="@android:drawable/ic_menu_gallery"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_details_label_bodyPart"
+                    android:text="@string/bodyPart"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    android:padding="2dp"
+                    android:layout_margin="10dp"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_details_bodyPart"
+                    android:text="Chest"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:padding="2dp"
+                    android:layout_margin="10dp"
+                    android:textSize="20sp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_details_label_type"
+                    android:text="@string/clothType"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    android:padding="2dp"
+                    android:layout_margin="10dp"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_details_type"
+                    android:text="T-Shirt"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:padding="2dp"
+                    android:layout_margin="10dp"
+                    android:textSize="20sp"/>
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_details_label_season"
+                    android:text="@string/season"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    android:padding="2dp"
+                    android:layout_margin="10dp"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_details_season"
+                    android:text="Winter"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:padding="2dp"
+                    android:layout_margin="10dp"
+                    android:textSize="20sp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_details_label_color"
+                    android:text="@string/color"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    android:padding="2dp"
+                    android:layout_margin="10dp"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_details_color"
+                    android:text="Red"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:padding="2dp"
+                    android:layout_margin="10dp"
+                    android:textSize="20sp"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_details_label_description"
+                android:text="@string/description"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:padding="2dp"
+                android:layout_margin="10dp"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_details_description"
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed feugiat tincidunt felis id porttitor. Cras venenatis semper neque, eu facilisis metus laoreet id. Sed vehicula justo in eros porttitor, non pulvinar risus dignissim. Curabitur a sagittis elit. Nulla nec nibh facilisis nibh aliquam lacinia in quis risus. Ut et nisl consectetur
+                elit porta lobortis. Praesent placerat odio sit amet eros feugiat, interdum tristique lorem bibendum. Ut tellus nibh, sollicitudin euismod mollis fringilla, dapibus sit amet lectus. Donec tempor turpis a felis iaculis, a semper leo maximus. Fusce vehicula, risus quis euismod tempus, sem odio mollis massa, non laoreet lectus ex ut leo. In hac habitasse
+                platea dictumst. Donec sit amet ligula risus. Aenean dictum orci est, ut mollis massa tincidunt eleifend. Integer quis tempus neque. Cras feugiat urna in libero egestas vestibulum. Suspendisse potenti. "
+                android:layout_gravity="center"
+                android:padding="2dp"
+                android:layout_margin="10dp"
+                android:textSize="20sp"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>
