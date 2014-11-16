@@ -103,6 +103,9 @@ public class DetailsClothActivity extends Activity {
                 removeFile(cloth.getUri());
                 finish();
                 return true;
+            case R.id.action_details_ok:
+                finish();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }

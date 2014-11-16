@@ -3,13 +3,16 @@
     tools:context="psi14.udc.es.thewardrobe.DetailsClothActivity" >
 
     <item android:id="@+id/action_edit"
-        android:title="@string/action_edit"
         android:icon="@android:drawable/ic_menu_edit"
-        android:showAsAction="always" />
+        android:showAsAction="always"
+        android:title="@string/action_edit" />
 
     <item android:id="@+id/action_delete"
-        android:title="@string/action_delete"
         android:icon="@android:drawable/ic_menu_delete"
-        android:showAsAction="always" />
-
+        android:showAsAction="always"
+        android:title="@string/action_delete" />
+    <item
+        android:id="@+id/action_details_ok"
+        android:showAsAction="always"
+        android:title="@string/action_details_ok" />
 </menu>
