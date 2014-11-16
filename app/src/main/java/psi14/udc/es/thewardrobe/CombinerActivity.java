@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import java.util.Iterator;
 import java.util.List;
@@ -43,7 +41,7 @@ public class CombinerActivity extends FragmentActivity {
 
         while (_allChestIterator.hasNext()) {
             Cloth argCloth = (Cloth) _allChestIterator.next();
-            adapter.addFragment(CombinerFragment.newInstance(argCloth));
+            adapter.addFragment(CombinatorFragment.newInstance(argCloth));
             if (DEBUG) Log.d(APP_TAG + activityTag, "Adapter Size :" + adapter.getCount());
         }
         pageChangeListener = new CombinerOnPageListener();
@@ -63,7 +61,7 @@ public class CombinerActivity extends FragmentActivity {
 
         while (_allLegsIterator.hasNext()) {
             Cloth argCloth = (Cloth) _allLegsIterator.next();
-            adapter.addFragment(CombinerFragment.newInstance(argCloth));
+            adapter.addFragment(CombinatorFragment.newInstance(argCloth));
             if (DEBUG) Log.d(APP_TAG + activityTag, "Adapter Size :" + adapter.getCount());
         }
         pageChangeListener = new CombinerOnPageListener();
@@ -83,7 +81,7 @@ public class CombinerActivity extends FragmentActivity {
 
         while (_allFeetsIterator.hasNext()) {
             Cloth argCloth = (Cloth) _allFeetsIterator.next();
-            adapter.addFragment(CombinerFragment.newInstance(argCloth));
+            adapter.addFragment(CombinatorFragment.newInstance(argCloth));
             if (DEBUG) Log.d(APP_TAG + activityTag, "Adapter Size :" + adapter.getCount());
         }
         pageChangeListener = new CombinerOnPageListener();
@@ -95,22 +93,4 @@ public class CombinerActivity extends FragmentActivity {
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.combiner, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }

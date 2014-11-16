@@ -33,7 +33,7 @@
             android:label="@string/title_activity_details_cloth"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".CombinerFragment"
+            android:name=".CombinatorFragment"
             android:label="@string/title_activity_combiner_fragment"></activity>
     </application>
 
