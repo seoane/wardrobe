@@ -11,7 +11,7 @@
             android:name=".TheWardrobeMainActivity"
             android:label="@string/app_name">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
@@ -19,19 +19,22 @@
         <activity
             android:name=".MacClothActivity"
             android:label="@string/title_activity_mac_cloth"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ListClothActivity"
             android:label="@string/title_activity_list_cloth"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".CombinerActivity"
             android:label="@string/title_activity_combiner"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".DetailsClothActivity"
             android:label="@string/title_activity_details_cloth"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CombinerFragment"
+            android:label="@string/title_activity_combiner_fragment"></activity>
     </application>
 
     <uses-permission android:name="android.permission.CAMERA" />

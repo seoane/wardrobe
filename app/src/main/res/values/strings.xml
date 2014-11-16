@@ -40,5 +40,6 @@
     <string name="menu_combiner">Combinador</string>
     <string name="title_activity_show_cloth">showClothActivity</string>
     <string name="action_details_ok">Ok</string>
+    <string name="title_activity_combiner_fragment">CombinerFragment</string>
 
 </resources>
