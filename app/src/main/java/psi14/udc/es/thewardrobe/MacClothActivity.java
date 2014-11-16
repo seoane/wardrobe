@@ -40,6 +40,7 @@ public class MacClothActivity extends Activity implements AdapterView.OnItemSele
 
 
     public final static String LOG_TAG = "MacClothActivity";
+    private final static String PATH="mCapturedPhotoPath";
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
     EditText etName,etDescription;
@@ -61,6 +62,7 @@ public class MacClothActivity extends Activity implements AdapterView.OnItemSele
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(LOG_TAG,"onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mac_cloth);
 
@@ -146,6 +148,20 @@ public class MacClothActivity extends Activity implements AdapterView.OnItemSele
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.mac_cloth, menu);
         return true;
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        // Needed because android kills the activity sometimes when calling the camera
+        outState.putString(PATH,mCapturedPhotoPath);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        mCapturedPhotoPath=savedInstanceState.getString(PATH);
+        Log.d(LOG_TAG,"Retrieved value:" + mCapturedPhotoPath);
     }
 
     @Override
@@ -309,7 +325,7 @@ public class MacClothActivity extends Activity implements AdapterView.OnItemSele
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "CLOTH_" + timeStamp + "_";
-        File storageDir = getExternalFilesDir(null);
+        File storageDir = getExternalFilesDir(DIRECTORY_PICTURES);
         File image;
 
         if (isExternalStorageWritable()) {
@@ -332,7 +348,6 @@ public class MacClothActivity extends Activity implements AdapterView.OnItemSele
         if (requestCode == REQUEST_IMAGE_CAPTURE){
             if (resultCode == RESULT_OK) {
                 if (isExternalStorageReadable()) {
-                    // TO-DO Problema raro... a veces mCapturedPhotoPath es null...
                     Log.d(LOG_TAG,"Creating thumbnail of " + mCapturedPhotoPath);
                     // Loading bitmap in background
                     loadBitmap(mCapturedPhotoPath,imageView);

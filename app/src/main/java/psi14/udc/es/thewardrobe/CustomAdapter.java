@@ -54,17 +54,17 @@ public class CustomAdapter extends BaseAdapter {
     }
 
     /******** What is the size of Passed List Size ************/
+    @Override
     public int getCount() {
-
-        if(list.size()<=0)
-            return 1;
         return list.size();
     }
 
+    @Override
     public Object getItem(int position) {
         return list.get(position);
     }
 
+    @Override
     public long getItemId(int position) {
         return list.get(position).getId();
     }
@@ -82,6 +82,7 @@ public class CustomAdapter extends BaseAdapter {
     }
 
     /****** Depends upon data size called for each row , Create each ListView row *****/
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
         View view = convertView;

@@ -31,6 +31,10 @@
     <string name="action_ok">Ok</string>
     <string name="cloth_updated">Updated</string>
     <string name="cloth_added">Added</string>
+    <string name="title_activity_details_cloth">Details</string>
+    <string name="bodyPart">Body Part:</string>
+    <string name="action_edit">Edit</string>
+    <string name="action_delete">Delete</string>
     <string name="title_activity_combiner">CombinerActivity</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="menu_combiner">Combinador</string>

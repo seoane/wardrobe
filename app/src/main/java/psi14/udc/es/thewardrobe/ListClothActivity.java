@@ -21,10 +21,8 @@ import psi14.udc.es.thewardrobe.ControlLayer.Cloth;
 import psi14.udc.es.thewardrobe.DataSources.ClothDataSource;
 import psi14.udc.es.thewardrobe.Utils.Constants;
 
-import static psi14.udc.es.thewardrobe.Utils.Constants.PARCELABLE_CLOTH_KEY;
 
-
-public class ListClothActivity extends Activity implements ListView.OnItemClickListener {
+public class ListClothActivity extends Activity {
 
     public static final String LOG_TAG = "ListClothActivity";
 
@@ -46,7 +44,7 @@ public class ListClothActivity extends Activity implements ListView.OnItemClickL
 
         // Context Menu
         registerForContextMenu(lv);
-        lv.setOnItemClickListener(this);
+
         //Load data: (Should be done on backGround)
         updateList();
 
@@ -124,12 +122,5 @@ public class ListClothActivity extends Activity implements ListView.OnItemClickL
             Log.d(LOG_TAG,"Deleted file: " + path);
     }
 
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent intent = new Intent(this, ShowClothActivity.class);
-        intent.putExtra(PARCELABLE_CLOTH_KEY, listCloth.get(position));
-        startActivity(intent);
-    }
 }
 
