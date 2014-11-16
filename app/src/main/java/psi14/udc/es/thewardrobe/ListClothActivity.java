@@ -21,8 +21,10 @@ import psi14.udc.es.thewardrobe.ControlLayer.Cloth;
 import psi14.udc.es.thewardrobe.DataSources.ClothDataSource;
 import psi14.udc.es.thewardrobe.Utils.Constants;
 
+import static psi14.udc.es.thewardrobe.Utils.Constants.ID;
 
-public class ListClothActivity extends Activity {
+
+public class ListClothActivity extends Activity implements ListView.OnItemClickListener {
 
     public static final String LOG_TAG = "ListClothActivity";
 
@@ -38,7 +40,7 @@ public class ListClothActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_cloth);
         lv = (ListView) findViewById(R.id.lv_main);
-
+        lv.setOnItemClickListener(this);
         // Obtain dataSources
         clothDataSource = ClothDataSource.getInstance(this);
 
@@ -60,9 +62,9 @@ public class ListClothActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.menu_add) {
-            startActivity(new Intent(this,MacClothActivity.class));
+            startActivity(new Intent(this, MacClothActivity.class));
             return true;
-        }else if (id == R.id.menu_update){
+        } else if (id == R.id.menu_update) {
             updateList();
             return true;
         }
@@ -80,19 +82,19 @@ public class ListClothActivity extends Activity {
     public boolean onContextItemSelected(MenuItem item) {
 
         info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        Log.d(LOG_TAG,"ContextMenu: Position on listView: " + info.position);
+        Log.d(LOG_TAG, "ContextMenu: Position on listView: " + info.position);
         Cloth cloth = (Cloth) lv.getAdapter().getItem(info.position);
         int id = cloth.getId();
 
         switch (item.getItemId()) {
             case R.id.context_edit:
-                Log.d(LOG_TAG,"Edit:Selected cloth with ID: " + id);
+                Log.d(LOG_TAG, "Edit:Selected cloth with ID: " + id);
                 Intent intent = new Intent(this, MacClothActivity.class);
-                intent.putExtra(Constants.ID,id);
+                intent.putExtra(Constants.ID, id);
                 startActivity(intent);
                 return true;
             case R.id.context_delete:
-                Log.d(LOG_TAG,"Delete:Selected cloth with ID: " + id);
+                Log.d(LOG_TAG, "Delete:Selected cloth with ID: " + id);
                 clothDataSource.deleteCloth(id);
                 removeFile(cloth.getUri());
                 updateList();
@@ -102,25 +104,31 @@ public class ListClothActivity extends Activity {
         }
     }
 
-    private void updateList(){
+    private void updateList() {
 
         listCloth = clothDataSource.getAllCloths();
 
-        if (listCloth.size()>0){
+        if (listCloth.size() > 0) {
             Resources res = getResources();
-            adapter = new CustomAdapter( this, listCloth,res );
-            lv.setAdapter( adapter );
-        }else{
+            adapter = new CustomAdapter(this, listCloth, res);
+            lv.setAdapter(adapter);
+        } else {
             Toast.makeText(this, getString(R.string.no_data), Toast.LENGTH_SHORT).show();
         }
     }
 
 
-    private void removeFile(String path){
+    private void removeFile(String path) {
         File file = new File(path);
         if (file.delete())
-            Log.d(LOG_TAG,"Deleted file: " + path);
+            Log.d(LOG_TAG, "Deleted file: " + path);
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = new Intent(this, DetailsClothActivity.class);
+        intent.putExtra(ID, listCloth.get(position).getId());
+        startActivity(intent);
+    }
 }
 

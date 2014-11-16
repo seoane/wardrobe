@@ -15,9 +15,8 @@ import java.io.File;
 
 import psi14.udc.es.thewardrobe.ControlLayer.Cloth;
 import psi14.udc.es.thewardrobe.DataSources.ClothDataSource;
-import psi14.udc.es.thewardrobe.Utils.Constants;
-import psi14.udc.es.thewardrobe.Utils.Utilities;
 
+import static psi14.udc.es.thewardrobe.Utils.Constants.DEBUG;
 import static psi14.udc.es.thewardrobe.Utils.Constants.ID;
 import static psi14.udc.es.thewardrobe.Utils.Utilities.cancelPotentialWork;
 
@@ -27,9 +26,9 @@ public class DetailsClothActivity extends Activity {
     public final static String LOG_TAG = "DetailsClothActivity";
 
     ImageView imageView;
-    TextView tv_name,tv_bodyPart,tv_clothType,tv_season,tv_color,tv_description;
+    TextView tv_name, tv_bodyPart, tv_clothType, tv_season, tv_color, tv_description;
     Bitmap phBitmap;
-    String[] bodyParts,seasons,colors;
+    String[] bodyParts, seasons, colors;
     int id;
     ClothDataSource clothDataSource;
     Cloth cloth;
@@ -75,7 +74,7 @@ public class DetailsClothActivity extends Activity {
                 tv_description.setText(cloth.getDescription());
 
             } else {
-                Log.d(LOG_TAG, "Cloth with ID: " + id + " not found");
+                if (DEBUG) Log.d(LOG_TAG, "Cloth with ID: " + id + " not found");
                 finish();
             }
 
@@ -92,36 +91,36 @@ public class DetailsClothActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_edit:
-                Log.d(LOG_TAG,"Edit:Selected cloth with ID: " + id);
+                Log.d(LOG_TAG, "Edit:Selected cloth with ID: " + id);
                 Intent intent = new Intent(this, MacClothActivity.class);
-                intent.putExtra(Constants.ID,id);
+                intent.putExtra(ID, id);
                 startActivity(intent);
                 finish();
                 return true;
             case R.id.action_delete:
-                Log.d(LOG_TAG,"Delete:Selected cloth with ID: " + id);
+                Log.d(LOG_TAG, "Delete:Selected cloth with ID: " + id);
                 clothDataSource.deleteCloth(id);
                 removeFile(cloth.getUri());
                 finish();
-            return true;
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-        // Method to load images in background
+    // Method to load images in background
     public void loadBitmap(String path, ImageView imageView) {
         if (cancelPotentialWork(path, imageView)) {
             final BitmapWorkerTask task = new BitmapWorkerTask(imageView);
             final AsyncDrawable asyncDrawable =
                     new AsyncDrawable(getResources(), phBitmap, task);
             imageView.setImageDrawable(asyncDrawable);
-            task.execute(path,"256");
+            task.execute(path, "256");
         }
     }
 
-    private void removeFile(String path){
+    private void removeFile(String path) {
         File file = new File(path);
         if (file.delete())
-            Log.d(LOG_TAG,"Deleted file: " + path);
+            Log.d(LOG_TAG, "Deleted file: " + path);
     }
 }
