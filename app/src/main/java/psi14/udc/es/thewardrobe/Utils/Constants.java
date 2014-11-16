@@ -19,5 +19,7 @@ public final class Constants {
     // CONSTANT FOR PICTURES_DEALING
     public static final String DIRECTORY_PICTURES = "cloths_pictures";
     public static final int THUMBSIZE = 64;
-
+    public static final String PARCELABLE_CLOTH_KEY = "cloth_parcel";
+    public static final Boolean DEBUG = false;
+    public static final String APP_TAG = "TheWardrobeLogTag_";
 }

@@ -7,7 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class TheWardrobeMainActivity extends Activity{
+public class TheWardrobeMainActivity extends Activity {
 
     public final static String LOG_TAG = "TheWardrobeMainActivity";
 
@@ -29,10 +29,13 @@ public class TheWardrobeMainActivity extends Activity{
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.menu_add) {
-            startActivity(new Intent(this,MacClothActivity.class));
+            startActivity(new Intent(this, MacClothActivity.class));
             return true;
-        }else if (id == R.id.menu_list){
-            startActivity(new Intent(this,ListClothActivity.class));
+        } else if (id == R.id.menu_list) {
+            startActivity(new Intent(this, ListClothActivity.class));
+            return true;
+        } else if (id == R.id.menu_combiner) {
+            startActivity(new Intent(this, CombinerActivity.class));
             return true;
         }
         return super.onOptionsItemSelected(item);

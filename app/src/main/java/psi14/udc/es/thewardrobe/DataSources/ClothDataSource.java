@@ -15,7 +15,16 @@ import psi14.udc.es.thewardrobe.Utils.BodyParts;
 import psi14.udc.es.thewardrobe.Utils.Colors;
 import psi14.udc.es.thewardrobe.Utils.Season;
 
-import static psi14.udc.es.thewardrobe.Utils.Constants.*;
+import static psi14.udc.es.thewardrobe.Utils.Constants.BODYPART;
+import static psi14.udc.es.thewardrobe.Utils.Constants.CLOTH_TABLE;
+import static psi14.udc.es.thewardrobe.Utils.Constants.COLOR;
+import static psi14.udc.es.thewardrobe.Utils.Constants.DEBUG;
+import static psi14.udc.es.thewardrobe.Utils.Constants.DESCRIPTION;
+import static psi14.udc.es.thewardrobe.Utils.Constants.ID;
+import static psi14.udc.es.thewardrobe.Utils.Constants.NAME;
+import static psi14.udc.es.thewardrobe.Utils.Constants.SEASON;
+import static psi14.udc.es.thewardrobe.Utils.Constants.TYPE;
+import static psi14.udc.es.thewardrobe.Utils.Constants.URI;
 
 
 public class ClothDataSource implements DataSourceInterface {
@@ -27,18 +36,18 @@ public class ClothDataSource implements DataSourceInterface {
         helper = new TheWardrobeSQLiteHelper(context);
     }
 
+    public static ClothDataSource getInstance(Context context) {
+        if (instance == null)
+            instance = new ClothDataSource(context);
+        return instance;
+    }
+
     public void open() throws SQLException {
         database = helper.getWritableDatabase();
     }
 
     public void close() {
         helper.close();
-    }
-
-    public static ClothDataSource getInstance(Context context) {
-        if (instance == null)
-            instance = new ClothDataSource(context);
-        return instance;
     }
 
     public int addCloth(Cloth cloth) {
@@ -113,7 +122,94 @@ public class ClothDataSource implements DataSourceInterface {
             } while (cursor.moveToNext());
         }
 
-        Log.d("getAllChests()", cloths.toString());
+        if (DEBUG) Log.d("getAllCloths()", cloths.toString());
+
+        return cloths;
+    }
+
+    public List<Cloth> getAllChests() {
+        open();
+        List<Cloth> cloths = new ArrayList<Cloth>();
+
+        String query = "SELECT * FROM " + CLOTH_TABLE + " WHERE " + BODYPART + " like " + "'" + BodyParts.CHEST + "'";
+
+
+        Cursor cursor = database.rawQuery(query, null);
+
+        Cloth cloth = null;
+        if (cursor.moveToFirst()) {
+            do {
+                cloth = new Cloth(cursor.getInt(0),
+                        cursor.getString(1),
+                        BodyParts.valueOf(cursor.getString(2)),
+                        cursor.getString(3),
+                        Season.valueOf(cursor.getString(4)),
+                        Colors.valueOf(cursor.getString(5)),
+                        cursor.getString(6),
+                        cursor.getString(7));
+                cloths.add(cloth);
+            } while (cursor.moveToNext());
+        }
+
+        if (DEBUG) Log.d("getAllChests()", cloths.toString());
+
+        return cloths;
+    }
+
+    public List<Cloth> getAllLegs() {
+        open();
+        List<Cloth> cloths = new ArrayList<Cloth>();
+
+        String query = "SELECT * FROM " + CLOTH_TABLE + " WHERE " + BODYPART + " like " + "'" + BodyParts.LEGS + "'";
+
+
+        Cursor cursor = database.rawQuery(query, null);
+
+        Cloth cloth = null;
+        if (cursor.moveToFirst()) {
+            do {
+                cloth = new Cloth(cursor.getInt(0),
+                        cursor.getString(1),
+                        BodyParts.valueOf(cursor.getString(2)),
+                        cursor.getString(3),
+                        Season.valueOf(cursor.getString(4)),
+                        Colors.valueOf(cursor.getString(5)),
+                        cursor.getString(6),
+                        cursor.getString(7));
+                cloths.add(cloth);
+            } while (cursor.moveToNext());
+        }
+
+        if (DEBUG) Log.d("getAllLegs()", cloths.toString());
+
+        return cloths;
+    }
+
+    public List<Cloth> getAllFeets() {
+        open();
+        List<Cloth> cloths = new ArrayList<Cloth>();
+
+        String query = "SELECT * FROM " + CLOTH_TABLE + " WHERE " + BODYPART + " like " + "'" + BodyParts.FEET + "'";
+
+
+        Cursor cursor = database.rawQuery(query, null);
+
+        Cloth cloth = null;
+        if (cursor.moveToFirst()) {
+            do {
+                cloth = new Cloth(cursor.getInt(0),
+                        cursor.getString(1),
+                        BodyParts.valueOf(cursor.getString(2)),
+                        cursor.getString(3),
+                        Season.valueOf(cursor.getString(4)),
+                        Colors.valueOf(cursor.getString(5)),
+                        cursor.getString(6),
+                        cursor.getString(7));
+                cloths.add(cloth);
+            } while (cursor.moveToNext());
+        }
+
+        if (DEBUG) Log.d("getAllFeets()", cloths.toString());
 
         return cloths;
     }

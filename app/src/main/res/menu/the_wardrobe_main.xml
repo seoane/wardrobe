@@ -3,12 +3,17 @@
     tools:context=".TheWardrobeMainActivity">
     <item
         android:id="@+id/menu_add"
-        android:showAsAction="always"
         android:icon="@android:drawable/ic_menu_add"
+        android:showAsAction="always"
         android:title="@string/menu_add" />
     <item
         android:id="@+id/menu_list"
-        android:showAsAction="never"
         android:icon="@android:drawable/ic_menu_more"
+        android:showAsAction="never"
         android:title="@string/menu_list" />
+    <item
+        android:id="@+id/menu_combiner"
+        android:icon="@android:drawable/ic_menu_agenda"
+        android:showAsAction="always"
+        android:title="@string/menu_combiner" />
 </menu>

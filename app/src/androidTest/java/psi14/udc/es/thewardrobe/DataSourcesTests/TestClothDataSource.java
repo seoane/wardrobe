@@ -62,7 +62,7 @@ public class TestClothDataSource extends AndroidTestCase {
             id = clothDataSource.addCloth(cloth);
             Cloth foundCloth = clothDataSource.getCloth(id);
             cloth.setDescription("Nueva Descripción");
-            clothDataSource.updateChest(cloth);
+            clothDataSource.updateCloth(cloth);
             Cloth foundUpdatedChest = clothDataSource.getCloth(id);
             assertEquals(foundCloth, foundUpdatedChest);
         } finally {
