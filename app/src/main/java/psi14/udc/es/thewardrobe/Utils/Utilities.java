@@ -1,6 +1,7 @@
 package psi14.udc.es.thewardrobe.Utils;
 
 
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
@@ -84,5 +85,17 @@ public abstract class Utilities {
             }
         }
         return null;
+    }
+
+    public static void loadBitmap(String path, ImageView imageView) {
+        if (cancelPotentialWork(path, imageView)) {
+            final BitmapWorkerTask task = new BitmapWorkerTask(imageView);
+            Bitmap mPlaceHolderBitmap = null;
+            Resources res = null;
+            final AsyncDrawable asyncDrawable =
+                    new AsyncDrawable(res, mPlaceHolderBitmap, task);
+            imageView.setImageDrawable(asyncDrawable);
+            task.execute(path);
+        }
     }
 }

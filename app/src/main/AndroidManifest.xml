@@ -19,15 +19,18 @@
         <activity
             android:name=".MacClothActivity"
             android:label="@string/title_activity_mac_cloth"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ListClothActivity"
             android:label="@string/title_activity_list_cloth"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".CombinerActivity"
             android:label="@string/title_activity_combiner"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ShowClothActivity"
+            android:label="@string/title_activity_show_cloth"></activity>
     </application>
 
     <uses-permission android:name="android.permission.CAMERA" />

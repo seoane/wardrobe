@@ -4,13 +4,6 @@
     android:layout_height="match_parent"
     tools:context="psi14.udc.es.thewardrobe.CombinerFragment">
 
-    <TextView
-        android:id="@+id/fragmentTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="img URI"
-        android:visibility="gone" />
-
     <ImageView
         android:id="@+id/fragmentImageView"
         android:layout_width="fill_parent"
