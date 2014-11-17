@@ -52,7 +52,7 @@ public class ClothDataSource implements DataSourceInterface {
 
     public int addCloth(Cloth cloth) {
         open();
-        Log.d("addChest", cloth.toString());
+        if (DEBUG) Log.d("addChest", cloth.toString());
         ContentValues values = new ContentValues();
 
         values.put(NAME, cloth.getName());

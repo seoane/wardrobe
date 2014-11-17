@@ -98,7 +98,7 @@ public class DetailsClothActivity extends Activity {
                 finish();
                 return true;
             case R.id.action_delete:
-                Log.d(LOG_TAG, "Delete:Selected cloth with ID: " + id);
+                if (DEBUG) Log.d(LOG_TAG, "Delete:Selected cloth with ID: " + id);
                 clothDataSource.deleteCloth(id);
                 removeFile(cloth.getUri());
                 finish();
@@ -124,6 +124,6 @@ public class DetailsClothActivity extends Activity {
     private void removeFile(String path) {
         File file = new File(path);
         if (file.delete())
-            Log.d(LOG_TAG, "Deleted file: " + path);
+            if (DEBUG) Log.d(LOG_TAG, "Deleted file: " + path);
     }
 }

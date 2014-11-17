@@ -22,8 +22,8 @@
     <string name="str_butt_save">Save</string>
     <string name="name_not_set">Please, name and take a picture of your cloth</string>
     <string name="menu_add">Add</string>
-    <string name="menu_list">Wardrobe Listing</string>
-    <string name="title_activity_list_cloth">Wardrobe Listing</string>
+    <string name="menu_list">Wardrobe Collection</string>
+    <string name="title_activity_list_cloth">Wardrobe Collection</string>
     <string name="menu_update">Update</string>
     <string name="str_delete">Delete</string>
     <string name="str_edit">Edit</string>
@@ -35,9 +35,9 @@
     <string name="bodyPart">Body Part:</string>
     <string name="action_edit">Edit</string>
     <string name="action_delete">Delete</string>
-    <string name="title_activity_combiner">CombinerActivity</string>
+    <string name="title_activity_combiner">Wardrobe Combiner</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="menu_combiner">Combinador</string>
+    <string name="menu_combiner">Combiner</string>
     <string name="title_activity_show_cloth">showClothActivity</string>
     <string name="action_details_ok">Ok</string>
     <string name="title_activity_combiner_fragment">CombinerFragment</string>

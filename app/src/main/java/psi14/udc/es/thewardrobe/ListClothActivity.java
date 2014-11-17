@@ -21,6 +21,7 @@ import psi14.udc.es.thewardrobe.ControlLayer.Cloth;
 import psi14.udc.es.thewardrobe.DataSources.ClothDataSource;
 import psi14.udc.es.thewardrobe.Utils.Constants;
 
+import static psi14.udc.es.thewardrobe.Utils.Constants.DEBUG;
 import static psi14.udc.es.thewardrobe.Utils.Constants.ID;
 
 
@@ -82,7 +83,7 @@ public class ListClothActivity extends Activity implements ListView.OnItemClickL
     public boolean onContextItemSelected(MenuItem item) {
 
         info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        Log.d(LOG_TAG, "ContextMenu: Position on listView: " + info.position);
+        if (DEBUG) Log.d(LOG_TAG, "ContextMenu: Position on listView: " + info.position);
         Cloth cloth = (Cloth) lv.getAdapter().getItem(info.position);
         int id = cloth.getId();
 
@@ -94,7 +95,7 @@ public class ListClothActivity extends Activity implements ListView.OnItemClickL
                 startActivity(intent);
                 return true;
             case R.id.context_delete:
-                Log.d(LOG_TAG, "Delete:Selected cloth with ID: " + id);
+                if (DEBUG) Log.d(LOG_TAG, "Delete:Selected cloth with ID: " + id);
                 clothDataSource.deleteCloth(id);
                 removeFile(cloth.getUri());
                 updateList();
@@ -121,7 +122,7 @@ public class ListClothActivity extends Activity implements ListView.OnItemClickL
     private void removeFile(String path) {
         File file = new File(path);
         if (file.delete())
-            Log.d(LOG_TAG, "Deleted file: " + path);
+            if (DEBUG) Log.d(LOG_TAG, "Deleted file: " + path);
     }
 
     @Override

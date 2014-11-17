@@ -47,7 +47,7 @@ public class CombinatorFragment extends Fragment implements ImageView.OnClickLis
         if (DEBUG) Log.d(APP_TAG + activityTag, "onCreateView : View Instantiated");
         if (cloth.getUri() != null) {
             if (DEBUG)
-                Log.d(APP_TAG + activityTag, "onCreateView : img URI: " + cloth.getUri().toString());
+                Log.d(APP_TAG + activityTag, "onCreateView : img URI: " + cloth.getUri());
             loadBitmap(cloth.getUri(), imageView);
 
         }
@@ -70,7 +70,8 @@ public class CombinatorFragment extends Fragment implements ImageView.OnClickLis
             final AsyncDrawable asyncDrawable =
                     new AsyncDrawable(res, mPlaceHolderBitmap, task);
             imageView.setImageDrawable(asyncDrawable);
-            task.execute(path);
+            String bitmapSize = "128";
+            task.execute(path,bitmapSize);
         }
     }
 

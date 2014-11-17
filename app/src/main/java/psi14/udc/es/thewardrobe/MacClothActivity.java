@@ -2,10 +2,8 @@ package psi14.udc.es.thewardrobe;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
 
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -22,7 +20,6 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -31,9 +28,9 @@ import psi14.udc.es.thewardrobe.DataSources.ClothDataSource;
 import psi14.udc.es.thewardrobe.Utils.BodyParts;
 import psi14.udc.es.thewardrobe.Utils.Colors;
 import psi14.udc.es.thewardrobe.Utils.Season;
+import psi14.udc.es.thewardrobe.Utils.Utilities;
 
 import static psi14.udc.es.thewardrobe.Utils.Constants.*;
-import static psi14.udc.es.thewardrobe.Utils.Utilities.decodeSampledBitmapFromPath;
 
 
 public class MacClothActivity extends Activity implements AdapterView.OnItemSelectedListener,View.OnClickListener{
@@ -62,7 +59,7 @@ public class MacClothActivity extends Activity implements AdapterView.OnItemSele
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d(LOG_TAG,"onCreate");
+        if (DEBUG) Log.d(LOG_TAG,"onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mac_cloth);
 
@@ -103,7 +100,7 @@ public class MacClothActivity extends Activity implements AdapterView.OnItemSele
             oldCloth = clothDataSource.getCloth(id);
             if (oldCloth != null) {
                 // Loading bitmap in background
-                loadBitmap(oldCloth.getUri(),imageView);
+                Utilities.loadBitmap(oldCloth.getUri(), imageView);
 
                 etName.setText(oldCloth.getName());
 
@@ -134,7 +131,7 @@ public class MacClothActivity extends Activity implements AdapterView.OnItemSele
                 mCapturedPhotoPath=oldCloth.getUri();
 
             } else {
-                Log.d(LOG_TAG, "Cloth with ID: " + id + " not found");
+                if (DEBUG) Log.d(LOG_TAG, "Cloth with ID: " + id + " not found");
             }
         }
 
@@ -154,14 +151,17 @@ public class MacClothActivity extends Activity implements AdapterView.OnItemSele
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         // Needed because android kills the activity sometimes when calling the camera
-        outState.putString(PATH,mCapturedPhotoPath);
+        if (mCapturedPhotoPath!=null)
+            outState.putString(PATH,mCapturedPhotoPath);
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        mCapturedPhotoPath=savedInstanceState.getString(PATH);
-        Log.d(LOG_TAG,"Retrieved value:" + mCapturedPhotoPath);
+        if (savedInstanceState!=null) {
+            mCapturedPhotoPath = savedInstanceState.getString(PATH);
+            if (DEBUG) Log.d(LOG_TAG, "Retrieved value:" + mCapturedPhotoPath);
+        }
     }
 
     @Override
@@ -348,16 +348,16 @@ public class MacClothActivity extends Activity implements AdapterView.OnItemSele
         if (requestCode == REQUEST_IMAGE_CAPTURE){
             if (resultCode == RESULT_OK) {
                 if (isExternalStorageReadable()) {
-                    Log.d(LOG_TAG,"Creating thumbnail of " + mCapturedPhotoPath);
+                    if (DEBUG) Log.d(LOG_TAG,"Creating thumbnail of " + mCapturedPhotoPath);
                     // Loading bitmap in background
-                    loadBitmap(mCapturedPhotoPath,imageView);
+                    Utilities.loadBitmap(mCapturedPhotoPath, imageView);
                     //Delete de old image
                     if (prevCapturedPhotoPath!=null){
                         removeFile(prevCapturedPhotoPath);
                         prevCapturedPhotoPath=null;
                     }
                 }else{
-                    Log.d(LOG_TAG,"Could not read External Storage");
+                    if (DEBUG) Log.d(LOG_TAG,"Could not read External Storage");
                 }
             }else {
                /*If result is not ok we delete the TempFile we created*/
@@ -379,58 +379,14 @@ public class MacClothActivity extends Activity implements AdapterView.OnItemSele
     /* Checks if external storage is available for read and write */
     public boolean isExternalStorageWritable() {
         String state = Environment.getExternalStorageState();
-        if (Environment.MEDIA_MOUNTED.equals(state)) {
-            return true;
-        }
-        return false;
+        return (Environment.MEDIA_MOUNTED.equals(state));
     }
 
     /* Checks if external storage is available to at least read */
     public boolean isExternalStorageReadable() {
         String state = Environment.getExternalStorageState();
-        if (Environment.MEDIA_MOUNTED.equals(state) ||
-                Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
-            return true;
-        }
-        return false;
-    }
-
-    public void loadBitmap(String path, ImageView imageView) {
-        BitmapWorkerTask task = new BitmapWorkerTask(imageView);
-        task.execute(path);
-    }
-
-
-    /*----------------------------------------------------------------------------------
-        Asynctask for thumbnail creation
-    -------------------------------------------------------------------------------------*/
-
-    class BitmapWorkerTask extends AsyncTask<String, Void, Bitmap> {
-        private final WeakReference<ImageView> imageViewReference;
-        private String path = "";
-
-        public BitmapWorkerTask(ImageView imageView) {
-            // Use a WeakReference to ensure the ImageView can be garbage collected
-            imageViewReference = new WeakReference<ImageView>(imageView);
-        }
-
-        // Decode image in background.
-        @Override
-        protected Bitmap doInBackground(String... params) {
-            path = params[0];
-            return decodeSampledBitmapFromPath(path, THUMBSIZE, THUMBSIZE);
-        }
-
-        // Once complete, see if ImageView is still around and set bitmap.
-        @Override
-        protected void onPostExecute(Bitmap bitmap) {
-            if (imageViewReference != null && bitmap != null) {
-                final ImageView imageView = imageViewReference.get();
-                if (imageView != null) {
-                    imageView.setImageBitmap(bitmap);
-                }
-            }
-        }
+        return (Environment.MEDIA_MOUNTED.equals(state) ||
+                Environment.MEDIA_MOUNTED_READ_ONLY.equals(state));
     }
 
 }
