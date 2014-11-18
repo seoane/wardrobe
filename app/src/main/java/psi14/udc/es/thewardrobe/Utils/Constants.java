@@ -20,6 +20,6 @@ public final class Constants {
     public static final String DIRECTORY_PICTURES = "TheWardrobe";
     public static final int THUMBSIZE = 64;
     public static final String PARCELABLE_CLOTH_KEY = "cloth_parcel";
-    public static final Boolean DEBUG = true;
+    public static final Boolean DEBUG = false;
     public static final String APP_TAG = "TheWardrobeLogTag_";
 }

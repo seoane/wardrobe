@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="psi14.udc.es.thewardrobe">
+    package="psi14.udc.es.thewardrobe"
+    android:versionCode="1"
+    android:versionName="0.1">
 
     <application
         android:allowBackup="true"
@@ -32,9 +34,6 @@
             android:name=".DetailsClothActivity"
             android:label="@string/title_activity_details_cloth"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".CombinatorFragment"
-            android:label="@string/title_activity_combiner_fragment"></activity>
     </application>
 
     <uses-permission android:name="android.permission.CAMERA" />
