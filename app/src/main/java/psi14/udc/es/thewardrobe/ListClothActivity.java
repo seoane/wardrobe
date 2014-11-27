@@ -1,6 +1,8 @@
 package psi14.udc.es.thewardrobe;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -11,16 +13,23 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import psi14.udc.es.thewardrobe.ControlLayer.Cloth;
 import psi14.udc.es.thewardrobe.DataSources.ClothDataSource;
+import psi14.udc.es.thewardrobe.Utils.BodyParts;
+import psi14.udc.es.thewardrobe.Utils.Colors;
 import psi14.udc.es.thewardrobe.Utils.Constants;
+import psi14.udc.es.thewardrobe.Utils.Season;
 
+import static psi14.udc.es.thewardrobe.Utils.Constants.BODYPART;
 import static psi14.udc.es.thewardrobe.Utils.Constants.DEBUG;
 import static psi14.udc.es.thewardrobe.Utils.Constants.ID;
 
@@ -35,6 +44,13 @@ public class ListClothActivity extends Activity implements ListView.OnItemClickL
     List<Cloth> listCloth;
     CustomAdapter adapter;
     AdapterView.AdapterContextMenuInfo info;
+    int posSelected=0;
+    String[] filters,subfilters,bodyParts,seasons,colors;
+
+    // Enum values
+    BodyParts[] bodyPartValues = BodyParts.values();
+    Colors[] colorValues = Colors.values();
+    Season[] seasonValues = Season.values();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +60,11 @@ public class ListClothActivity extends Activity implements ListView.OnItemClickL
         lv.setOnItemClickListener(this);
         // Obtain dataSources
         clothDataSource = ClothDataSource.getInstance(this);
+        filters = getResources().getStringArray(R.array.filters);
+        bodyParts = getResources().getStringArray(R.array.bodyParts);
+        seasons = getResources().getStringArray(R.array.seasons);
+        colors = getResources().getStringArray(R.array.colors);
+
 
         // Context Menu
         registerForContextMenu(lv);
@@ -67,6 +88,9 @@ public class ListClothActivity extends Activity implements ListView.OnItemClickL
             return true;
         } else if (id == R.id.menu_update) {
             updateList();
+            return true;
+        }else if (id == R.id.menu_filter){
+            createDialogFilter();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -118,6 +142,18 @@ public class ListClothActivity extends Activity implements ListView.OnItemClickL
         }
     }
 
+    private void updateList(List<Cloth> list){
+
+        if (list.size() > 0) {
+            Resources res = getResources();
+            adapter = new CustomAdapter(this, list, res);
+            lv.setAdapter(adapter);
+        } else {
+            Toast.makeText(this, getString(R.string.no_data), Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
 
     private void removeFile(String path) {
         File file = new File(path);
@@ -130,6 +166,89 @@ public class ListClothActivity extends Activity implements ListView.OnItemClickL
         Intent intent = new Intent(this, DetailsClothActivity.class);
         intent.putExtra(ID, listCloth.get(position).getId());
         startActivity(intent);
+    }
+
+    private void createDialogFilter(){
+        // We use position instead of string due to translation problems
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle(getString(R.string.select_filter))
+
+                .setSingleChoiceItems(filters, 0, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int pos) {
+                        Toast.makeText(getApplicationContext(), filters[pos],
+                                Toast.LENGTH_SHORT).show();
+                        posSelected = pos;
+                        Log.d(LOG_TAG, "DialogFilter: Selected " + filters[posSelected]);
+                    }
+                })
+
+
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                        AlertDialog.Builder builder = new AlertDialog.Builder(ListClothActivity.this);
+                        switch (posSelected) {
+                            // Bodypart
+                            case 0:
+                                subfilters = bodyParts;
+                                break;
+                            // Season
+                            case 1:
+                                subfilters = seasons;
+                                break;
+                            // Color
+                            case 2:
+                                subfilters = colors;
+                                break;
+                        }
+                        builder.setSingleChoiceItems(subfilters, 0, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int pos) {
+                                Toast.makeText(getApplicationContext(), subfilters[pos],
+                                        Toast.LENGTH_SHORT).show();
+                                List<Cloth> selectedCloths=new ArrayList<Cloth>();
+                                switch (posSelected) {
+                                    // Bodypart
+                                    case 0:
+                                        Log.d(LOG_TAG,"DialogSubFilter Selected: " + bodyPartValues[pos].toString());
+                                        selectedCloths = clothDataSource.getAllCloths();
+                                        break;
+                                    // Season
+                                    case 1:
+                                        Log.d(LOG_TAG,"DialogSubFilter Selected: " + seasonValues[pos].toString());
+                                        selectedCloths = clothDataSource.getAllCloths();
+                                        break;
+                                    // Color
+                                    case 2:
+                                        Log.d(LOG_TAG,"DialogSubFilter Selected: " + colorValues[pos].toString());
+                                        selectedCloths = clothDataSource.getAllCloths();
+                                        break;
+                                }
+                                updateList(selectedCloths);
+                                dialog.dismiss();
+
+                            }
+                        });
+
+                        AlertDialog alert = builder.create();
+                        alert.show();
+
+
+                    }
+                })
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert = builder.create();
+        alert.show();
+
     }
 }
 

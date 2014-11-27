@@ -41,5 +41,9 @@
     <string name="title_activity_show_cloth">showClothActivity</string>
     <string name="action_details_ok">Ok</string>
     <string name="title_activity_combiner_fragment">CombinerFragment</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="menu_filter">Filter</string>
+    <string name="select_filter">Select a filter</string>
 
 </resources>
