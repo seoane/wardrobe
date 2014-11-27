@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -190,6 +191,93 @@ public class ClothDataSource implements DataSourceInterface {
         List<Cloth> cloths = new ArrayList<Cloth>();
 
         String query = "SELECT * FROM " + CLOTH_TABLE + " WHERE " + BODYPART + " like " + "'" + BodyParts.FEET + "'";
+
+
+        Cursor cursor = database.rawQuery(query, null);
+
+        Cloth cloth = null;
+        if (cursor.moveToFirst()) {
+            do {
+                cloth = new Cloth(cursor.getInt(0),
+                        cursor.getString(1),
+                        BodyParts.valueOf(cursor.getString(2)),
+                        cursor.getString(3),
+                        Season.valueOf(cursor.getString(4)),
+                        Colors.valueOf(cursor.getString(5)),
+                        cursor.getString(6),
+                        cursor.getString(7));
+                cloths.add(cloth);
+            } while (cursor.moveToNext());
+        }
+
+        if (DEBUG) Log.d("getAllFeets()", cloths.toString());
+
+        return cloths;
+    }
+
+    public List<Cloth> getByColor(Color color) {
+        open();
+        List<Cloth> cloths = new ArrayList<Cloth>();
+
+        String query = "SELECT * FROM " + CLOTH_TABLE + " WHERE " + COLOR + " like " + "'" + color + "'";
+
+
+        Cursor cursor = database.rawQuery(query, null);
+
+        Cloth cloth = null;
+        if (cursor.moveToFirst()) {
+            do {
+                cloth = new Cloth(cursor.getInt(0),
+                        cursor.getString(1),
+                        BodyParts.valueOf(cursor.getString(2)),
+                        cursor.getString(3),
+                        Season.valueOf(cursor.getString(4)),
+                        Colors.valueOf(cursor.getString(5)),
+                        cursor.getString(6),
+                        cursor.getString(7));
+                cloths.add(cloth);
+            } while (cursor.moveToNext());
+        }
+
+        if (DEBUG) Log.d("getAllFeets()", cloths.toString());
+
+        return cloths;
+    }
+
+    public List<Cloth> getBySeason(Season season) {
+        open();
+        List<Cloth> cloths = new ArrayList<Cloth>();
+
+        String query = "SELECT * FROM " + CLOTH_TABLE + " WHERE " + SEASON + " like " + "'" + season + "'";
+
+
+        Cursor cursor = database.rawQuery(query, null);
+
+        Cloth cloth = null;
+        if (cursor.moveToFirst()) {
+            do {
+                cloth = new Cloth(cursor.getInt(0),
+                        cursor.getString(1),
+                        BodyParts.valueOf(cursor.getString(2)),
+                        cursor.getString(3),
+                        Season.valueOf(cursor.getString(4)),
+                        Colors.valueOf(cursor.getString(5)),
+                        cursor.getString(6),
+                        cursor.getString(7));
+                cloths.add(cloth);
+            } while (cursor.moveToNext());
+        }
+
+        if (DEBUG) Log.d("getAllFeets()", cloths.toString());
+
+        return cloths;
+    }
+
+    public List<Cloth> getByBodyPart(BodyParts bodyPart) {
+        open();
+        List<Cloth> cloths = new ArrayList<Cloth>();
+
+        String query = "SELECT * FROM " + CLOTH_TABLE + " WHERE " + BODYPART + " like " + "'" + bodyPart + "'";
 
 
         Cursor cursor = database.rawQuery(query, null);
