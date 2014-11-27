@@ -212,17 +212,17 @@ public class ListClothActivity extends Activity implements ListView.OnItemClickL
                                     // Bodypart
                                     case 0:
                                         Log.d(LOG_TAG,"Filtering database with: " + bodyPartValues[pos].toString());
-                                        selectedCloths = clothDataSource.getAllCloths();
+                                        selectedCloths = clothDataSource.getByBodyPart(bodyPartValues[pos]);
                                         break;
                                     // Season
                                     case 1:
                                         Log.d(LOG_TAG,"Filtering database with: " + seasonValues[pos].toString());
-                                        selectedCloths = clothDataSource.getAllCloths();
+                                        selectedCloths = clothDataSource.getBySeason(seasonValues[pos]);
                                         break;
                                     // Color
                                     case 2:
                                         Log.d(LOG_TAG,"Filtering database with: " + colorValues[pos].toString());
-                                        selectedCloths = clothDataSource.getAllCloths();
+                                        selectedCloths = clothDataSource.getByColor(colorValues[pos]);
                                         break;
                                 }
                                 updateList(selectedCloths);

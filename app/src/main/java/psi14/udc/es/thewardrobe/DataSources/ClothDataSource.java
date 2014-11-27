@@ -215,7 +215,7 @@ public class ClothDataSource implements DataSourceInterface {
         return cloths;
     }
 
-    public List<Cloth> getByColor(Color color) {
+    public List<Cloth> getByColor(Colors color) {
         open();
         List<Cloth> cloths = new ArrayList<Cloth>();
 
