@@ -65,7 +65,6 @@ public class ListClothActivity extends Activity implements ListView.OnItemClickL
         seasons = getResources().getStringArray(R.array.seasons);
         colors = getResources().getStringArray(R.array.colors);
 
-
         // Context Menu
         registerForContextMenu(lv);
 
@@ -212,17 +211,17 @@ public class ListClothActivity extends Activity implements ListView.OnItemClickL
                                 switch (posSelected) {
                                     // Bodypart
                                     case 0:
-                                        Log.d(LOG_TAG,"DialogSubFilter Selected: " + bodyPartValues[pos].toString());
+                                        Log.d(LOG_TAG,"Filtering database with: " + bodyPartValues[pos].toString());
                                         selectedCloths = clothDataSource.getAllCloths();
                                         break;
                                     // Season
                                     case 1:
-                                        Log.d(LOG_TAG,"DialogSubFilter Selected: " + seasonValues[pos].toString());
+                                        Log.d(LOG_TAG,"Filtering database with: " + seasonValues[pos].toString());
                                         selectedCloths = clothDataSource.getAllCloths();
                                         break;
                                     // Color
                                     case 2:
-                                        Log.d(LOG_TAG,"DialogSubFilter Selected: " + colorValues[pos].toString());
+                                        Log.d(LOG_TAG,"Filtering database with: " + colorValues[pos].toString());
                                         selectedCloths = clothDataSource.getAllCloths();
                                         break;
                                 }
