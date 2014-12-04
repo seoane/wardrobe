@@ -97,7 +97,7 @@ public class ClothDataSource implements DataSourceInterface {
     public Cloth getCloth(Integer id) {
         open();
 
-        String[] columns = {NAME,BODYPART,TYPE,SEASON,COLOR, DESCRIPTION, URI};
+        String[] columns = {NAME,BODYPART,TYPE,SEASON,COLOR, DESCRIPTION, URI,FREQUENCY};
 
         Cursor cursor =
                 database.query(CLOTH_TABLE,
