@@ -1,19 +1,24 @@
 package psi14.udc.es.thewardrobe;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -39,6 +44,7 @@ public class MacClothActivity extends Activity implements AdapterView.OnItemSele
     public final static String LOG_TAG = "MacClothActivity";
     private final static String PATH="mCapturedPhotoPath";
     static final int REQUEST_IMAGE_CAPTURE = 1;
+    static final int REQUEST_IMAGE_GALLERY = 2;
 
     EditText etName,etDescription;
     Spinner spBodyPart,spClothType,spSeason,spColor;
@@ -241,9 +247,25 @@ public class MacClothActivity extends Activity implements AdapterView.OnItemSele
         if (view == imageView){
             // Remember older image if we fail to get a new one
             prevCapturedPhotoPath = mCapturedPhotoPath;
-            Log.d(LOG_TAG,"Image click");
-            dispatchTakePictureIntent();
+            if (DEBUG) Log.d(LOG_TAG,"Image click");
 
+            final String[] items = getResources().getStringArray(R.array.img_sources);
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(getString(R.string.select_source));
+            builder.setItems(items, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int item) {
+                    switch (item) {
+                        case 0:
+                            dispatchTakePictureIntent();
+                            break;
+                        case 1:
+                            dispatchGalleryIntent();
+                            break;
+                    }
+                }
+            });
+            AlertDialog alert = builder.create();
+            alert.show();
         }
     }
 
@@ -302,6 +324,14 @@ public class MacClothActivity extends Activity implements AdapterView.OnItemSele
         return true;
     }
 
+    private void dispatchGalleryIntent(){
+        if (DEBUG) Log.d(LOG_TAG,"Gallery Intent Dispatched");
+        Intent pickPhoto = new Intent(Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(pickPhoto , REQUEST_IMAGE_GALLERY);
+
+    }
+
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
@@ -345,7 +375,7 @@ public class MacClothActivity extends Activity implements AdapterView.OnItemSele
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent returnedIntent) {
         if (requestCode == REQUEST_IMAGE_CAPTURE){
             if (resultCode == RESULT_OK) {
                 if (isExternalStorageReadable()) {
@@ -368,6 +398,29 @@ public class MacClothActivity extends Activity implements AdapterView.OnItemSele
                 mCapturedPhotoPath=prevCapturedPhotoPath;
             }
 
+        }else if (requestCode == REQUEST_IMAGE_GALLERY){
+            if (resultCode == RESULT_OK){
+                if (DEBUG) Log.d(LOG_TAG, "Receiving image from gallery" + returnedIntent.getData());
+                Uri selectedImage = returnedIntent.getData();
+                String[] filePathColumn = {MediaStore.Images.Media.DATA};
+
+                Cursor cursor = getContentResolver().query(
+                        selectedImage, filePathColumn, null, null, null);
+                cursor.moveToFirst();
+
+                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                String filePath = cursor.getString(columnIndex);
+                cursor.close();
+                mCapturedPhotoPath=filePath;
+                if (isExternalStorageReadable()) {
+                    if (DEBUG) Log.d(LOG_TAG,"Creating thumbnail of " + mCapturedPhotoPath);
+                    // Loading bitmap in background
+                    Utilities.loadBitmap(mCapturedPhotoPath, imageView);
+                }else{
+                    if (DEBUG) Log.d(LOG_TAG,"Could not read External Storage");
+                }
+
+            }
         }
     }
 

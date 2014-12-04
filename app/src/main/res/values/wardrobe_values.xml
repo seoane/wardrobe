@@ -65,5 +65,9 @@
         <item>Grey</item>
     </string-array>
 
+    <string-array name="img_sources">
+        <item>Camera</item>
+        <item>Gallery</item>
+    </string-array>
 
 </resources>

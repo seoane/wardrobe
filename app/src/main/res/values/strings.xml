@@ -45,9 +45,9 @@
     <string name="cancel">Cancel</string>
     <string name="menu_filter">Filter</string>
     <string name="select_filter">Select a filter</string>
-    <string name="menu_list_combiner">Combinaciones</string>
+    <string name="menu_list_combiner">Combinations</string>
     <string name="title_activity_list_combiner">ListCombinerActivity</string>
-    <string name="alert_dialog_comb_name">Nombre de la combinación: </string>
+    <string name="alert_dialog_comb_name">Combination name:</string>
+    <string name="select_source">Select source</string>
 
-    alert_dialog_comb_name
 </resources>
