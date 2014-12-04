@@ -1,15 +1,23 @@
 package psi14.udc.es.thewardrobe;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 
 import java.util.Iterator;
 import java.util.List;
 
 import psi14.udc.es.thewardrobe.ControlLayer.Cloth;
 import psi14.udc.es.thewardrobe.DataSources.ClothDataSource;
+import psi14.udc.es.thewardrobe.Utils.Constants;
 
 import static psi14.udc.es.thewardrobe.Utils.Constants.APP_TAG;
 import static psi14.udc.es.thewardrobe.Utils.Constants.DEBUG;
@@ -21,7 +29,9 @@ public class CombinerActivity extends FragmentActivity {
     ClothDataSource clothDataSource;
     ViewPager pagerHead, pagerLegs, pagerFeet;
     CombinerOnPageListener pageChangeListener;
-
+    List<Cloth> _allChests;
+    List<Cloth> _allLegs;
+    List<Cloth> _allFeets;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,14 +44,16 @@ public class CombinerActivity extends FragmentActivity {
     }
 
     private void fillChestViewPager() {
-        List<Cloth> _allChests = clothDataSource.getAllChests();
+        _allChests = clothDataSource.getAllChests();
         Iterator _allChestIterator = _allChests.iterator();
         pagerHead = (ViewPager) findViewById(R.id.headPager);
         adapter = new CombinerPageAdapter(getSupportFragmentManager());
 
         while (_allChestIterator.hasNext()) {
             Cloth argCloth = (Cloth) _allChestIterator.next();
-            adapter.addFragment(CombinatorFragment.newInstance(argCloth));
+            CombinatorFragment combinatorFragment = CombinatorFragment.newInstance(argCloth);
+            combinatorFragment.setHasOptionsMenu(true);
+            adapter.addFragment(combinatorFragment);
             if (DEBUG) Log.d(APP_TAG + activityTag, "Adapter Size :" + adapter.getCount());
         }
         pageChangeListener = new CombinerOnPageListener();
@@ -53,15 +65,42 @@ public class CombinerActivity extends FragmentActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.combiner_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (DEBUG) Log.d(APP_TAG + activityTag,"onOptionsItemSelected");
+        if (id == R.id.combiner_save) {
+            int currentChestId = _allChests.get(pagerHead.getCurrentItem()).getId();
+            int currentLegsId = _allLegs.get(pagerHead.getCurrentItem()).getId();
+            int currentFeetsId = _allFeets.get(pagerHead.getCurrentItem()).getId();
+            if (DEBUG) Log.d(APP_TAG + activityTag,
+                    "\npager Head Current Item ID: " + currentChestId + "\n" +
+                            " pager Legs Current Item ID: " + currentLegsId + "\n" +
+                            " pager Feet Current Item ID: " + currentFeetsId
+            );
+            clothDataSource.addClothsToRT(currentChestId,currentLegsId,currentFeetsId);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private void fillLegsViewPager() {
-        List<Cloth> _allLegs = clothDataSource.getAllLegs();
+        _allLegs = clothDataSource.getAllLegs();
         Iterator _allLegsIterator = _allLegs.iterator();
         pagerLegs = (ViewPager) findViewById(R.id.legsPager);
         adapter = new CombinerPageAdapter(getSupportFragmentManager());
 
         while (_allLegsIterator.hasNext()) {
             Cloth argCloth = (Cloth) _allLegsIterator.next();
-            adapter.addFragment(CombinatorFragment.newInstance(argCloth));
+            CombinatorFragment combinatorFragment = CombinatorFragment.newInstance(argCloth);
+            combinatorFragment.setHasOptionsMenu(true);
+            adapter.addFragment(combinatorFragment);
             if (DEBUG) Log.d(APP_TAG + activityTag, "Adapter Size :" + adapter.getCount());
         }
         pageChangeListener = new CombinerOnPageListener();
@@ -74,14 +113,16 @@ public class CombinerActivity extends FragmentActivity {
     }
 
     private void fillFeetsViewPager() {
-        List<Cloth> _allFeets = clothDataSource.getAllFeets();
+        _allFeets = clothDataSource.getAllFeets();
         Iterator _allFeetsIterator = _allFeets.iterator();
         pagerFeet = (ViewPager) findViewById(R.id.feetPager);
         adapter = new CombinerPageAdapter(getSupportFragmentManager());
 
         while (_allFeetsIterator.hasNext()) {
             Cloth argCloth = (Cloth) _allFeetsIterator.next();
-            adapter.addFragment(CombinatorFragment.newInstance(argCloth));
+            CombinatorFragment combinatorFragment = CombinatorFragment.newInstance(argCloth);
+            combinatorFragment.setHasOptionsMenu(true);
+            adapter.addFragment(combinatorFragment);
             if (DEBUG) Log.d(APP_TAG + activityTag, "Adapter Size :" + adapter.getCount());
         }
         pageChangeListener = new CombinerOnPageListener();

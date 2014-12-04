@@ -14,6 +14,7 @@ public final class Constants {
     public static final String SEASON = "SEASON";
     public static final String COLOR = "COLOR";
     public static final String URI = "URI";
+    public static final String FREQUENCY = "FREQUENCY";
     public static final String DESCRIPTION = "DESCRIPTION";
     public static final String TYPE = "TYPE";
     public static final String CLOTH_RELATION_TABLE = "CLOTHS_RELATION";
@@ -26,6 +27,6 @@ public final class Constants {
     public static final String DIRECTORY_PICTURES = "TheWardrobe";
     public static final int THUMBSIZE = 64;
     public static final String PARCELABLE_CLOTH_KEY = "cloth_parcel";
-    public static final Boolean DEBUG = false;
+    public static final Boolean DEBUG = true;
     public static final String APP_TAG = "TheWardrobeLogTag_";
 }

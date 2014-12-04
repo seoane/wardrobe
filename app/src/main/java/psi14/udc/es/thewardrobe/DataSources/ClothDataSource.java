@@ -17,11 +17,16 @@ import psi14.udc.es.thewardrobe.Utils.Colors;
 import psi14.udc.es.thewardrobe.Utils.Season;
 
 import static psi14.udc.es.thewardrobe.Utils.Constants.BODYPART;
+import static psi14.udc.es.thewardrobe.Utils.Constants.CHEST_ID;
+import static psi14.udc.es.thewardrobe.Utils.Constants.CLOTH_RELATION_TABLE;
 import static psi14.udc.es.thewardrobe.Utils.Constants.CLOTH_TABLE;
 import static psi14.udc.es.thewardrobe.Utils.Constants.COLOR;
 import static psi14.udc.es.thewardrobe.Utils.Constants.DEBUG;
 import static psi14.udc.es.thewardrobe.Utils.Constants.DESCRIPTION;
+import static psi14.udc.es.thewardrobe.Utils.Constants.FEET_ID;
+import static psi14.udc.es.thewardrobe.Utils.Constants.FREQUENCY;
 import static psi14.udc.es.thewardrobe.Utils.Constants.ID;
+import static psi14.udc.es.thewardrobe.Utils.Constants.LEGS_ID;
 import static psi14.udc.es.thewardrobe.Utils.Constants.NAME;
 import static psi14.udc.es.thewardrobe.Utils.Constants.SEASON;
 import static psi14.udc.es.thewardrobe.Utils.Constants.TYPE;
@@ -63,6 +68,7 @@ public class ClothDataSource implements DataSourceInterface {
         values.put(COLOR, cloth.getColor().toString());
         values.put(DESCRIPTION, cloth.getDescription());
         values.put(URI, cloth.getUri());
+        values.put(FREQUENCY,cloth.getFrequency());
 
 
         Long id = database.insert(CLOTH_TABLE, null, values);
@@ -70,6 +76,24 @@ public class ClothDataSource implements DataSourceInterface {
         return id.intValue();
     }
 
+    public int addClothsToRT(int chestId, int legsId, int feetId) {
+        open();
+        if (DEBUG) Log.d("addClothsToRT",
+                "\npager Head Current Item ID: " + chestId + "\n" +
+                        " pager Legs Current Item ID: " + legsId + "\n" +
+                        " pager Feet Current Item ID: " + feetId
+        );
+
+        ContentValues values = new ContentValues();
+
+        values.put(CHEST_ID, chestId);
+        values.put(LEGS_ID,legsId);
+        values.put(FEET_ID,feetId);
+
+        Long id = database.insert(CLOTH_RELATION_TABLE, null, values);
+        database.close();
+        return id.intValue();
+    }
     public Cloth getCloth(Integer id) {
         open();
 
@@ -93,7 +117,8 @@ public class ClothDataSource implements DataSourceInterface {
                 Season.valueOf(cursor.getString(3)),
                 Colors.valueOf(cursor.getString(4)),
                 cursor.getString(5),
-                cursor.getString(6));
+                cursor.getString(6),
+                cursor.getInt(7));
         cloth.setId(id);
 
         return cloth;
@@ -118,7 +143,8 @@ public class ClothDataSource implements DataSourceInterface {
                         Season.valueOf(cursor.getString(4)),
                         Colors.valueOf(cursor.getString(5)),
                         cursor.getString(6),
-                        cursor.getString(7));
+                        cursor.getString(7),
+                        cursor.getInt(8));
                 cloths.add(cloth);
             } while (cursor.moveToNext());
         }
@@ -147,7 +173,8 @@ public class ClothDataSource implements DataSourceInterface {
                         Season.valueOf(cursor.getString(4)),
                         Colors.valueOf(cursor.getString(5)),
                         cursor.getString(6),
-                        cursor.getString(7));
+                        cursor.getString(7),
+                        cursor.getInt(8));
                 cloths.add(cloth);
             } while (cursor.moveToNext());
         }
@@ -176,7 +203,8 @@ public class ClothDataSource implements DataSourceInterface {
                         Season.valueOf(cursor.getString(4)),
                         Colors.valueOf(cursor.getString(5)),
                         cursor.getString(6),
-                        cursor.getString(7));
+                        cursor.getString(7),
+                        cursor.getInt(8));
                 cloths.add(cloth);
             } while (cursor.moveToNext());
         }
@@ -205,7 +233,8 @@ public class ClothDataSource implements DataSourceInterface {
                         Season.valueOf(cursor.getString(4)),
                         Colors.valueOf(cursor.getString(5)),
                         cursor.getString(6),
-                        cursor.getString(7));
+                        cursor.getString(7),
+                        cursor.getInt(8));
                 cloths.add(cloth);
             } while (cursor.moveToNext());
         }
@@ -234,7 +263,8 @@ public class ClothDataSource implements DataSourceInterface {
                         Season.valueOf(cursor.getString(4)),
                         Colors.valueOf(cursor.getString(5)),
                         cursor.getString(6),
-                        cursor.getString(7));
+                        cursor.getString(7),
+                        cursor.getInt(8));
                 cloths.add(cloth);
             } while (cursor.moveToNext());
         }
@@ -263,7 +293,8 @@ public class ClothDataSource implements DataSourceInterface {
                         Season.valueOf(cursor.getString(4)),
                         Colors.valueOf(cursor.getString(5)),
                         cursor.getString(6),
-                        cursor.getString(7));
+                        cursor.getString(7),
+                        cursor.getInt(8));
                 cloths.add(cloth);
             } while (cursor.moveToNext());
         }
@@ -292,7 +323,8 @@ public class ClothDataSource implements DataSourceInterface {
                         Season.valueOf(cursor.getString(4)),
                         Colors.valueOf(cursor.getString(5)),
                         cursor.getString(6),
-                        cursor.getString(7));
+                        cursor.getString(7),
+                        cursor.getInt(8));
                 cloths.add(cloth);
             } while (cursor.moveToNext());
         }
@@ -318,6 +350,7 @@ public class ClothDataSource implements DataSourceInterface {
         values.put(COLOR, cloth.getColor().toString());
         values.put(DESCRIPTION, cloth.getDescription());
         values.put(URI, cloth.getUri());
+        values.put(FREQUENCY,cloth.getFrequency());
         return (database.update(CLOTH_TABLE, values, ID + " = " + idNot, null) >= 1);
     }
 }
