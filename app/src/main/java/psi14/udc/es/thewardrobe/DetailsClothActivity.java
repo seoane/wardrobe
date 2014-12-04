@@ -4,14 +4,18 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import psi14.udc.es.thewardrobe.ControlLayer.Cloth;
 import psi14.udc.es.thewardrobe.DataSources.ClothDataSource;
@@ -19,19 +23,21 @@ import psi14.udc.es.thewardrobe.DataSources.ClothDataSource;
 import static psi14.udc.es.thewardrobe.Utils.Constants.DEBUG;
 import static psi14.udc.es.thewardrobe.Utils.Constants.ID;
 import static psi14.udc.es.thewardrobe.Utils.Utilities.cancelPotentialWork;
+import static psi14.udc.es.thewardrobe.Utils.Utilities.randInt;
 
 
-public class DetailsClothActivity extends Activity {
+public class DetailsClothActivity extends Activity implements View.OnClickListener {
 
     public final static String LOG_TAG = "DetailsClothActivity";
 
-    ImageView imageView;
+    ImageView imageView,imSuggColor,imSuggSeason,imSuggType;
     TextView tv_name, tv_bodyPart, tv_clothType, tv_season, tv_color, tv_description;
     Bitmap phBitmap;
     String[] bodyParts, seasons, colors;
     int id;
     ClothDataSource clothDataSource;
-    Cloth cloth;
+    Cloth cloth,suggColor,suggSeason,suggType;
+    List<Cloth> suggColorList,suggSeasonList,suggTypeList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +46,14 @@ public class DetailsClothActivity extends Activity {
 
         //ImageView
         imageView = (ImageView) findViewById(R.id.imageView_details);
+        imSuggColor = (ImageView) findViewById(R.id.im_suggestionColor);
+        imSuggSeason = (ImageView) findViewById(R.id.im_suggestionSeason);
+        imSuggType = (ImageView) findViewById(R.id.im_suggestionType);
+
+        //Listeners
+        imSuggColor.setOnClickListener(this);
+        imSuggSeason.setOnClickListener(this);
+        imSuggType.setOnClickListener(this);
 
         // TextViews
         tv_name = (TextView) findViewById(R.id.tv_details_name);
@@ -79,6 +93,35 @@ public class DetailsClothActivity extends Activity {
             }
 
         }
+
+        // Retrieve similar clothes
+        suggColorList = clothDataSource.getByColor(cloth.getColor());
+        //Remove actual cloth
+        suggColorList.remove(cloth);
+        if (suggColorList.size()>0) {
+            int rand = randInt(0, suggColorList.size()-1);
+            suggColor = suggColorList.get(rand);
+            loadBitmap(suggColor.getUri(),imSuggColor);
+        }
+
+        suggSeasonList = clothDataSource.getBySeason(cloth.getSeason());
+        //Remove actual cloth
+        suggSeasonList.remove(cloth);
+        if (suggSeasonList.size()>0) {
+            int rand = randInt(0, suggSeasonList.size()-1);
+            suggSeason = suggSeasonList.get(rand);
+            loadBitmap(suggSeason.getUri(),imSuggSeason);
+        }
+
+        suggTypeList = clothDataSource.getByBodyPart(cloth.getBodyPart());
+        //Remove actual cloth
+        suggTypeList.remove(cloth);
+        if (suggTypeList.size()>0) {
+            int rand = randInt(0, suggTypeList.size()-1);
+            suggType = suggTypeList.get(rand);
+            loadBitmap(suggType.getUri(),imSuggType);
+        }
+
     }
 
     @Override
@@ -125,5 +168,32 @@ public class DetailsClothActivity extends Activity {
         File file = new File(path);
         if (file.delete())
             if (DEBUG) Log.d(LOG_TAG, "Deleted file: " + path);
+    }
+
+    @Override
+    public void onClick(View view) {
+        Intent intent = new Intent(this, DetailsClothActivity.class);
+        if (view==imSuggColor){
+            if (suggColor!=null){
+                intent.putExtra(ID, suggColor.getId());
+                startActivity(intent);
+                finish();
+            }
+
+        }else if (view == imSuggSeason){
+            if (suggSeason!=null) {
+                intent.putExtra(ID, suggSeason.getId());
+                startActivity(intent);
+                finish();
+            }
+
+        }else if (view == imSuggType){
+            if (suggType!=null) {
+                intent.putExtra(ID, suggType.getId());
+                startActivity(intent);
+                finish();
+            }
+
+        }
     }
 }
