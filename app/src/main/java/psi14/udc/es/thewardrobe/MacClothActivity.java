@@ -286,7 +286,8 @@ public class MacClothActivity extends Activity implements AdapterView.OnItemSele
                     seasonValues[indexSeason],
                     colorValues[indexColor],
                     description.trim(),
-                    mCapturedPhotoPath);
+                    mCapturedPhotoPath,
+                    0);
 
             clothDataSource.addCloth(cloth);
 

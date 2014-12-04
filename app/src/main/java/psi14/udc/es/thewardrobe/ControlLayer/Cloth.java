@@ -26,8 +26,9 @@ public class Cloth implements Parcelable {
     Colors color;
     String description;
     String uri;
+    Integer frequency;
 
-    public Cloth(Integer id, String name, BodyParts bodyPart, String type, Season season, Colors color, String description, String uri) {
+    public Cloth(Integer id, String name, BodyParts bodyPart, String type, Season season, Colors color, String description, String uri, Integer frequency) {
         this.id = id;
         this.name = name;
         this.bodyPart = bodyPart;
@@ -36,9 +37,10 @@ public class Cloth implements Parcelable {
         this.color = color;
         this.description = description;
         this.uri = uri;
+        this.frequency = frequency;
     }
 
-    public Cloth(String name, BodyParts bodyPart, String type, Season season, Colors color, String description, String uri) {
+    public Cloth(String name, BodyParts bodyPart, String type, Season season, Colors color, String description, String uri, Integer frequency) {
         this.name = name;
         this.bodyPart = bodyPart;
         this.type = type;
@@ -46,6 +48,7 @@ public class Cloth implements Parcelable {
         this.color = color;
         this.description = description;
         this.uri = uri;
+        this.frequency = frequency;
     }
 
     public Cloth(Parcel in) {
@@ -60,6 +63,7 @@ public class Cloth implements Parcelable {
         this.color = Colors.valueOf(data[5]);
         this.description = data[6];
         this.uri = data[7];
+        this.frequency = Integer.getInteger(data[8]);
     }
 
     public Integer getId() {
@@ -126,6 +130,14 @@ public class Cloth implements Parcelable {
         this.uri = uri;
     }
 
+    public Integer getFrequency() {
+        return frequency;
+    }
+
+    public void setFrequency(Integer frequency) {
+        this.frequency = frequency;
+    }
+
     @Override
     public String toString() {
         return "Cloth{" +
@@ -137,6 +149,7 @@ public class Cloth implements Parcelable {
                 ", color=" + color +
                 ", description='" + description + '\'' +
                 ", uri='" + uri + '\'' +
+                ", frequency='" + frequency + '\'' +
                 '}';
     }
 
@@ -150,6 +163,8 @@ public class Cloth implements Parcelable {
         if (bodyPart != cloth.bodyPart) return false;
         if (color != cloth.color) return false;
         if (description != null ? !description.equals(cloth.description) : cloth.description != null)
+            return false;
+        if (frequency != null ? !frequency.equals(cloth.frequency) : cloth.frequency != null)
             return false;
         if (id != null ? !id.equals(cloth.id) : cloth.id != null) return false;
         if (name != null ? !name.equals(cloth.name) : cloth.name != null) return false;
@@ -170,6 +185,7 @@ public class Cloth implements Parcelable {
         result = 31 * result + (color != null ? color.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (uri != null ? uri.hashCode() : 0);
+        result = 31 * result + (frequency != null ? frequency.hashCode() : 0);
         return result;
     }
 
@@ -188,6 +204,7 @@ public class Cloth implements Parcelable {
                 this.season.toString(),
                 this.color.toString(),
                 this.description,
-                this.uri});
+                this.uri,
+                this.frequency.toString()});
     }
 }
