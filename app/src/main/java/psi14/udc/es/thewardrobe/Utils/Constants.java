@@ -6,6 +6,7 @@ public final class Constants {
     //CONSTANTS FOR SQL_DEALING
 
     public static final String CLOTH_TABLE = "CLOTHS";
+    public static final String COMBINER_TABLE = "COMBINER";
 
     public static final String ID = "_id";
     public static final String NAME = "NAME";
@@ -15,6 +16,11 @@ public final class Constants {
     public static final String URI = "URI";
     public static final String DESCRIPTION = "DESCRIPTION";
     public static final String TYPE = "TYPE";
+    public static final String CLOTH_RELATION_TABLE = "CLOTHS_RELATION";
+    public static final String CHEST_ID = "CHEST_ID";
+    public static final String FEET_ID = "FEET_ID";
+    public static final String LEGS_ID = "LEGS_ID";
+
 
     // CONSTANT FOR PICTURES_DEALING
     public static final String DIRECTORY_PICTURES = "TheWardrobe";

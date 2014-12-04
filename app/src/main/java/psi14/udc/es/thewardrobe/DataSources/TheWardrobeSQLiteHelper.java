@@ -43,6 +43,17 @@ public class TheWardrobeSQLiteHelper extends SQLiteOpenHelper {
                 DESCRIPTION + " TEXT NOT NULL," +
                 URI + " TEXT NOT NULL" +
                 ");");
+        db.execSQL(
+                "CREATE TABLE " + CLOTH_RELATION_TABLE + "(" +
+                ID + "INTEGER PRIMARY KEY AUTOINCREMENT," +
+                CHEST_ID +  "INTEGER NOT NULL," +
+                LEGS_ID + "INTEGER NOT NULL," +
+                FEET_ID + "INTEGER NOT NULL," +
+                "FOREIGN KEY(" + CHEST_ID + ") REFERENCES" +  CLOTH_TABLE + "("+ ID + ")," +
+                "FOREIGN KEY(" + FEET_ID + ") REFERENCES" +  CLOTH_TABLE + "("+ ID + ")," +
+                "FOREIGN KEY(" + LEGS_ID + ") REFERENCES" +  CLOTH_TABLE + "("+ ID + ")"
+                );
+
 
     }
 
