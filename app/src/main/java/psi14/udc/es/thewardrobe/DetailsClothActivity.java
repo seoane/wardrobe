@@ -150,7 +150,7 @@ public class DetailsClothActivity extends Activity implements View.OnClickListen
             case R.id.action_delete:
                 if (DEBUG) Log.d(LOG_TAG, "Delete:Selected cloth with ID: " + id);
                 clothDataSource.deleteCloth(id);
-                removeFile(cloth.getUri());
+                //removeFile(cloth.getUri());
                 finish();
                 return true;
             case R.id.action_details_ok:

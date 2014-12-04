@@ -120,7 +120,7 @@ public class ListClothActivity extends Activity implements ListView.OnItemClickL
             case R.id.context_delete:
                 if (DEBUG) Log.d(LOG_TAG, "Delete:Selected cloth with ID: " + id);
                 clothDataSource.deleteCloth(id);
-                removeFile(cloth.getUri());
+                //removeFile(cloth.getUri());
                 updateList();
                 return true;
             default:
