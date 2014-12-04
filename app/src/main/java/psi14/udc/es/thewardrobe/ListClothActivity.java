@@ -153,13 +153,6 @@ public class ListClothActivity extends Activity implements ListView.OnItemClickL
 
     }
 
-
-    private void removeFile(String path) {
-        File file = new File(path);
-        if (file.delete())
-            if (DEBUG) Log.d(LOG_TAG, "Deleted file: " + path);
-    }
-
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(this, DetailsClothActivity.class);
@@ -175,8 +168,6 @@ public class ListClothActivity extends Activity implements ListView.OnItemClickL
 
                 .setSingleChoiceItems(filters, 0, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int pos) {
-                        Toast.makeText(getApplicationContext(), filters[pos],
-                                Toast.LENGTH_SHORT).show();
                         posSelected = pos;
                         Log.d(LOG_TAG, "DialogFilter: Selected " + filters[posSelected]);
                     }

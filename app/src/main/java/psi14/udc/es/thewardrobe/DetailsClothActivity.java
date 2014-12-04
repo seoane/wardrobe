@@ -171,12 +171,6 @@ public class DetailsClothActivity extends Activity implements View.OnClickListen
         }
     }
 
-    private void removeFile(String path) {
-        File file = new File(path);
-        if (file.delete())
-            if (DEBUG) Log.d(LOG_TAG, "Deleted file: " + path);
-    }
-
     @Override
     public void onClick(View view) {
         Intent intent = new Intent(this, DetailsClothActivity.class);
