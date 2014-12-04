@@ -7,6 +7,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
+import java.util.Random;
+
 import psi14.udc.es.thewardrobe.AsyncDrawable;
 import psi14.udc.es.thewardrobe.BitmapWorkerTask;
 
@@ -97,5 +99,18 @@ public abstract class Utilities {
             imageView.setImageDrawable(asyncDrawable);
             task.execute(path);
         }
+    }
+
+    public static int randInt(int min, int max) {
+
+        // NOTE: Usually this should be a field rather than a method
+        // variable so that it is not re-seeded every call.
+        Random rand = new Random();
+
+        // nextInt is normally exclusive of the top value,
+        // so add 1 to make it inclusive
+        int randomNum = rand.nextInt((max - min) + 1) + min;
+
+        return randomNum;
     }
 }

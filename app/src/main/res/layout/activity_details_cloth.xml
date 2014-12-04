@@ -13,7 +13,9 @@
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
-
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
             <ImageView
                 android:layout_width="128dp"
                 android:layout_height="128dp"
@@ -33,7 +35,7 @@
                     android:padding="2dp"
                     android:layout_margin="10dp"
                     android:textSize="25sp"/>
-
+        </LinearLayout>
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -180,7 +182,41 @@
                 android:layout_margin="10dp"
                 android:textSize="20sp"/>
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:layout_margin="5dp"
+                    android:id="@+id/im_suggestionColor"
+                    android:layout_gravity="right"
+                    android:scaleType="centerCrop"
+                    android:src="@android:drawable/ic_menu_gallery"/>
+
+                <ImageView
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:layout_margin="5dp"
+                    android:id="@+id/im_suggestionSeason"
+                    android:layout_gravity="right"
+                    android:scaleType="centerCrop"
+                    android:src="@android:drawable/ic_menu_gallery"/>
+
+                <ImageView
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:layout_margin="5dp"
+                    android:id="@+id/im_suggestionType"
+                    android:layout_gravity="right"
+                    android:scaleType="centerCrop"
+                    android:src="@android:drawable/ic_menu_gallery"/>
+
+                </LinearLayout>
         </LinearLayout>
+
     </ScrollView>
 
 
