@@ -37,6 +37,9 @@ public class TheWardrobeMainActivity extends Activity {
         } else if (id == R.id.menu_combiner) {
             startActivity(new Intent(this, CombinerActivity.class));
             return true;
+        } else if (id == R.id.menu_list_combiner) {
+            startActivity(new Intent(this, ListCombinerActivity.class));
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }

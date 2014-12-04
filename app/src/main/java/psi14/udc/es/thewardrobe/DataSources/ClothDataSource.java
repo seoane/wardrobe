@@ -21,6 +21,7 @@ import static psi14.udc.es.thewardrobe.Utils.Constants.CHEST_ID;
 import static psi14.udc.es.thewardrobe.Utils.Constants.CLOTH_RELATION_TABLE;
 import static psi14.udc.es.thewardrobe.Utils.Constants.CLOTH_TABLE;
 import static psi14.udc.es.thewardrobe.Utils.Constants.COLOR;
+import static psi14.udc.es.thewardrobe.Utils.Constants.COMB_NAME;
 import static psi14.udc.es.thewardrobe.Utils.Constants.DEBUG;
 import static psi14.udc.es.thewardrobe.Utils.Constants.DESCRIPTION;
 import static psi14.udc.es.thewardrobe.Utils.Constants.FEET_ID;
@@ -76,7 +77,7 @@ public class ClothDataSource implements DataSourceInterface {
         return id.intValue();
     }
 
-    public int addClothsToRT(int chestId, int legsId, int feetId) {
+    public int addClothsToRT(int chestId, int legsId, int feetId, String combName) {
         open();
         if (DEBUG) Log.d("addClothsToRT",
                 "\npager Head Current Item ID: " + chestId + "\n" +
@@ -85,7 +86,7 @@ public class ClothDataSource implements DataSourceInterface {
         );
 
         ContentValues values = new ContentValues();
-
+        values.put(COMB_NAME,combName);
         values.put(CHEST_ID, chestId);
         values.put(LEGS_ID,legsId);
         values.put(FEET_ID,feetId);

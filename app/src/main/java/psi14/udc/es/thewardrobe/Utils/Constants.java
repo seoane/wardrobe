@@ -21,6 +21,8 @@ public final class Constants {
     public static final String CHEST_ID = "CHEST_ID";
     public static final String FEET_ID = "FEET_ID";
     public static final String LEGS_ID = "LEGS_ID";
+    public static final String COMB_NAME = "COMB_NAME";
+
 
 
     // CONSTANT FOR PICTURES_DEALING

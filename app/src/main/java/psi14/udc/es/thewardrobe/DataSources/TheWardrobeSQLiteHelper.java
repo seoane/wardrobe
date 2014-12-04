@@ -47,6 +47,7 @@ public class TheWardrobeSQLiteHelper extends SQLiteOpenHelper {
         db.execSQL(
                 "CREATE TABLE " + CLOTH_RELATION_TABLE + "(" +
                 ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                COMB_NAME + " TEXT NOT NULL," +
                 CHEST_ID +  " INTEGER NOT NULL," +
                 LEGS_ID + " INTEGER NOT NULL," +
                 FEET_ID + " INTEGER NOT NULL," +
