@@ -95,6 +95,14 @@ public class DetailsClothActivity extends Activity implements View.OnClickListen
         }
 
         // Retrieve similar clothes
+        retrieveSimilarClothes();
+
+    }
+
+    private void retrieveSimilarClothes(){
+        // At the moment it retrieves randomly
+
+        // Retrieve similar clothes
         suggColorList = clothDataSource.getByColor(cloth.getColor());
         //Remove actual cloth
         suggColorList.remove(cloth);
@@ -121,7 +129,6 @@ public class DetailsClothActivity extends Activity implements View.OnClickListen
             suggType = suggTypeList.get(rand);
             loadBitmap(suggType.getUri(),imSuggType);
         }
-
     }
 
     @Override
