@@ -5,16 +5,20 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.widget.ImageView;
 
+import java.io.File;
 import java.util.Random;
 
 import psi14.udc.es.thewardrobe.AsyncDrawable;
 import psi14.udc.es.thewardrobe.BitmapWorkerTask;
 
+import static psi14.udc.es.thewardrobe.Utils.Constants.DEBUG;
+
 public abstract class Utilities {
 
-
+    public static String LOG_TAG = "Utilities";
 
     public static int calculateInSampleSize(
             BitmapFactory.Options options, int reqWidth, int reqHeight) {
@@ -101,6 +105,7 @@ public abstract class Utilities {
         }
     }
 
+    // General utilities
     public static int randInt(int min, int max) {
 
         // NOTE: Usually this should be a field rather than a method
@@ -112,5 +117,11 @@ public abstract class Utilities {
         int randomNum = rand.nextInt((max - min) + 1) + min;
 
         return randomNum;
+    }
+
+    public static void removeFile(String path) {
+        File file = new File(path);
+        if (file.delete())
+            if (DEBUG) Log.d(LOG_TAG, "Deleted file: " + path);
     }
 }
