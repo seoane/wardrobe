@@ -86,9 +86,10 @@ public class CombinerActivity extends FragmentActivity {
         if (id == R.id.combiner_save) {
 
             LayoutInflater inflater = getLayoutInflater();
+            final View view = inflater.inflate(R.layout.alert_dialog_edit_text, null);
             new AlertDialog.Builder(this)
                     .setTitle(getString(R.string.alert_dialog_comb_name))
-                    .setView(inflater.inflate(R.layout.alert_dialog_edit_text, null))
+                    .setView(view)
                     .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int whichButton) {
                             int currentChestId = _allChests.get(pagerHead.getCurrentItem()).getId();
@@ -99,7 +100,7 @@ public class CombinerActivity extends FragmentActivity {
                                             " pager Legs Current Item ID: " + currentLegsId + "\n" +
                                             " pager Feet Current Item ID: " + currentFeetsId
                             );
-                            etAlertDialogCombiner = (EditText) findViewById(R.id.et_comb_alert_dialog);
+                            etAlertDialogCombiner = (EditText) view.findViewById(R.id.et_comb_alert_dialog);
                             combName = etAlertDialogCombiner.getText().toString();
                             clothDataSource.addClothsToRT(currentChestId,currentLegsId,currentFeetsId,combName);
                         }

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import psi14.udc.es.thewardrobe.ControlLayer.Cloth;
+import psi14.udc.es.thewardrobe.ControlLayer.Combination;
 import psi14.udc.es.thewardrobe.Utils.BodyParts;
 import psi14.udc.es.thewardrobe.Utils.Colors;
 import psi14.udc.es.thewardrobe.Utils.Season;
@@ -21,6 +22,7 @@ import static psi14.udc.es.thewardrobe.Utils.Constants.CHEST_ID;
 import static psi14.udc.es.thewardrobe.Utils.Constants.CLOTH_RELATION_TABLE;
 import static psi14.udc.es.thewardrobe.Utils.Constants.CLOTH_TABLE;
 import static psi14.udc.es.thewardrobe.Utils.Constants.COLOR;
+import static psi14.udc.es.thewardrobe.Utils.Constants.COMBINER_TABLE;
 import static psi14.udc.es.thewardrobe.Utils.Constants.COMB_NAME;
 import static psi14.udc.es.thewardrobe.Utils.Constants.DEBUG;
 import static psi14.udc.es.thewardrobe.Utils.Constants.DESCRIPTION;
@@ -153,6 +155,32 @@ public class ClothDataSource implements DataSourceInterface {
         if (DEBUG) Log.d("getAllCloths()", cloths.toString());
 
         return cloths;
+    }
+
+    public List<Combination> getAllCombinations() {
+        open();
+        List<Combination> _combinations = new ArrayList<Combination>();
+
+        String query = "SELECT  * FROM " + CLOTH_RELATION_TABLE;
+
+
+        Cursor cursor = database.rawQuery(query, null);
+
+        Combination combination = null;
+        if (cursor.moveToFirst()) {
+            do {
+                combination = new Combination(cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getInt(2),
+                        cursor.getInt(3),
+                        cursor.getInt(4));
+                _combinations.add(combination);
+            } while (cursor.moveToNext());
+        }
+
+        if (DEBUG) Log.d("getAllCloths()", _combinations.toString());
+
+        return _combinations;
     }
 
     public List<Cloth> getAllChests() {

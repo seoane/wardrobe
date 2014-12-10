@@ -49,5 +49,6 @@
     <string name="title_activity_list_combiner">ListCombinerActivity</string>
     <string name="alert_dialog_comb_name">Combination name:</string>
     <string name="select_source">Select source</string>
+    <string name="str_comb_name">Combination Name</string>
 
 </resources>
