@@ -25,14 +25,18 @@ import psi14.udc.es.thewardrobe.DataSources.ClothDataSource;
 import psi14.udc.es.thewardrobe.Utils.Constants;
 
 import static psi14.udc.es.thewardrobe.Utils.Constants.APP_TAG;
+import static psi14.udc.es.thewardrobe.Utils.Constants.CHEST_ID;
 import static psi14.udc.es.thewardrobe.Utils.Constants.DEBUG;
+import static psi14.udc.es.thewardrobe.Utils.Constants.FEET_ID;
+import static psi14.udc.es.thewardrobe.Utils.Constants.ID;
+import static psi14.udc.es.thewardrobe.Utils.Constants.LEGS_ID;
 
 
 public class CombinerActivity extends FragmentActivity {
     static CombinerPageAdapter adapter;
     public String activityTag = "CombinerActivity";
     ClothDataSource clothDataSource;
-    ViewPager pagerHead, pagerLegs, pagerFeet;
+    ViewPager pagerChest, pagerLegs, pagerFeet;
     CombinerOnPageListener pageChangeListener;
     List<Cloth> _allChests;
     List<Cloth> _allLegs;
@@ -40,21 +44,45 @@ public class CombinerActivity extends FragmentActivity {
     EditText etAlertDialogCombiner;
     String combName = "";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_combiner);
         clothDataSource = ClothDataSource.getInstance(this);
+        Bundle extra = getIntent().getExtras();
         fillChestViewPager();
         fillLegsViewPager();
         fillFeetsViewPager();
+
+        if (extra != null) {
+            int chestId = extra.getInt(CHEST_ID, 0);
+            int feetId = extra.getInt(LEGS_ID, 0);
+            int legsId = extra.getInt(FEET_ID, 0);
+            clothDataSource = ClothDataSource.getInstance(this);
+            Cloth chest = clothDataSource.getCloth(chestId);
+            Cloth legs = clothDataSource.getCloth(legsId);
+            Cloth feet = clothDataSource.getCloth(feetId);
+
+            if (chest != null && legs != null && feet != null) {
+                    pagerChest.setCurrentItem(_allChests.indexOf(chest));
+                    pagerLegs.setCurrentItem(_allLegs.indexOf(legs));
+                    pagerFeet.setCurrentItem(_allFeets.indexOf(feet));
+
+
+            } else {
+                if (DEBUG) Log.d(activityTag, "Cloth not found");
+                finish();
+            }
+        }
+
         if (DEBUG) Log.d(APP_TAG + activityTag, "ViewPager Loaded");
     }
 
     private void fillChestViewPager() {
         _allChests = clothDataSource.getAllChests();
         Iterator _allChestIterator = _allChests.iterator();
-        pagerHead = (ViewPager) findViewById(R.id.headPager);
+        pagerChest = (ViewPager) findViewById(R.id.headPager);
         adapter = new CombinerPageAdapter(getSupportFragmentManager());
 
         while (_allChestIterator.hasNext()) {
@@ -65,11 +93,10 @@ public class CombinerActivity extends FragmentActivity {
             if (DEBUG) Log.d(APP_TAG + activityTag, "Adapter Size :" + adapter.getCount());
         }
         pageChangeListener = new CombinerOnPageListener();
-        pagerHead.setOnPageChangeListener(pageChangeListener);
-        pagerHead.setPageTransformer(true, new CombinerPageTransformer());
-        pagerHead.setAdapter(adapter);
-        pagerHead.setCurrentItem(0);
-        ;
+        pagerChest.setOnPageChangeListener(pageChangeListener);
+        pagerChest.setPageTransformer(true, new CombinerPageTransformer());
+        pagerChest.setAdapter(adapter);
+        pagerChest.setCurrentItem(0);
 
     }
 
@@ -92,9 +119,9 @@ public class CombinerActivity extends FragmentActivity {
                     .setView(view)
                     .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int whichButton) {
-                            int currentChestId = _allChests.get(pagerHead.getCurrentItem()).getId();
-                            int currentLegsId = _allLegs.get(pagerHead.getCurrentItem()).getId();
-                            int currentFeetsId = _allFeets.get(pagerHead.getCurrentItem()).getId();
+                            int currentChestId = _allChests.get(pagerChest.getCurrentItem()).getId();
+                            int currentLegsId = _allLegs.get(pagerLegs.getCurrentItem()).getId();
+                            int currentFeetsId = _allFeets.get(pagerFeet.getCurrentItem()).getId();
                             if (DEBUG) Log.d(APP_TAG + activityTag,
                                     "\npager Head Current Item ID: " + currentChestId + "\n" +
                                             " pager Legs Current Item ID: " + currentLegsId + "\n" +

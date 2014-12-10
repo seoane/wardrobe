@@ -36,8 +36,8 @@ public class TheWardrobeMainActivity extends Activity {
                 this,                  /* host Activity */
                 mDrawerLayout,         /* DrawerLayout object */
                 android.R.drawable.ic_menu_agenda,  /* nav drawer icon to replace 'Up' caret */
-                R.string.action_add,  /* "open drawer" description */
-                R.string.action_cancel  /* "close drawer" description */
+                R.string.action_open_drawer,  /* "open drawer" description */
+                R.string.action_close_drawer  /* "close drawer" description */
         ) {
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);

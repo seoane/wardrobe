@@ -50,5 +50,7 @@
     <string name="alert_dialog_comb_name">Combination name:</string>
     <string name="select_source">Select source</string>
     <string name="str_comb_name">Combination Name</string>
+    <string name="action_open_drawer">Open Drawer</string>
+    <string name="action_close_drawer">Close Drawer</string>
 
 </resources>
