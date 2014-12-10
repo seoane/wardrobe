@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string-array name="drawer_menu">
+        <item>@string/catalog</item>
+        <item>@string/combinator</item>
+        <item>@string/combinations</item>
+    </string-array>
+
     <string-array name="filters">
         <item>@string/bodyPart</item>
         <item>@string/season</item>
@@ -70,4 +76,7 @@
         <item>Gallery</item>
     </string-array>
 
+    <string name="catalog">Catalogo</string>
+    <string name="combinations">Mis Combinaciones</string>
+    <string name="combinator">Combinador</string>
 </resources>
