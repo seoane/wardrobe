@@ -23,7 +23,7 @@
     <string name="name_not_set">Please, name and take a picture of your cloth</string>
     <string name="menu_add">Add</string>
     <string name="menu_list">Wardrobe Collection</string>
-    <string name="title_activity_list_cloth">Wardrobe Collection</string>
+    <string name="title_activity_list_cloth">Catalog</string>
     <string name="menu_update">Update</string>
     <string name="str_delete">Delete</string>
     <string name="str_edit">Edit</string>
@@ -46,7 +46,7 @@
     <string name="menu_filter">Filter</string>
     <string name="select_filter">Select a filter</string>
     <string name="menu_list_combiner">Combinations</string>
-    <string name="title_activity_list_combiner">ListCombinerActivity</string>
+    <string name="title_activity_list_combiner">My Combinations</string>
     <string name="alert_dialog_comb_name">Combination name:</string>
     <string name="select_source">Select source</string>
     <string name="str_comb_name">Combination Name</string>
