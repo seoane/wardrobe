@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import psi14.udc.es.thewardrobe.ControlLayer.Cloth;
@@ -155,6 +156,34 @@ public class ClothDataSource implements DataSourceInterface {
         if (DEBUG) Log.d("getAllCloths()", cloths.toString());
 
         return cloths;
+    }
+    public  List<Combination> getCombinationByClothId(Integer id) {
+        open();
+        List<Combination> _combinations = new ArrayList<Combination>();
+
+        String query = "SELECT  * FROM " + CLOTH_RELATION_TABLE +
+                " WHERE " + CHEST_ID + " like " + "'" + id  + "'" + " OR " +
+                            LEGS_ID + " like " + "'" + id  + "'" + " OR " +
+                            CHEST_ID + " like " + "'" + id  + "'";
+
+
+        Cursor cursor = database.rawQuery(query, null);
+
+        Combination combination = null;
+        if (cursor.moveToFirst()) {
+            do {
+                combination = new Combination(cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getInt(2),
+                        cursor.getInt(3),
+                        cursor.getInt(4));
+                _combinations.add(combination);
+            } while (cursor.moveToNext());
+        }
+
+        if (DEBUG) Log.d("getAllCloths()", _combinations.toString());
+
+        return _combinations;
     }
 
     public List<Combination> getAllCombinations() {
@@ -365,7 +394,22 @@ public class ClothDataSource implements DataSourceInterface {
 
     public boolean deleteCloth(Integer id) {
         open();
-        return (database.delete(CLOTH_TABLE, ID + " =? ", new String[]{String.valueOf(id)}) == 1);
+        boolean returned =  database.delete(CLOTH_TABLE, ID + " =? ", new String[]{String.valueOf(id)}) == 1;
+        List<Combination> _combination;
+        if ((_combination = getCombinationByClothId(id)) != null) {
+            Iterator it = _combination.iterator();
+            while (it.hasNext()) {
+                Combination combination = (Combination ) it.next();
+                deleteCombination(combination.getId());
+            }
+        }
+        return (returned);
+    }
+
+    public boolean deleteCombination(Integer id) {
+        open();
+        boolean returned =  database.delete(CLOTH_RELATION_TABLE , ID + " =? ", new String[]{String.valueOf(id)}) == 1;
+        return (returned);
     }
 
     public boolean updateCloth(Cloth cloth) {

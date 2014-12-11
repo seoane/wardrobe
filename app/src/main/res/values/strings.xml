@@ -52,5 +52,6 @@
     <string name="str_comb_name">Combination Name</string>
     <string name="action_open_drawer">Open Drawer</string>
     <string name="action_close_drawer">Close Drawer</string>
+    <string name="incomplete_combination">Incomplete Combination</string>
 
 </resources>

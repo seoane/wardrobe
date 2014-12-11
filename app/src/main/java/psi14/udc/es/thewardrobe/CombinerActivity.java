@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.Iterator;
 import java.util.List;
@@ -111,32 +112,37 @@ public class CombinerActivity extends FragmentActivity {
         int id = item.getItemId();
         if (DEBUG) Log.d(APP_TAG + activityTag,"onOptionsItemSelected");
         if (id == R.id.combiner_save) {
+            if (_allFeets.size() != 0 && _allChests.size() != 0 && _allLegs.size() !=0) {
+                LayoutInflater inflater = getLayoutInflater();
+                final View view = inflater.inflate(R.layout.alert_dialog_edit_text, null);
+                new AlertDialog.Builder(this)
+                        .setTitle(getString(R.string.alert_dialog_comb_name))
+                        .setView(view)
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                int currentChestId = _allChests.get(pagerChest.getCurrentItem()).getId();
+                                int currentLegsId = _allLegs.get(pagerLegs.getCurrentItem()).getId();
+                                int currentFeetsId = _allFeets.get(pagerFeet.getCurrentItem()).getId();
+                                if (DEBUG) Log.d(APP_TAG + activityTag,
+                                        "\npager Head Current Item ID: " + currentChestId + "\n" +
+                                                " pager Legs Current Item ID: " + currentLegsId + "\n" +
+                                                " pager Feet Current Item ID: " + currentFeetsId
+                                );
+                                etAlertDialogCombiner = (EditText) view.findViewById(R.id.et_comb_alert_dialog);
+                                combName = etAlertDialogCombiner.getText().toString();
+                                clothDataSource.addClothsToRT(currentChestId, currentLegsId, currentFeetsId, combName);
+                            }
+                        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        // Do nothing.
+                    }
+                }).show();
+                return true;
+            }
+            else {
+                Toast.makeText(this, getString(R.string.incomplete_combination), Toast.LENGTH_SHORT).show();
 
-            LayoutInflater inflater = getLayoutInflater();
-            final View view = inflater.inflate(R.layout.alert_dialog_edit_text, null);
-            new AlertDialog.Builder(this)
-                    .setTitle(getString(R.string.alert_dialog_comb_name))
-                    .setView(view)
-                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int whichButton) {
-                            int currentChestId = _allChests.get(pagerChest.getCurrentItem()).getId();
-                            int currentLegsId = _allLegs.get(pagerLegs.getCurrentItem()).getId();
-                            int currentFeetsId = _allFeets.get(pagerFeet.getCurrentItem()).getId();
-                            if (DEBUG) Log.d(APP_TAG + activityTag,
-                                    "\npager Head Current Item ID: " + currentChestId + "\n" +
-                                            " pager Legs Current Item ID: " + currentLegsId + "\n" +
-                                            " pager Feet Current Item ID: " + currentFeetsId
-                            );
-                            etAlertDialogCombiner = (EditText) view.findViewById(R.id.et_comb_alert_dialog);
-                            combName = etAlertDialogCombiner.getText().toString();
-                            clothDataSource.addClothsToRT(currentChestId,currentLegsId,currentFeetsId,combName);
-                        }
-                    }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int whichButton) {
-                    // Do nothing.
-                }
-            }).show();
-            return true;
+            }
         }
         return super.onOptionsItemSelected(item);
     }
