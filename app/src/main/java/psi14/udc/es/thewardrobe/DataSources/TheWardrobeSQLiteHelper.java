@@ -18,7 +18,7 @@ public class TheWardrobeSQLiteHelper extends SQLiteOpenHelper {
     Context context;
 
     public TheWardrobeSQLiteHelper(Context context) {
-        super(context, DB_FILE, null, 1);
+        super(context, DB_FILE, null, 2);
         DB_PATH = context.getFilesDir().getPath() + "/databases/";
         this.context = context;
     }
@@ -66,9 +66,10 @@ public class TheWardrobeSQLiteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int arg1, int arg2) {
-        if (DEBUG) Log.d(LOG_TAG,"Removing db if already exits");
+        Log.d(LOG_TAG,"Removing db if already exits");
         // Drop older  table if existed
         db.execSQL("DROP TABLE IF EXISTS "+  CLOTH_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " +  CLOTH_RELATION_TABLE);
 
         // create fresh cloths table
         this.onCreate(db);
