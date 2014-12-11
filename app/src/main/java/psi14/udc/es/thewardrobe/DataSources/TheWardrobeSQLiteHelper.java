@@ -66,7 +66,7 @@ public class TheWardrobeSQLiteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int arg1, int arg2) {
-        Log.d(LOG_TAG,"Removing db if already exits");
+        if (DEBUG) Log.d(LOG_TAG,"onUpgrade: Removing dbs if already exits");
         // Drop older  table if existed
         db.execSQL("DROP TABLE IF EXISTS "+  CLOTH_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " +  CLOTH_RELATION_TABLE);

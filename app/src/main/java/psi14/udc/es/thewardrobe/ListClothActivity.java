@@ -132,24 +132,23 @@ public class ListClothActivity extends Activity implements ListView.OnItemClickL
 
         listCloth = clothDataSource.getAllCloths();
 
-        if (listCloth.size() > 0) {
-            Resources res = getResources();
-            adapter = new CustomAdapter(this, listCloth, res);
-            lv.setAdapter(adapter);
-        } else {
+        Resources res = getResources();
+        adapter = new CustomAdapter(this, listCloth, res);
+        lv.setAdapter(adapter);
+
+        if (listCloth.size()==0)
             Toast.makeText(this, getString(R.string.no_data), Toast.LENGTH_SHORT).show();
-        }
+
     }
 
     private void updateList(List<Cloth> list){
 
-        if (list.size() > 0) {
-            Resources res = getResources();
-            adapter = new CustomAdapter(this, list, res);
-            lv.setAdapter(adapter);
-        } else {
+       Resources res = getResources();
+       adapter = new CustomAdapter(this, list, res);
+       lv.setAdapter(adapter);
+
+       if (listCloth.size()==0)
             Toast.makeText(this, getString(R.string.no_data), Toast.LENGTH_SHORT).show();
-        }
 
     }
 
