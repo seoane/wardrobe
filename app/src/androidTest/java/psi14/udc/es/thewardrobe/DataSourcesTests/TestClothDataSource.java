@@ -26,7 +26,7 @@ public class TestClothDataSource extends AndroidTestCase {
                             Season.AUTUMN,
                             Colors.BLUE,
                             "No hay descripción disponible",
-                            "/path/to/picture.jpg");
+                            "/path/to/picture.jpg",0);
             id = clothDataSource.addCloth(cloth);
             Cloth foundCloth = clothDataSource.getCloth(id);
             assertEquals(cloth, foundCloth);
@@ -43,7 +43,7 @@ public class TestClothDataSource extends AndroidTestCase {
                         Season.AUTUMN,
                         Colors.BLUE,
                         "No hay descripción disponible",
-                        "/path/to/picture.jpg");
+                        "/path/to/picture.jpg",0);
         Integer id = clothDataSource.addCloth(cloth);
         assertTrue(clothDataSource.deleteCloth(id));
     }
@@ -58,7 +58,7 @@ public class TestClothDataSource extends AndroidTestCase {
                             Season.AUTUMN,
                             Colors.BLUE,
                             "No hay descripción disponible",
-                            "/path/to/picture.jpg");
+                            "/path/to/picture.jpg",0);
             id = clothDataSource.addCloth(cloth);
             Cloth foundCloth = clothDataSource.getCloth(id);
             cloth.setDescription("Nueva Descripción");
