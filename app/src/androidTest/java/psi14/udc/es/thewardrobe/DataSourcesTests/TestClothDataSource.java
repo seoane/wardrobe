@@ -28,6 +28,7 @@ public class TestClothDataSource extends AndroidTestCase {
                             "No hay descripción disponible",
                             "/path/to/picture.jpg",0);
             id = clothDataSource.addCloth(cloth);
+            cloth.setId(id);
             Cloth foundCloth = clothDataSource.getCloth(id);
             assertEquals(cloth, foundCloth);
         } finally {
