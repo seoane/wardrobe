@@ -5,6 +5,7 @@
         <item>@string/catalog</item>
         <item>@string/combinator</item>
         <item>@string/combinations</item>
+        <item>@string/help</item>
     </string-array>
 
     <string-array name="filters">
@@ -79,5 +80,6 @@
     <string name="catalog">Catalogo</string>
     <string name="combinations">Mis Combinaciones</string>
     <string name="combinator">Combinador</string>
+    <string name="help">Ayuda</string>
 
 </resources>

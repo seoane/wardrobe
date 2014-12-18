@@ -112,6 +112,8 @@ public class TheWardrobeMainActivity extends Activity {
                 case 2:
                     startActivity(new Intent(view.getContext(), ListCombinerActivity.class));
                     break;
+                case 3:
+                    startActivity(new Intent(view.getContext(),TheWardrobeHelpActivity.class));
             }
         }
     }

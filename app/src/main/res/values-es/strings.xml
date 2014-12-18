@@ -55,5 +55,6 @@
     <string name="incomplete_combination">Combinación incompleta</string>
     <string name="confirm">Estás seguro?</string>
     <string name="landscape">Por favor toma una fotografía en apaisado</string>
+    <string name="title_activity_the_wardrobe_help">Ayuda</string>
 
 </resources>

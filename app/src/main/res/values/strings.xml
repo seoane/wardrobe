@@ -55,5 +55,6 @@
     <string name="incomplete_combination">Incomplete Combination</string>
     <string name="confirm">Are you sure?</string>
     <string name="landscape">Please take a photograph in Landscape</string>
+    <string name="title_activity_the_wardrobe_help">Help</string>
 
 </resources>

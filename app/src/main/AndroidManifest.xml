@@ -38,6 +38,11 @@
             android:name=".ListCombinerActivity"
             android:label="@string/title_activity_list_combiner" >
         </activity>
+        <activity
+            android:name=".TheWardrobeHelpActivity"
+            android:label="@string/title_activity_the_wardrobe_help"
+            android:icon="@android:drawable/ic_menu_help">
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.CAMERA" />
