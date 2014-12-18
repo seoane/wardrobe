@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="drawer_menu">
+        <item>@string/catalog</item>
+        <item>@string/combinator</item>
+        <item>@string/combinations</item>
+    </string-array>
+
+    <string-array name="filters">
+        <item>@string/bodyPart</item>
+        <item>@string/season</item>
+        <item>@string/color</item>
+    </string-array>
+
+    <string-array name="bodyParts">
+        <item>@string/chest</item>
+        <item>@string/legs</item>
+        <item>@string/feet</item>
+    </string-array>
+
+
+    <string-array name="chestTypes">
+        <item>Camiseta</item>
+        <item>Blusa</item>
+        <item>Camisa</item>
+        <item>Jersey</item>
+        <item>Chaqueta</item>
+        <item>Sudadera</item>
+        <item>Sudadera con capucha</item>
+    </string-array>
+
+    <string-array name="legsTypes">
+        <item>Falda</item>
+        <item>Pantalones</item>
+        <item>Pantalones cortos</item>
+        <item>Leggings</item>
+        <item>Pantalones Capri</item>
+        <item>Falda Tubo</item>
+        <item>Mini Falda</item>
+    </string-array>
+
+
+    <string-array name="feetTypes">
+        <item>Zapatos</item>
+        <item>Botas</item>
+        <item>Sandalias</item>
+        <item>Tacones</item>
+        <item>Zapatillas de deporte</item>
+        <item>Zapatillas de casa</item>
+        <item>Bailarinas</item>
+    </string-array>
+
+    <string-array name="seasons">
+        <item>Otoño</item>
+        <item>Invierno</item>
+        <item>Primavera</item>
+        <item>Verano</item>
+    </string-array>
+
+    <string-array name="colors">
+        <item>Blanco</item>
+        <item>Azul</item>
+        <item>Rojo</item>
+        <item>Verde</item>
+        <item>Amarillo</item>
+        <item>Negro</item>
+        <item>Naranja</item>
+        <item>Marrón</item>
+        <item>Rosa</item>
+        <item>Gris</item>
+    </string-array>
+
+    <string-array name="img_sources">
+        <item>Camara</item>
+        <item>Galleria</item>
+    </string-array>
+
+    <string name="catalog">Catalogo</string>
+    <string name="combinations">Mis Combinaciones</string>
+    <string name="combinator">Combinador</string>
+
+</resources>

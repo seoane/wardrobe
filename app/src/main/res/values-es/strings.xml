@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">TheWardrobe</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Configuración</string>
+    <string name="title_activity_mac_cloth">Editor de Prendas</string>
+    <string name="name">Nombre:</string>
+    <string name="part">Parte del cuerpo:</string>
+    <string name="clothType">Tipo de prenda:</string>
+    <string name="season">Temporada:</string>
+    <string name="color">Color:</string>
+    <string name="description">Descripción:</string>
+    <string name="action_add">Añadir</string>
+    <string name="action_cancel">Cancelar</string>
+    <string name="chest">Pecho</string>
+    <string name="feet">Pies</string>
+    <string name="legs">Piernas</string>
+    <string name="insert_name">Dale un nombre a tu prenda</string>
+    <string name="insert_description">Introduce una descripción</string>
+    <string name="error_photo_saving">Error guardando la fotografia</string>
+    <string name="str_butt_save">Guardar</string>
+    <string name="name_not_set">Por favor, pónle un nombre y una fotografía a tu prenda</string>
+    <string name="menu_add">Añadir</string>
+    <string name="menu_list">Ropero</string>
+    <string name="title_activity_list_cloth">Catalogo</string>
+    <string name="menu_update">Actualizar</string>
+    <string name="str_delete">Borrar</string>
+    <string name="str_edit">Editar</string>
+    <string name="no_data">No hay datos</string>
+    <string name="action_ok">Ok</string>
+    <string name="cloth_updated">Actualizada</string>
+    <string name="cloth_added">Añadida</string>
+    <string name="title_activity_details_cloth">Detalles</string>
+    <string name="bodyPart">Parte del cuerpo:</string>
+    <string name="action_edit">Editar</string>
+    <string name="action_delete">Borrar</string>
+    <string name="title_activity_combiner">Combinador</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="menu_combiner">Combinador</string>
+    <string name="title_activity_show_cloth">showClothActivity</string>
+    <string name="action_details_ok">Ok</string>
+    <string name="title_activity_combiner_fragment">CombinerFragment</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="menu_filter">Filtrar</string>
+    <string name="select_filter">Selecciona un filtro</string>
+    <string name="menu_list_combiner">Combinaciones</string>
+    <string name="title_activity_list_combiner">Mis Combinaciones</string>
+    <string name="alert_dialog_comb_name">Nombre de la combinación:</string>
+    <string name="select_source">Selecciona una fuente</string>
+    <string name="str_comb_name">Nombre Combinacion</string>
+    <string name="action_open_drawer">Abrir Drawer</string>
+    <string name="action_close_drawer">Cerrar Drawer</string>
+    <string name="incomplete_combination">Combinación incompleta</string>
+    <string name="confirm">Estás seguro?</string>
+    <string name="landscape">Por favor toma una fotografía en apaisado</string>
+
+</resources>
