@@ -36,6 +36,7 @@ import psi14.udc.es.thewardrobe.Utils.Season;
 import psi14.udc.es.thewardrobe.Utils.Utilities;
 
 import static psi14.udc.es.thewardrobe.Utils.Constants.*;
+import static psi14.udc.es.thewardrobe.Utils.Utilities.isLandscape;
 
 
 public class MacClothActivity extends Activity implements AdapterView.OnItemSelectedListener,View.OnClickListener{
@@ -178,7 +179,8 @@ public class MacClothActivity extends Activity implements AdapterView.OnItemSele
                 // Remove older image if exists and we arent updating an existing one
                 if (mCapturedPhotoPath!=null && oldCloth==null)
                     removeFile(mCapturedPhotoPath);
-                finish();
+                // Ask for user confirmation
+                createConfirmDialog();
                 return true;
             case R.id.action_ok:
                 name = etName.getText().toString();
@@ -381,12 +383,17 @@ public class MacClothActivity extends Activity implements AdapterView.OnItemSele
                 if (isExternalStorageReadable()) {
                     if (DEBUG) Log.d(LOG_TAG,"Creating thumbnail of " + mCapturedPhotoPath);
                     // Loading bitmap in background
-                    Utilities.loadBitmap(mCapturedPhotoPath, imageView);
-                    //Delete de old image
-                    if (prevCapturedPhotoPath!=null){
-                        removeFile(prevCapturedPhotoPath);
-                        prevCapturedPhotoPath=null;
-                    }
+                    if (isLandscape(mCapturedPhotoPath)) {
+                        Utilities.loadBitmap(mCapturedPhotoPath, imageView);
+                        //Delete the old image
+                        if (prevCapturedPhotoPath!=null){
+                            removeFile(prevCapturedPhotoPath);
+                            prevCapturedPhotoPath=null;
+                        }
+                    }else{
+                        Toast.makeText(this,getString(R.string.landscape),Toast.LENGTH_SHORT).show();
+                        mCapturedPhotoPath= prevCapturedPhotoPath;
+                    };
                 }else{
                     if (DEBUG) Log.d(LOG_TAG,"Could not read External Storage");
                 }
@@ -415,7 +422,12 @@ public class MacClothActivity extends Activity implements AdapterView.OnItemSele
                 if (isExternalStorageReadable()) {
                     if (DEBUG) Log.d(LOG_TAG,"Creating thumbnail of " + mCapturedPhotoPath);
                     // Loading bitmap in background
-                    Utilities.loadBitmap(mCapturedPhotoPath, imageView);
+                    if (isLandscape(mCapturedPhotoPath)) {
+                        Utilities.loadBitmap(mCapturedPhotoPath, imageView);
+                    }else{
+                        Toast.makeText(this,getString(R.string.landscape),Toast.LENGTH_SHORT).show();
+                        mCapturedPhotoPath=prevCapturedPhotoPath;
+                    }
                 }else{
                     if (DEBUG) Log.d(LOG_TAG,"Could not read External Storage");
                 }
@@ -443,4 +455,26 @@ public class MacClothActivity extends Activity implements AdapterView.OnItemSele
                 Environment.MEDIA_MOUNTED_READ_ONLY.equals(state));
     }
 
+
+    private void createConfirmDialog(){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                finish();
+            }
+        });
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+            }
+        });
+
+        builder.setTitle(getString(R.string.confirm));
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+    }
 }

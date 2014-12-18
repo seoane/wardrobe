@@ -59,6 +59,21 @@ public abstract class Utilities {
         return BitmapFactory.decodeFile(path, options);
     }
 
+    /*Method used to check image dimensions
+    * Return true if the image is Landscape*/
+
+     public static boolean isLandscape(String path){
+
+        // First decode with inJustDecodeBounds=true to check dimensions
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(path, options);
+
+        return (options.outWidth>options.outHeight);
+
+    }
+
+
     /*------------------------------------------------------------------------
     Used in ListViews and GridViews to check if another task is already working
     on rendering the image

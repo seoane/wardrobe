@@ -53,5 +53,7 @@
     <string name="action_open_drawer">Open Drawer</string>
     <string name="action_close_drawer">Close Drawer</string>
     <string name="incomplete_combination">Incomplete Combination</string>
+    <string name="confirm">Are you sure?</string>
+    <string name="landscape">Please take a photograph in Landscape</string>
 
 </resources>
