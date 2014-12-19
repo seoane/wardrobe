@@ -77,7 +77,7 @@
         <item>Galleria</item>
     </string-array>
 
-    <string name="catalog">Catalogo</string>
+    <string name="catalog">Catálogo</string>
     <string name="combinations">Mis Combinaciones</string>
     <string name="combinator">Combinador</string>
     <string name="help">Ayuda</string>

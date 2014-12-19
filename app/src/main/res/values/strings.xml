@@ -58,5 +58,26 @@
     <string name="title_activity_the_wardrobe_help">Help</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="navigation"><u>Navigation</u></string>
+    <string name="creation"><u>Cloth Creation</u></string>
+    <string name="visualization"><u>Visualization</u></string>
+    <string name="detailed_view">Detailed View</string>
+    <string name="help_navigation_desc">Navigation inside the app is done through a side bar where you can select the different utilities of the app, you can access this menu by <b>touching the app title.</b></string>
+    <string name="help_navigation_desc2">Alternatively you can slide your finger from the left border inwards.</string>
+    <string name="help_ic_draw">Side menu icon</string>
+    <string name="help_creation_desc">Initially your app wont have any clothes registered so you need to create some of them from your own physical wardrobe.</string>
+    <string name="help_ic_add">To the creation cloth screen</string>
+    <string name="help_creation_desc2">Once in the creation screen you need to introduce <b>a photograph, name, part of the body, cloth type, season, color</b> and optionally a description.</string>
+    <string name="help_ic_camera">Select/Take picture</string>
+    <string name="help_ic_save">Save cloth</string>
+    <string name="help_ic_cancel">Cancel</string>
+    <string name="help_visualization_desc">Multiple screen exits to visualize and organize your virtual wardrobe</string>
+    <string name="help_catalog_desc">Catalog lets you access all your clothes in a list like view and <b>filter</b> them by some fields. If you click any of the list items it will show you all its details. On <b>long click</b> a contextual menu will appear to let you edit or remove the selected cloth</string>
+    <string name="help_combinator_desc">The combinator lets you make your own combinations and store them.</string>
+    <string name="help_ic_combinator">Save combination</string>
+    <string name="help_combinations_desc">This screen shows you your saved combinations in a list like view, you can select any of them to check it out clearly on the combinator.</string>
+    <string name="help_details_desc">The detailed view shows <b>all the attributes</b> of your clothes, edit, or remove them. It also lets you see similar clothes.</string>
+    <string name="help_ic_edit">Edit cloth</string>
+    <string name="help_ic_delete">Delete cloth</string>
 
 </resources>

@@ -58,5 +58,26 @@
     <string name="title_activity_the_wardrobe_help">Ayuda</string>
     <string name="yes">Si</string>
     <string name="no">No</string>
+    <string name="navigation"><u>Navegación</u></string>
+    <string name="creation"><u>Creación de Prendas</u></string>
+    <string name="visualization"><u>Visualización</u></string>
+    <string name="detailed_view">Vista Detallada</string>
+    <string name="help_navigation_desc">La navegación dentro de la app se realiza a través de una barra de menú lateral donde se pueden seleccionar las distintas secciones de la aplicación, <b>acceda a este menú tocando sobre el título de la aplicación en la esquina superior izquierda.</b></string>
+    <string name="help_ic_draw">Icono menú lateral</string>
+    <string name="help_navigation_desc2">Alternativamente deslice su dedo desde el borde izquierdo de la pantalla hacia el centro para desplegar el menú.</string>
+    <string name="help_creation_desc">Inicialmente su armario estará vacio por lo que necesitará crear prendas a partir de las existentes en su armario físico.</string>
+    <string name="help_ic_add">Acceso a la pantalla de creación de prendas</string>
+    <string name="help_creation_desc2">Una vez en la pantalla de creación necesitará introducir las siguientes características de la prenda: una <b>foto, nombre, parte del cuerpo, tipo e prenda, temporada, color</b> y opcionalmente una descripción.</string>
+    <string name="help_ic_camera">Tomar/Seleccionar fotografía</string>
+    <string name="help_ic_save">Guardar prenda</string>
+    <string name="help_ic_cancel">Cancelar</string>
+    <string name="help_visualization_desc">Existen multitud de pantallas que le permiten visualizar y organizar su ropero virtual</string>
+    <string name="help_catalog_desc">El catálogo le permite visualizar sus prendas en una <b>lista filtrable</b> desde el menú de la esquina superior derecha. Al seleccionar una mediante un toque de dedo se mostrarán todos sus detalles. Si realizamos una <b>pulsación larga</b> se mostrará un menú contextual que permite editar o borrar la prenda seleccionada.</string>
+    <string name="help_combinator_desc">El combinador permite generar combinaciones y almacenarlas.</string>
+    <string name="help_ic_combinator">Guardar combinacion</string>
+    <string name="help_combinations_desc">Esta pantalla muestra sus combinaciones guardadas, al seleccionar cualquiera de ellas se mostrará de modo más claro en ell combinador.</string>
+    <string name="help_details_desc">La vista detallada muestra <b>todos los atributos de las prendas</b>, además de permitir editarlas o borrarlas. Muestra además prendas similares.</string>
+    <string name="help_ic_edit">Editar prenda</string>
+    <string name="help_ic_delete">Borrar prenda</string>
 
 </resources>

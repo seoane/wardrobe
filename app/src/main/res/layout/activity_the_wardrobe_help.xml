@@ -13,8 +13,265 @@
 
         <LinearLayout
             android:orientation="vertical"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="30dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/navigation"
+                android:id="@+id/help_navigation"
+                android:layout_gravity="left"
+                android:layout_margin="10dp"
+                android:typeface="serif"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/help_navigation_desc"
+                android:id="@+id/help_navigation_desc"
+                android:layout_margin="10dp"
+                android:typeface="serif"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/help_ic_draw"
+                android:id="@+id/help_ic_draw"
+                android:typeface="serif"
+                android:layout_margin="10dp"
+                android:drawableLeft="@drawable/ic_drawer"
+                android:drawablePadding="5dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/help_navigation_desc2"
+                android:id="@+id/help_navigation_desc2"
+                android:layout_margin="10dp"
+                android:typeface="serif" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="30dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/creation"
+                android:id="@+id/help_creation"
+                android:layout_gravity="left"
+                android:layout_margin="10dp"
+                android:typeface="serif" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/help_creation_desc"
+                android:id="@+id/help_creation_desc"
+                android:layout_margin="10dp"
+                android:typeface="serif" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/help_ic_add"
+                android:id="@+id/help_ic_add"
+                android:typeface="serif"
+                android:layout_margin="10dp"
+                android:drawableLeft="@android:drawable/ic_menu_add"
+                android:drawablePadding="5dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/help_creation_desc2"
+                android:id="@+id/help_creation_desc2"
+                android:layout_margin="10dp"
+                android:typeface="serif" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/help_ic_camera"
+                android:id="@+id/help_ic_camera"
+                android:typeface="serif"
+                android:layout_margin="10dp"
+                android:drawableLeft="@android:drawable/ic_menu_camera"
+                android:drawablePadding="5dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/help_ic_save"
+                android:id="@+id/help_ic_save"
+                android:typeface="serif"
+                android:layout_margin="10dp"
+                android:drawableLeft="@android:drawable/ic_menu_save"
+                android:drawablePadding="5dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/help_ic_cancel"
+                android:id="@+id/help_ic_cancel"
+                android:typeface="serif"
+                android:layout_margin="10dp"
+                android:drawableLeft="@android:drawable/ic_menu_close_clear_cancel"
+                android:drawablePadding="5dp"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="30dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/visualization"
+                android:id="@+id/help_visualization"
+                android:layout_gravity="left"
+                android:layout_margin="10dp"
+                android:typeface="serif" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/help_visualization_desc"
+                android:id="@+id/help_visualization_desc"
+                android:layout_margin="10dp"
+                android:typeface="serif" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="italic"
+                android:textSize="25dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/catalog"
+                android:id="@+id/help_catalog"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="10dp"
+                android:typeface="serif" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/help_catalog_desc"
+                android:id="@+id/help_catalog_desc"
+                android:layout_margin="10dp"
+                android:typeface="serif" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="italic"
+                android:textSize="25dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/combinator"
+                android:id="@+id/help_combinator"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="10dp"
+                android:typeface="serif" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/help_combinator_desc"
+                android:id="@+id/help_combinator_desc"
+                android:layout_margin="10dp"
+                android:typeface="serif" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/help_ic_combinator"
+                android:id="@+id/help_ic_combinator"
+                android:typeface="serif"
+                android:layout_margin="10dp"
+                android:drawableLeft="@android:drawable/ic_menu_save"
+                android:drawablePadding="5dp"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="italic"
+                android:textSize="25dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/combinations"
+                android:id="@+id/help_mycombinations"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="10dp"
+                android:typeface="serif" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/help_combinations_desc"
+                android:id="@+id/help_combinations_desc"
+                android:layout_margin="10dp"
+                android:typeface="serif" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="italic"
+                android:textSize="25dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/detailed_view"
+                android:id="@+id/help_details"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="10dp"
+                android:typeface="serif" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/help_details_desc"
+                android:id="@+id/help_details_desc"
+                android:layout_margin="10dp"
+                android:typeface="serif" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/help_ic_edit"
+                android:id="@+id/help_ic_edit"
+                android:typeface="serif"
+                android:layout_margin="10dp"
+                android:drawableLeft="@android:drawable/ic_menu_edit"
+                android:drawablePadding="5dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/help_ic_delete"
+                android:id="@+id/help_ic_delete"
+                android:typeface="serif"
+                android:layout_margin="10dp"
+                android:drawableLeft="@android:drawable/ic_menu_close_clear_cancel"
+                android:drawablePadding="5dp"/>
 
 
 
