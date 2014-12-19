@@ -460,12 +460,12 @@ public class MacClothActivity extends Activity implements AdapterView.OnItemSele
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 finish();
             }
         });
-        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
             }

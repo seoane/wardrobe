@@ -5,18 +5,18 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Configuración</string>
     <string name="title_activity_mac_cloth">Editor de Prendas</string>
-    <string name="name">Nombre:</string>
-    <string name="part">Parte del cuerpo:</string>
-    <string name="clothType">Tipo de prenda:</string>
-    <string name="season">Temporada:</string>
-    <string name="color">Color:</string>
-    <string name="description">Descripción:</string>
+    <string name="name">Nombre</string>
+    <string name="part">Parte del cuerpo</string>
+    <string name="clothType">Tipo de prenda</string>
+    <string name="season">Temporada</string>
+    <string name="color">Color</string>
+    <string name="description">Descripción</string>
     <string name="action_add">Añadir</string>
     <string name="action_cancel">Cancelar</string>
     <string name="chest">Pecho</string>
     <string name="feet">Pies</string>
     <string name="legs">Piernas</string>
-    <string name="insert_name">Dale un nombre a tu prenda</string>
+    <string name="insert_name">Nombre para tu prenda</string>
     <string name="insert_description">Introduce una descripción</string>
     <string name="error_photo_saving">Error guardando la fotografia</string>
     <string name="str_butt_save">Guardar</string>
@@ -56,5 +56,7 @@
     <string name="confirm">Estás seguro?</string>
     <string name="landscape">Por favor toma una fotografía en apaisado</string>
     <string name="title_activity_the_wardrobe_help">Ayuda</string>
+    <string name="yes">Si</string>
+    <string name="no">No</string>
 
 </resources>
