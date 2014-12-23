@@ -81,5 +81,7 @@
     <string name="help_ic_delete">Delete cloth</string>
     <string name="author_1">Jesús Seoane Vila</string>
     <string name="author_2">Lois Alberte Gómez Sánchez</string>
+    <string name="str_butt_use">Use</string>
+    <string name="most_popular">Most Popular</string>
 
 </resources>

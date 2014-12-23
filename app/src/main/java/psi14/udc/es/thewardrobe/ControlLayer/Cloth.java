@@ -138,6 +138,10 @@ public class Cloth implements Parcelable {
         this.frequency = frequency;
     }
 
+    public void use(){
+        this.frequency++;
+    }
+
     @Override
     public String toString() {
         return "Cloth{" +

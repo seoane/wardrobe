@@ -21,27 +21,33 @@
         <activity
             android:name=".MacClothActivity"
             android:label="@string/title_activity_mac_cloth"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:parentActivityName=".TheWardrobeMainActivity"/>
         <activity
             android:name=".ListClothActivity"
             android:label="@string/title_activity_list_cloth"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:parentActivityName=".TheWardrobeMainActivity"/>
         <activity
             android:name=".CombinerActivity"
             android:label="@string/title_activity_combiner"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:parentActivityName=".TheWardrobeMainActivity"/>
         <activity
             android:name=".DetailsClothActivity"
             android:label="@string/title_activity_details_cloth"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:parentActivityName=".TheWardrobeMainActivity"/>
         <activity
             android:name=".ListCombinerActivity"
-            android:label="@string/title_activity_list_combiner" >
+            android:label="@string/title_activity_list_combiner"
+            android:parentActivityName=".TheWardrobeMainActivity">
         </activity>
         <activity
             android:name=".TheWardrobeHelpActivity"
             android:label="@string/title_activity_the_wardrobe_help"
-            android:icon="@android:drawable/ic_menu_help">
+            android:icon="@android:drawable/ic_menu_help"
+            android:parentActivityName=".TheWardrobeMainActivity">
         </activity>
     </application>
 

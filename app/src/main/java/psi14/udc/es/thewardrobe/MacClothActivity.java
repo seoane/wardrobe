@@ -70,6 +70,7 @@ public class MacClothActivity extends Activity implements AdapterView.OnItemSele
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mac_cloth);
 
+        getActionBar().setDisplayHomeAsUpEnabled(true);
 
         //Views
         etName = (EditText) findViewById(R.id.et_name);

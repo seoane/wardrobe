@@ -44,6 +44,8 @@ public class DetailsClothActivity extends Activity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_cloth);
 
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+
         //ImageView
         imageView = (ImageView) findViewById(R.id.imageView_details);
         imSuggColor = (ImageView) findViewById(R.id.im_suggestionColor);

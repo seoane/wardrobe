@@ -12,5 +12,8 @@ public class TheWardrobeHelpActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_the_wardrobe_help);
+
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+
     }
 }

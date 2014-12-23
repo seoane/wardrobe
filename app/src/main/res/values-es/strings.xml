@@ -79,5 +79,8 @@
     <string name="help_details_desc">La vista detallada muestra <b>todos los atributos de las prendas</b>, además de permitir editarlas o borrarlas. Muestra además prendas similares.</string>
     <string name="help_ic_edit">Editar prenda</string>
     <string name="help_ic_delete">Borrar prenda</string>
+    <string name="str_butt_use">Usar</string>
+    <string name="most_popular">Lo mas popular</string>
+
 
 </resources>

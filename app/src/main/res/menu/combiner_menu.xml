@@ -5,4 +5,8 @@
         android:id="@+id/combiner_save" android:title="@string/str_butt_save"
         android:icon="@android:drawable/ic_menu_save"
         android:showAsAction="always"/>
+    <item
+        android:id="@+id/combiner_use" android:title="@string/str_butt_use"
+        android:icon="@android:drawable/ic_media_play"
+        android:showAsAction="always"/>
 </menu>

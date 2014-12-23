@@ -55,6 +55,9 @@ public class ListClothActivity extends Activity implements ListView.OnItemClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+
         setContentView(R.layout.activity_list_cloth);
         lv = (ListView) findViewById(R.id.lv_main);
         lv.setOnItemClickListener(this);

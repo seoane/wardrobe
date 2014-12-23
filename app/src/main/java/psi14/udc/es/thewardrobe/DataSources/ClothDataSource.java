@@ -98,6 +98,7 @@ public class ClothDataSource implements DataSourceInterface {
         database.close();
         return id.intValue();
     }
+
     public Cloth getCloth(Integer id) {
         open();
 
@@ -128,6 +129,7 @@ public class ClothDataSource implements DataSourceInterface {
         return cloth;
     }
 
+
     public List<Cloth> getAllCloths() {
         open();
         List<Cloth> cloths = new ArrayList<Cloth>();
@@ -157,6 +159,37 @@ public class ClothDataSource implements DataSourceInterface {
 
         return cloths;
     }
+
+    public List<Cloth> getAllClothsOrderByFrequency() {
+        open();
+        List<Cloth> cloths = new ArrayList<Cloth>();
+
+        String query = "SELECT  * FROM " + CLOTH_TABLE + " ORDER BY " + FREQUENCY + " DESC";
+
+
+        Cursor cursor = database.rawQuery(query, null);
+
+        Cloth cloth = null;
+        if (cursor.moveToFirst()) {
+            do {
+                cloth = new Cloth(cursor.getInt(0),
+                        cursor.getString(1),
+                        BodyParts.valueOf(cursor.getString(2)),
+                        cursor.getString(3),
+                        Season.valueOf(cursor.getString(4)),
+                        Colors.valueOf(cursor.getString(5)),
+                        cursor.getString(6),
+                        cursor.getString(7),
+                        cursor.getInt(8));
+                cloths.add(cloth);
+            } while (cursor.moveToNext());
+        }
+
+        if (DEBUG) Log.d("getAllCloths()", cloths.toString());
+
+        return cloths;
+    }
+
     public  List<Combination> getCombinationByClothId(Integer id) {
         open();
         List<Combination> _combinations = new ArrayList<Combination>();

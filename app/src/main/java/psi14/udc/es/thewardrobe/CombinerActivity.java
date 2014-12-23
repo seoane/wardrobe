@@ -50,6 +50,8 @@ public class CombinerActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_combiner);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+
         clothDataSource = ClothDataSource.getInstance(this);
         Bundle extra = getIntent().getExtras();
         fillChestViewPager();
@@ -142,6 +144,43 @@ public class CombinerActivity extends FragmentActivity {
             else {
                 Toast.makeText(this, getString(R.string.incomplete_combination), Toast.LENGTH_SHORT).show();
 
+            }
+        }
+        if (id == R.id.combiner_use) {
+            int currentChestId = _allChests.get(pagerChest.getCurrentItem()).getId();
+            int currentLegsId = _allLegs.get(pagerLegs.getCurrentItem()).getId();
+            int currentFeetsId = _allFeets.get(pagerFeet.getCurrentItem()).getId();
+            Cloth currentChest = clothDataSource.getCloth(currentChestId);
+            Cloth currentLegs = clothDataSource.getCloth(currentLegsId);
+            Cloth currentFeets = clothDataSource.getCloth(currentFeetsId);
+            if (DEBUG) Log.d(APP_TAG + activityTag,
+                    "\nFrequency Head Current: " + currentChest.getFrequency() + "\n" +
+                            " Frequency Legs Current: " + currentLegs.getFrequency() + "\n" +
+                            " Frequency Feet Current : " + currentFeets.getFrequency()
+            );
+            currentChest.use();
+            currentLegs.use();
+            currentFeets.use();
+
+            if (DEBUG) Log.d(APP_TAG + activityTag,
+                    "\nFrequency Head Middle: " + currentChest.getFrequency() + "\n" +
+                            " Frequency Legs Middle: " + currentLegs.getFrequency() + "\n" +
+                            " Frequency Feet Middle : " + currentFeets.getFrequency()
+            );
+
+            clothDataSource.updateCloth(currentChest);
+            clothDataSource.updateCloth(currentLegs);
+            clothDataSource.updateCloth(currentFeets);
+
+            if (DEBUG) {
+                currentChest = clothDataSource.getCloth(currentChestId);
+                currentLegs = clothDataSource.getCloth(currentLegsId);
+                currentFeets = clothDataSource.getCloth(currentFeetsId);
+                Log.d(APP_TAG + activityTag,
+                        "\nFrequency Head After: " + currentChest.getFrequency() + "\n" +
+                                " Frequency Legs After: " + currentLegs.getFrequency() + "\n" +
+                                " Frequency Feet After : " + currentFeets.getFrequency()
+                );
             }
         }
         return super.onOptionsItemSelected(item);
