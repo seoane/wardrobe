@@ -208,6 +208,17 @@
                 android:drawableLeft="@android:drawable/ic_menu_save"
                 android:drawablePadding="5dp"/>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/help_ic_like_combinator"
+                android:id="@+id/help_ic_like_combinator"
+                android:typeface="serif"
+                android:layout_margin="10dp"
+                android:drawableLeft="@android:drawable/ic_menu_myplaces"
+                android:drawablePadding="5dp"/>
+
 
             <TextView
                 android:layout_width="wrap_content"

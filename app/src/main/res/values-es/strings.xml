@@ -81,6 +81,7 @@
     <string name="help_ic_delete">Borrar prenda</string>
     <string name="str_butt_use">Usar</string>
     <string name="most_popular">Lo mas popular</string>
-
+    <string name="use_combination">Uso de la combinación registrado</string>
+    <string name="help_ic_like_combinator">Registrar uso de la combinacion</string>
 
 </resources>

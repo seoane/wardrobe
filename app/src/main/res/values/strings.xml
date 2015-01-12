@@ -83,5 +83,7 @@
     <string name="author_2">Lois Alberte Gómez Sánchez</string>
     <string name="str_butt_use">Use</string>
     <string name="most_popular">Most Popular</string>
+    <string name="use_combination">Combination marked as used</string>
+    <string name="help_ic_like_combinator">Register combination</string>
 
 </resources>
